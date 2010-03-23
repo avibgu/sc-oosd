@@ -1,0 +1,39 @@
+<rss version="2.0>
+
+	<channel>
+
+		<title>News from some site</title>
+
+		<link>http://www.somesite.com</link>
+
+		<description>An example of an RSS feed</description>
+
+		<item>
+			<title>Something happend</title>
+			<guid>http://www.somesite.com/1234</guid>
+			<description>This morning, something happend...</description>
+		</item>
+
+		<item>
+			<title>Something else happend</title>
+			<guid>http://www.somesite.com/3456</guid>
+			<description>This evening, something else happend...</description>
+			<author>johndoe@somesite.com</author>
+			<category>news</category>
+		</item>
+
+		<item>
+			<title>Nothing happend</title>
+			<guid>http://www.somesite.com/4321</guid>
+			<description>Nothing happend...</description>
+			<category>no news</category>
+			<category>good news</category>
+		</item>
+
+	</channel>
+
+	<channel>
+	...
+	</channel>
+
+</rss>

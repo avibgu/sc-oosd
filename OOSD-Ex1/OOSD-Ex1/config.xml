@@ -1,0 +1,17 @@
+<conf>
+
+	<feed>http://www.cs.bgu.ac.il/~oosd102/wiki.files/splsample.xml</feed>
+
+	<format>rss</format>
+
+	<filter>
+		<name>content</name>
+		<arg>published</arg>
+	</filter>
+
+	<filter>
+		<name>author</name>
+		<arg>Leonid</arg>
+	</filter>
+
+</conf>
