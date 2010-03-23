@@ -53,9 +53,13 @@ public class Main {
 		}
 
 		// filterring the feeds
-		for (int i=0; i < rssFeeds.size(); i++){
+		
+		Vector<Filter> filters = confHandler.getFilters();
+		
+		for (int i=0; i < filters.size(); i++){
 
 			//TODO filterrrrrrr...
+			Vector<RSSFeed> rssFeeds = filters.get(i).filter( rssFeeds );
 		}
 
 		// creating output
