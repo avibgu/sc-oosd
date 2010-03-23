@@ -1,9 +1,10 @@
-package ex1;
+package main;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -30,7 +31,7 @@ public class SimpleXMLReader {
 	/**
 	 * first ctor
 	 *
-	 * @param _fn the file name
+	 * @param _fn the file name to parse from
 	 * @param _handler the handler
 	 */
 	public SimpleXMLReader(String _fn, DefaultHandler _handler){
@@ -45,8 +46,8 @@ public class SimpleXMLReader {
 	/**
 	 * second ctor
 	 *
-	 * @param _feed
-	 * @param _handler
+	 * @param _feed the feed to parse from
+	 * @param _handler the handler
 	 */
 	public SimpleXMLReader(Feed _feed, DefaultHandler _handler){
 
@@ -59,50 +60,50 @@ public class SimpleXMLReader {
 
 	private void read() {
 
-		File file = null;
-
-		InputSource src = null;
-
 		try{
-
-			if (this.file != null){
-
-			     src = new InputSource( new FileInputStream( file ) );
-			}
-			else {
-
-				src = this.feed.getStream();
-			}
 
 			SAXParserFactory spf = SAXParserFactory.newInstance();
 
 			SAXParser saxParser = spf.newSAXParser();
 
-			XMLReader rdr;
+			if (this.file != null){
 
-			rdr = saxParser.getXMLReader();
+				XMLReader rdr;
 
-			rdr.setContentHandler( this.handler );
+				rdr = saxParser.getXMLReader();
 
-			rdr.parse( src );
+				rdr.setContentHandler( this.handler );
 
+				InputSource src1 = new InputSource( new FileInputStream( this.file ) );
+
+				rdr.parse( src1 );
+
+			}
+			else {
+
+				InputStream src2 = this.feed.getStream();
+				saxParser.parse( src2 , this.handler );
+			}
 		}
 	    catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (ParserConfigurationException e) {
+
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch (IOException e) {
+
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch (SAXException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (ParserConfigurationException e) {
+
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
 }
