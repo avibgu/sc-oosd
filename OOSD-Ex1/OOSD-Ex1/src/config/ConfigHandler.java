@@ -14,7 +14,7 @@ public class ConfigHandler extends DefaultHandler{
 
 	private Vector<Feed> feeds;
 	private Vector<Filter> filters;
-	private Format format;
+	private Vector<Format> formats;
 
 	private String name;
 	private String arg;
@@ -29,7 +29,7 @@ public class ConfigHandler extends DefaultHandler{
 
 		this.feeds = new Vector<Feed>();
 		this.filters = new Vector<Filter>();
-		this.format = null;
+		this.formats = new Vector<Format>();
 
 		this.name = null;
 		this.arg = null;
@@ -38,7 +38,7 @@ public class ConfigHandler extends DefaultHandler{
 	/**
 	 * @return the feed
 	 */
-	public Vector<Feed> getFeed(){
+	public Vector<Feed> getFeeds(){
 
 		return this.feeds;
 	}
@@ -54,9 +54,9 @@ public class ConfigHandler extends DefaultHandler{
 	/**
 	 * @return the format
 	 */
-	public Format getFormat(){
+	public Vector<Format> getFormats(){
 
-		return this.format;
+		return this.formats;
 	}
 
 	/**
@@ -97,13 +97,13 @@ public class ConfigHandler extends DefaultHandler{
     	// and qName.equals("name")
     	if ( this.stack.peek().equals("name") ){
 
-    		this.name = this.sb.toString();
+    		this.name = this.sb.toString().trim();
     		this.sb = new StringBuffer();
     	}
 
-    	if ( this.stack.peek().equals("args") ){
+    	if ( this.stack.peek().equals("arg") ){
 
-    		this.arg = this.sb.toString();
+    		this.arg = this.sb.toString().trim();
     		this.sb = new StringBuffer();
     	}
 
@@ -115,13 +115,15 @@ public class ConfigHandler extends DefaultHandler{
 
     	if ( qName.equals("format") ){
 
-    		this.format = new Format( this.sb.toString() );
+    		this.formats.add( new Format( this.sb.toString().trim() ) );
     		this.sb = new StringBuffer();
     	}
 
     	if ( qName.equals("filter") ){
 
     		this.filters.add( new Filter(this.name, this.arg) );
+    		this.name = null;
+    		this.arg = null;
     		this.sb = new StringBuffer();
     	}
 
