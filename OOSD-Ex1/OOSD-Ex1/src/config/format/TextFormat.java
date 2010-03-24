@@ -1,8 +1,6 @@
 package config.format;
 
-import java.util.Vector;
-
-import rss.RSSFeed;
+import rss.Item;
 
 public class TextFormat extends Format {
 
@@ -12,9 +10,25 @@ public class TextFormat extends Format {
 	}
 
 	@Override
-	public String convertToMyFormat(Vector<RSSFeed> rssFeeds) {
-		// TODO Auto-generated method stub
-		return null;
+	protected String before() {
+
+		return "";
 	}
 
+	@Override
+	protected String forEachItem(Item item) {
+
+		String ans = "";
+
+		ans += item.getM_title() + "\n";
+		ans += "* " + item.getM_description() + "\n\n";
+
+		return ans;
+	}
+
+	@Override
+	protected String after() {
+
+		return "";
+	}
 }

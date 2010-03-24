@@ -1,8 +1,6 @@
 package config.format;
 
-import java.util.Vector;
-
-import rss.RSSFeed;
+import rss.Item;
 
 public class RssFormat extends Format {
 
@@ -11,10 +9,44 @@ public class RssFormat extends Format {
 		super(_format);
 	}
 
-	@Override
-	public String convertToMyFormat(Vector<RSSFeed> rssFeeds) {
-		// TODO Auto-generated method stub
-		return null;
+	protected String before() {
+
+		String ans = "";
+
+		ans += "<rss>\n";
+		ans += "\t<channel>\n";
+		ans += "\t\t<title></title>\n";
+		ans += "\t\t<link></link>\n";
+		ans += "\t\t<description></description>\n";
+
+		return ans;
 	}
 
+	protected String forEachItem(Item item) {
+
+		String ans = "";
+
+		ans += "\t\t\t</item>\n";
+
+		ans += "\t\t\t\t<guid>" + item.getM_guid() + "</guid>\n";
+		ans += "\t\t\t\t<title>" + item.getM_title() + "</title>\n";
+		ans += "\t\t\t\t<link>" + item.getM_link() + "</link>\n";
+		ans += "\t\t\t\t<description>" + item.getM_description() + "</description>\n";
+		ans += "\t\t\t\t<author>" + item.getM_author() + "</author>\n";
+		ans += "\t\t\t\t<category>" + item.getM_category() + "</category>\n";
+
+		ans += "\t\t\t</item>\n";
+
+		return ans;
+	}
+
+	protected String after() {
+
+		String ans = "";
+
+		ans += "\t</channel>\n";
+		ans += "</rss>\n";
+
+		return ans;
+	}
 }

@@ -4,6 +4,8 @@ import java.util.Vector;
 
 import config.ConfImpl;
 
+import rss.Channel;
+import rss.Item;
 import rss.RSSFeed;
 
 public abstract class Format extends ConfImpl {
@@ -28,5 +30,35 @@ public abstract class Format extends ConfImpl {
 		return this.format;
 	}
 
-	public abstract String convertToMyFormat(Vector<RSSFeed> rssFeeds);
+	public final String convertToMyFormat(Vector<RSSFeed> rssFeeds){
+
+		String ans = "";
+
+		ans += before();
+
+		for (RSSFeed feed: rssFeeds){
+
+			Vector <Channel> channels = feed.getChannels();
+
+			for (Channel channel: channels){
+
+				Vector <Item> items = channel.getItems();
+
+				for (Item item: items){
+
+					ans += forEachItem(item);
+				}
+			}
+		}
+
+		ans += after();
+
+		return ans;
+	}
+
+	protected abstract String before();
+
+	protected abstract  String forEachItem(Item item);
+
+	protected abstract String after();
 }
