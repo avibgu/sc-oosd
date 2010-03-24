@@ -53,13 +53,13 @@ public class Main {
 		}
 
 		// filterring the feeds
-		
+
 		Vector<Filter> filters = confHandler.getFilters();
-		
+
 		for (int i=0; i < filters.size(); i++){
 
 			//TODO filterrrrrrr...
-			Vector<RSSFeed> rssFeeds = filters.get(i).filter( rssFeeds );
+			//Vector<RSSFeed> rssFeeds = filters.get(i).filter( rssFeeds );
 		}
 
 		// creating output
@@ -77,7 +77,7 @@ public class Main {
 					FileWriter file = new FileWriter("output" + j + ".xml");
 					BufferedWriter out = new BufferedWriter(file);
 
-					rssFeeds.get(j).toRss(out);	//out.write("text");
+					//rssFeeds.get(j).toRss(out);	//out.write("text");
 
 					outputFiles.add(out);
 					out.close();
@@ -90,7 +90,7 @@ public class Main {
 					FileWriter file = new FileWriter("output" + j + ".txt");
 					BufferedWriter out = new BufferedWriter(file);
 
-					rssFeeds.get(j).toTxt(out);	//out.write("text");
+					//rssFeeds.get(j).toTxt(out);	//out.write("text");
 
 					outputFiles.add(out);
 					out.close();

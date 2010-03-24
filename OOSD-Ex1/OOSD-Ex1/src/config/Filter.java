@@ -1,5 +1,9 @@
 package config;
 
+import java.util.Vector;
+
+import rss.RSSFeed;
+
 public class Filter extends ConfImpl {
 
 	private String name;
@@ -32,9 +36,9 @@ public class Filter extends ConfImpl {
 
 		return this.arg;
 	}
-	
+
 	public Vector<RSSFeed> filter (Vector<RSSFeed> rssFeeds){
-		
+
 		// TODO
 		return null;
 	}

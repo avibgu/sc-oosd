@@ -15,9 +15,9 @@ public class RssHandler extends DefaultHandler {
 	private StringBuffer m_sb;
 	private RSSFeed m_feed;
 	private boolean m_readingchannelspecs;
-	
+
 	/**
-	 * creating a new RssHandler
+	 * creates a new RssHandler
 	 */
 	public RssHandler(){
 
@@ -29,13 +29,13 @@ public class RssHandler extends DefaultHandler {
 	}
 
 	/**
-	 * returns the Rss feed beeing modified
-	 * @return the Rss feed beeing modified
+	 * returns the Rss feed being modified
+	 * @return the Rss feed being modified
 	 */
 	public RSSFeed getRssFeed(){
 
 		return this.m_feed;
-		
+
 	}
 
 	/**
@@ -49,54 +49,17 @@ public class RssHandler extends DefaultHandler {
     public void startElement( String uri, String lName, String qName, Attributes attribs ) {
 
     	this.m_stack.push(qName);
-    	
+
     	if(qName.equals("channel")){
     		this.m_readingchannelspecs = true;
     		Channel channel = new Channel();
     		this.m_feed.getChannels().add(channel);
-    		 		
     		this.m_sb = new StringBuffer();
 
     	}
-//parsing the title, link and description of the channel
-    	
-    	if(qName.equals("title") && this.m_readingchannelspecs){
-    		Channel channel = this.m_feed.getChannels().lastElement();
-    		if(channel != null){
-    			channel.setTitle(this.m_sb.toString());
-    			this.m_sb = new StringBuffer();
-    		}
 
-    	}
-    	
-    	if(qName.equals("link") && this.m_readingchannelspecs){
-    		try {
-        		Channel channel = this.m_feed.getChannels().lastElement();
-    			if(channel != null){
-    				URL link = new URL(this.m_sb.toString());
-    				channel.setLink(link);
-    			}
-			}
-    		
-    		catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    		
-			this.m_sb = new StringBuffer();
 
-    	}
-    	
-    	if(qName.equals("description") && this.m_readingchannelspecs){
-    		Channel channel = this.m_feed.getChannels().lastElement();
-    		if(channel != null){
-    			channel.setDescription(this.m_sb.toString());
-    			this.m_sb = new StringBuffer();
-    		}
-
-    	}
-
-//parsing the title, link and description of the item    	
+//parsing the title, link and description of the item
     	if(qName.equals("item")){
     		Item item = new Item();
     		Channel channel = this.m_feed.getChannels().lastElement();
@@ -104,66 +67,10 @@ public class RssHandler extends DefaultHandler {
     		this.m_readingchannelspecs = false;
 			this.m_sb = new StringBuffer();
     	}
-    	
-    	if(qName.equals("title") && !this.m_readingchannelspecs){
-    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
-			if (item != null){
-				item.setTitle(this.m_sb.toString());
-			}
-			this.m_sb = new StringBuffer();
 
-    	}
-    	
-    	if(qName.equals("link")&& !this.m_readingchannelspecs){
-    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
-    		if (item != null){
-	    		try {
-					URL link = new URL(this.m_sb.toString());
-	    			item.setLink(link);
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-    		}
-    		this.m_sb = new StringBuffer();
 
-    	}
-    	
-    	if(qName.equals("description") && !this.m_readingchannelspecs){
-    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
-    		if (item != null){
-	    		item.setDescription(this.m_sb.toString());
-    		}
-    		this.m_sb = new StringBuffer();
 
-    	}
-    	
-    	if(qName.equals("guid")){
-    		UUID guid = UUID.fromString(this.m_sb.toString());
-    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
-    		if (item != null){
-	    		item.setGuid(guid);
-    		}
-    		this.m_sb = new StringBuffer();
-    	}
-    	
-    	if(qName.equals("author")){
-    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
-    		if (item != null){
-	    		item.setAuthor(this.m_sb.toString());
-    		}
-    		this.m_sb = new StringBuffer();
-    	}
-    	
-    	if(qName.equals("category")){
-    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
-    		if (item != null){
-	    		item.setCategory(this.m_sb.toString());
-    		}
-    		this.m_sb = new StringBuffer();
-    	}
-    	
-     	
+
     }
 
     /**
@@ -187,6 +94,106 @@ public class RssHandler extends DefaultHandler {
 	 */
     public void endElement( String uri, String lName, String qName ) {
 
+
+//parsing the title, link and description of the channel
+
+    	if(qName.equals("title") && this.m_readingchannelspecs){
+    		Channel channel = this.m_feed.getChannels().lastElement();
+    		if(channel != null){
+    			channel.setTitle(this.m_sb.toString().trim());
+    			this.m_sb = new StringBuffer();
+    		}
+
+    	}
+
+    	if(qName.equals("link") && this.m_readingchannelspecs){
+    		try {
+        		Channel channel = this.m_feed.getChannels().lastElement();
+    			if(channel != null){
+    				URL link = new URL(this.m_sb.toString());
+    				channel.setLink(link);
+    			}
+			}
+
+    		catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			this.m_sb = new StringBuffer();
+
+    	}
+
+    	if(qName.equals("description") && this.m_readingchannelspecs){
+    		Channel channel = this.m_feed.getChannels().lastElement();
+    		if(channel != null){
+    			channel.setDescription(this.m_sb.toString().trim());
+    			this.m_sb = new StringBuffer();
+    		}
+
+    	}
+
+    	if(qName.equals("title") && !this.m_readingchannelspecs){
+    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
+			if (item != null){
+				item.setTitle(this.m_sb.toString().trim());
+			}
+			this.m_sb = new StringBuffer();
+
+    	}
+
+    	if(qName.equals("link")&& !this.m_readingchannelspecs){
+    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
+    		if (item != null){
+	    		try {
+					URL link = new URL(this.m_sb.toString());
+	    			item.setLink(link);
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    		}
+    		this.m_sb = new StringBuffer();
+
+    	}
+
+    	if(qName.equals("description") && !this.m_readingchannelspecs){
+    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
+    		if (item != null){
+	    		item.setDescription(this.m_sb.toString().trim());
+    		}
+    		this.m_sb = new StringBuffer();
+
+    	}
+
+    	if(qName.equals("guid")){
+    		UUID guid = UUID.fromString(this.m_sb.toString());
+    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
+    		if (item != null){
+	    		item.setGuid(guid);
+    		}
+    		this.m_sb = new StringBuffer();
+    	}
+
+    	if(qName.equals("author")){
+    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
+    		if (item != null){
+	    		item.setAuthor(this.m_sb.toString().trim());
+    		}
+    		this.m_sb = new StringBuffer();
+    	}
+
+    	if(qName.equals("category")){
+    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
+    		if (item != null){
+	    		item.setCategory(this.m_sb.toString().trim());
+    		}
+    		this.m_sb = new StringBuffer();
+    	}
+
+    	if(qName.equals("item")){
+    		this.m_readingchannelspecs = true;
+    	}
         this.m_stack.pop();
     }
 }

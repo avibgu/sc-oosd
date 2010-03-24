@@ -1,39 +1,57 @@
-<rss version="2.0>
-
-	<channel>
-
-		<title>News from some site</title>
-
-		<link>http://www.somesite.com</link>
-
-		<description>An example of an RSS feed</description>
-
-		<item>
-			<title>Something happend</title>
-			<guid>http://www.somesite.com/1234</guid>
-			<description>This morning, something happend...</description>
-		</item>
-
-		<item>
-			<title>Something else happend</title>
-			<guid>http://www.somesite.com/3456</guid>
-			<description>This evening, something else happend...</description>
-			<author>johndoe@somesite.com</author>
-			<category>news</category>
-		</item>
-
-		<item>
-			<title>Nothing happend</title>
-			<guid>http://www.somesite.com/4321</guid>
-			<description>Nothing happend...</description>
-			<category>no news</category>
-			<category>good news</category>
-		</item>
-
-	</channel>
-
-	<channel>
-	...
-	</channel>
-
-</rss>
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0">
+  <channel>
+    <title>Announcements</title>
+    <link>http://www.cs.bgu.ac.il/~spl101/index.php?page=Announcements&amp;format=standalone</link>
+    <image><url>http://www.cs.bgu.ac.il/~ygleyzer/course.wiki/images/flavicon.gif</url></image>
+    <description></description>
+    <generator>CourseWiki 2.4.2 + PHP 5.2.6-pl7-gentoo</generator>
+    <pubDate>Fri, 19 Mar 2010 14:25:09 +0200</pubDate>
+    <category>News</category>
+    <language>en</language>
+    <webMaster>spl101@cs.bgu.ac.il</webMaster>
+      <item>
+        <title>grades</title>
+        <link>http://www.cs.bgu.ac.il/~spl101/index.php?page=Announcements&amp;format=standalone&amp;message=112</link>
+        <pubDate>Sat, 06 Mar 2010 22:24:55 +0200</pubDate>
+        <author>spl101</author>
+        <description>final grades: spl101-grades-final.pdf
+please contact TA in charge of exercise in case you are surprised by that exercise grade.
+thank you</description>
+      </item>
+      <item>
+        <title>Assignment 3 + 4</title>
+        <link>http://www.cs.bgu.ac.il/~spl101/index.php?page=Announcements&amp;format=standalone&amp;message=109</link>
+        <pubDate>Sun, 28 Feb 2010 09:38:25 +0200</pubDate>
+        <author>Achiya Elyasaf</author>
+        <description>Even more slots are published. Please make sure you follow published guidelines.</description>
+      </item>
+      <item>
+        <title>Assignment 3 + 4</title>
+        <link>http://www.cs.bgu.ac.il/~spl101/index.php?page=Announcements&amp;format=standalone&amp;message=107</link>
+        <pubDate>Sun, 21 Feb 2010 18:19:59 +0200</pubDate>
+        <author>Avitan Gefen</author>
+        <description>More slots are published. Please make sure you follow published guidelines.</description>
+      </item>
+      <item>
+        <title>Achiya's office hours</title>
+        <link>http://www.cs.bgu.ac.il/~spl101/index.php?page=Announcements&amp;format=standalone&amp;message=106</link>
+        <pubDate>Sat, 20 Feb 2010 19:12:10 +0200</pubDate>
+        <author>Achiya Elyasaf</author>
+        <description>Due to milluim I will not hold my office hours this week.</description>
+      </item>
+       <item>
+        <title>Frontal checks Assignment 3 and 4</title>
+        <link>http://www.cs.bgu.ac.il/~spl101/index.php?page=Announcements&amp;format=standalone&amp;message=97</link>
+        <pubDate>Mon, 08 Feb 2010 14:13:33 +0200</pubDate>
+        <author>Avitan Gefen</author>
+        <description>Slots have been published. Register here.</description>
+      </item>
+      <item>
+        <title>The office hours of Leonid are cancled this Monday, 8/2/2010.</title>
+        <link>http://www.cs.bgu.ac.il/~spl101/index.php?page=Announcements&amp;format=standalone&amp;message=95</link>
+        <pubDate>Sun, 07 Feb 2010 18:51:50 +0200</pubDate>
+        <author>Leonid</author>
+        <description> </description>
+      </item>
+  </channel>
+</rss>  
