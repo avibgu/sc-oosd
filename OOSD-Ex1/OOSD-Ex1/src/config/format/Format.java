@@ -1,6 +1,8 @@
-package config;
+package config.format;
 
 import java.util.Vector;
+
+import config.ConfImpl;
 
 import rss.RSSFeed;
 

@@ -1,12 +1,12 @@
-package config;
+package config.filter;
 
 import java.util.Vector;
 
 import rss.RSSFeed;
 
-public class FilterByContent extends Filter {
+public class FilterByCategory extends Filter{
 
-	public FilterByContent(String _name, String _arg) {
+	public FilterByCategory(String _name, String _arg) {
 
 		super(_name, _arg);
 	}

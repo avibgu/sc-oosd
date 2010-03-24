@@ -10,6 +10,8 @@ import java.util.Vector;
 
 import rss.*;
 import config.*;
+import config.filter.Filter;
+import config.format.Format;
 
 public class Main {
 

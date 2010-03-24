@@ -1,6 +1,8 @@
-package config;
+package config.filter;
 
 import java.util.Vector;
+
+import config.ConfImpl;
 
 import rss.RSSFeed;
 

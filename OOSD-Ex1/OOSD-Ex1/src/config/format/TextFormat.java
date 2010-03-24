@@ -1,4 +1,4 @@
-package config;
+package config.format;
 
 import java.util.Vector;
 

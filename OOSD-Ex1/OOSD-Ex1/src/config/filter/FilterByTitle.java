@@ -1,14 +1,14 @@
-package config;
+package config.filter;
 
 import java.util.Vector;
 
 import rss.RSSFeed;
 
-public class FilterByAuthor extends Filter {
+public class FilterByTitle extends Filter {
 
-	public FilterByAuthor(String _name, String _arg) {
+	public FilterByTitle(String _name, String _arg){
 
-		super(_name, _arg);
+		super(_name, _name);
 	}
 
 	@Override

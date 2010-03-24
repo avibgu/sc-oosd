@@ -4,6 +4,17 @@ package config;
 
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.Attributes;
+
+import config.filter.Filter;
+import config.filter.FilterByAuthor;
+import config.filter.FilterByCategory;
+import config.filter.FilterByContent;
+import config.filter.FilterByTitle;
+import config.format.Format;
+import config.format.RssFormat;
+import config.format.TextFormat;
+
+
 import java.util.Stack;
 import java.util.Vector;
 
