@@ -37,8 +37,6 @@ public class Main {
 
 		SimpleXMLReader reader = new SimpleXMLReader(args[0], confHandler);
 
-		reader = new SimpleXMLReader(args[0], confHandler);
-
 		// parsing the rss feeds
 		RssHandler rssHandler = new RssHandler();
 
