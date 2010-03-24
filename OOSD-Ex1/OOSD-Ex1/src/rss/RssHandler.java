@@ -7,27 +7,31 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Stack;
 import java.util.UUID;
-import java.util.Vector;
+
 
 public class RssHandler extends DefaultHandler {
 
 	private Stack<String> m_stack;
 	private StringBuffer m_sb;
 	private RSSFeed m_feed;
-	private boolean m_channelOpen;
+	private boolean m_readingchannelspecs;
 	
 	/**
-	 * default ctor
+	 * creating a new RssHandler
 	 */
 	public RssHandler(){
 
 		this.m_stack = new Stack<String>();
 		this.m_sb = new StringBuffer();
 		this.m_feed = new RSSFeed();
-		this.m_channelOpen = false;
+		this.m_readingchannelspecs = false;
 
 	}
 
+	/**
+	 * returns the Rss feed beeing modified
+	 * @return the Rss feed beeing modified
+	 */
 	public RSSFeed getRssFeed(){
 
 		return this.m_feed;
@@ -47,7 +51,7 @@ public class RssHandler extends DefaultHandler {
     	this.m_stack.push(qName);
     	
     	if(qName.equals("channel")){
-    		this.m_channelOpen = true;
+    		this.m_readingchannelspecs = true;
     		Channel channel = new Channel();
     		this.m_feed.getChannels().add(channel);
     		 		
@@ -56,7 +60,7 @@ public class RssHandler extends DefaultHandler {
     	}
 //parsing the title, link and description of the channel
     	
-    	if(qName.equals("title") && this.m_channelOpen){
+    	if(qName.equals("title") && this.m_readingchannelspecs){
     		Channel channel = this.m_feed.getChannels().lastElement();
     		if(channel != null){
     			channel.setTitle(this.m_sb.toString());
@@ -65,7 +69,7 @@ public class RssHandler extends DefaultHandler {
 
     	}
     	
-    	if(qName.equals("link") && this.m_channelOpen){
+    	if(qName.equals("link") && this.m_readingchannelspecs){
     		try {
         		Channel channel = this.m_feed.getChannels().lastElement();
     			if(channel != null){
@@ -83,7 +87,7 @@ public class RssHandler extends DefaultHandler {
 
     	}
     	
-    	if(qName.equals("description") && this.m_channelOpen){
+    	if(qName.equals("description") && this.m_readingchannelspecs){
     		Channel channel = this.m_feed.getChannels().lastElement();
     		if(channel != null){
     			channel.setDescription(this.m_sb.toString());
@@ -97,10 +101,11 @@ public class RssHandler extends DefaultHandler {
     		Item item = new Item();
     		Channel channel = this.m_feed.getChannels().lastElement();
     		channel.getItems().add(item);
+    		this.m_readingchannelspecs = false;
 			this.m_sb = new StringBuffer();
     	}
     	
-    	if(qName.equals("title") && !this.m_channelOpen){
+    	if(qName.equals("title") && !this.m_readingchannelspecs){
     		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
 			if (item != null){
 				item.setTitle(this.m_sb.toString());
@@ -109,7 +114,7 @@ public class RssHandler extends DefaultHandler {
 
     	}
     	
-    	if(qName.equals("link")&& !this.m_channelOpen){
+    	if(qName.equals("link")&& !this.m_readingchannelspecs){
     		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
     		if (item != null){
 	    		try {
@@ -124,7 +129,7 @@ public class RssHandler extends DefaultHandler {
 
     	}
     	
-    	if(qName.equals("description") && !this.m_channelOpen){
+    	if(qName.equals("description") && !this.m_readingchannelspecs){
     		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
     		if (item != null){
 	    		item.setDescription(this.m_sb.toString());
@@ -181,12 +186,6 @@ public class RssHandler extends DefaultHandler {
 	 * @param qName the name that we use
 	 */
     public void endElement( String uri, String lName, String qName ) {
-
-
-    	if ( qName.equals("channel") ){
-    		this.m_channelOpen = false;
-    	}
-    	
 
         this.m_stack.pop();
     }
