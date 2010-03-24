@@ -58,8 +58,7 @@ public class Main {
 
 		for (int i=0; i < filters.size(); i++){
 
-			//TODO filterrrrrrr...
-			//Vector<RSSFeed> rssFeeds = filters.get(i).filter( rssFeeds );
+			rssFeeds = filters.get(i).filter( rssFeeds );
 		}
 
 		// creating output
