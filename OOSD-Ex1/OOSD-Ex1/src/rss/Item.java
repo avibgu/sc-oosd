@@ -6,15 +6,18 @@ import java.util.Vector;
 
 public class Item extends RSSElement{
 
-	private UUID m_guid;
+	private String m_guid;
 	private String m_author;
 	private Vector<String> m_categories;
 
 	public Item(){
 
+		this.m_guid = "";
+		this.m_author = "";
+		this.m_categories = new Vector<String>();
 	}
 
-	public void setGuid(UUID guid){
+	public void setGuid(String guid){
 		this.m_guid = guid;
 	}
 
@@ -34,7 +37,7 @@ public class Item extends RSSElement{
 		this.m_author = author;
 	}
 
-	public UUID getM_guid() {
+	public String getM_guid() {
 		return this.m_guid;
 	}
 

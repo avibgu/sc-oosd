@@ -67,34 +67,36 @@ public class Main {
 
 		Vector<BufferedWriter> outputFiles = new Vector<BufferedWriter>();
 
-		for (int i=0; i < formats.size(); i++){
+		System.out.print(formats.get(0).convertToMyFormat(rssFeeds));
 
-			if ( formats.get(i).getFormat().equals("rss") ){
-
-				for (int j=0; j < rssFeeds.size(); j++){
-
-					FileWriter file = new FileWriter("output" + j + ".xml");
-					BufferedWriter out = new BufferedWriter(file);
-
-					//rssFeeds.get(j).toRss(out);	//out.write("text");
-
-					outputFiles.add(out);
-					out.close();
-				}
-			}
-			else{
-
-				for (int j=0; j < rssFeeds.size(); j++){
-
-					FileWriter file = new FileWriter("output" + j + ".txt");
-					BufferedWriter out = new BufferedWriter(file);
-
-					//rssFeeds.get(j).toTxt(out);	//out.write("text");
-
-					outputFiles.add(out);
-					out.close();
-				}
-			}
-		}
+//		for (int i=0; i < formats.size(); i++){
+//
+//			if ( formats.get(i).getFormat().equals("rss") ){
+//
+//				for (int j=0; j < rssFeeds.size(); j++){
+//
+//					FileWriter file = new FileWriter("output" + j + ".xml");
+//					BufferedWriter out = new BufferedWriter(file);
+//
+//					//rssFeeds.get(j).toRss(out);	//out.write("text");
+//
+//					outputFiles.add(out);
+//					out.close();
+//				}
+//			}
+//			else{
+//
+//				for (int j=0; j < rssFeeds.size(); j++){
+//
+//					FileWriter file = new FileWriter("output" + j + ".txt");
+//					BufferedWriter out = new BufferedWriter(file);
+//
+//					//rssFeeds.get(j).toTxt(out);	//out.write("text");
+//
+//					outputFiles.add(out);
+//					out.close();
+//				}
+//			}
+//		}
 	}
 }

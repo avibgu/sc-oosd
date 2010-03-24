@@ -1,5 +1,7 @@
 package config.format;
 
+import java.util.Vector;
+
 import rss.Item;
 
 public class RssFormat extends Format {
@@ -26,16 +28,25 @@ public class RssFormat extends Format {
 
 		String ans = "";
 
-		ans += "\t\t\t</item>\n";
+		ans += "\t\t<item>\n";
 
-		ans += "\t\t\t\t<guid>" + item.getM_guid() + "</guid>\n";
-		ans += "\t\t\t\t<title>" + item.getM_title() + "</title>\n";
-		ans += "\t\t\t\t<link>" + item.getM_link() + "</link>\n";
-		ans += "\t\t\t\t<description>" + item.getM_description() + "</description>\n";
-		ans += "\t\t\t\t<author>" + item.getM_author() + "</author>\n";
-		ans += "\t\t\t\t<category>" + item.getM_category() + "</category>\n";
+		ans += "\t\t\t<guid>" + item.getM_guid() + "</guid>\n";
+		ans += "\t\t\t<title>" + item.getM_title() + "</title>\n";
+		ans += "\t\t\t<link>" + item.getM_link() + "</link>\n";
+		ans += "\t\t\t<description>" + item.getM_description() + "</description>\n";
+		ans += "\t\t\t<author>" + item.getM_author() + "</author>\n";
 
-		ans += "\t\t\t</item>\n";
+		Vector<String> categories = item.getM_categories();
+
+		if (categories != null){
+
+			for (int i=0; i < categories.size(); i++){
+
+				ans += "\t\t\t<category>" + categories.get(i) + "</category>\n";
+			}
+		}
+
+		ans += "\t\t</item>\n";
 
 		return ans;
 	}

@@ -166,10 +166,9 @@ public class RssHandler extends DefaultHandler {
     	}
 
     	if(qName.equals("guid") && !this.m_readingchannelspecs){
-    		UUID guid = UUID.fromString(this.m_sb.toString());
     		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
     		if (item != null){
-	    		item.setGuid(guid);
+	    		item.setGuid(this.m_sb.toString());
     		}
     		this.m_sb = new StringBuffer();
     	}
