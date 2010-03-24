@@ -116,7 +116,17 @@ public class ConfigHandler extends DefaultHandler{
 
     	if ( qName.equals("format") ){
 
-    		this.formats.add( new Format( this.sb.toString().trim() ) );
+    		String formatType = this.sb.toString().trim();
+
+    		if ( formatType.equals("rss") ){
+
+    			this.formats.add( new RssFormat( formatType ) );
+    		}
+    		else if ( formatType.equals("text") ){
+
+    			this.formats.add( new TextFormat( formatType ) );
+    		}
+
     		this.sb = new StringBuffer();
     	}
 
