@@ -2,36 +2,37 @@ package rss;
 
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.Attributes;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Stack;
+import java.util.UUID;
 import java.util.Vector;
 
 public class RssHandler extends DefaultHandler {
 
-	private Stack<String> stack;
-	private StringBuffer sb;
-
-	private RSSFeed feed;
-
-
+	private Stack<String> m_stack;
+	private StringBuffer m_sb;
+	private RSSFeed m_feed;
+	private boolean m_channelOpen;
+	
 	/**
 	 * default ctor
 	 */
 	public RssHandler(){
 
-		this.stack = new Stack<String>();
-		this.sb = new StringBuffer();
-
-		this.feed = new RSSFeed();
+		this.m_stack = new Stack<String>();
+		this.m_sb = new StringBuffer();
+		this.m_feed = new RSSFeed();
+		this.m_channelOpen = false;
 
 	}
 
 	public RSSFeed getRssFeed(){
 
-		return this.feed;
+		return this.m_feed;
+		
 	}
-
-
-
 
 	/**
 	 * this method invoked when an element starts
@@ -43,7 +44,121 @@ public class RssHandler extends DefaultHandler {
 	 */
     public void startElement( String uri, String lName, String qName, Attributes attribs ) {
 
-    	this.stack.push(qName);
+    	this.m_stack.push(qName);
+    	
+    	if(qName.equals("channel")){
+    		this.m_channelOpen = true;
+    		Channel channel = new Channel();
+    		this.m_feed.getChannels().add(channel);
+    		 		
+    		this.m_sb = new StringBuffer();
+
+    	}
+//parsing the title, link and description of the channel
+    	
+    	if(qName.equals("title") && this.m_channelOpen){
+    		Channel channel = this.m_feed.getChannels().lastElement();
+    		if(channel != null){
+    			channel.setTitle(this.m_sb.toString());
+    			this.m_sb = new StringBuffer();
+    		}
+
+    	}
+    	
+    	if(qName.equals("link") && this.m_channelOpen){
+    		try {
+        		Channel channel = this.m_feed.getChannels().lastElement();
+    			if(channel != null){
+    				URL link = new URL(this.m_sb.toString());
+    				channel.setLink(link);
+    			}
+			}
+    		
+    		catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		
+			this.m_sb = new StringBuffer();
+
+    	}
+    	
+    	if(qName.equals("description") && this.m_channelOpen){
+    		Channel channel = this.m_feed.getChannels().lastElement();
+    		if(channel != null){
+    			channel.setDescription(this.m_sb.toString());
+    			this.m_sb = new StringBuffer();
+    		}
+
+    	}
+
+//parsing the title, link and description of the item    	
+    	if(qName.equals("item")){
+    		Item item = new Item();
+    		Channel channel = this.m_feed.getChannels().lastElement();
+    		channel.getItems().add(item);
+			this.m_sb = new StringBuffer();
+    	}
+    	
+    	if(qName.equals("title") && !this.m_channelOpen){
+    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
+			if (item != null){
+				item.setTitle(this.m_sb.toString());
+			}
+			this.m_sb = new StringBuffer();
+
+    	}
+    	
+    	if(qName.equals("link")&& !this.m_channelOpen){
+    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
+    		if (item != null){
+	    		try {
+					URL link = new URL(this.m_sb.toString());
+	    			item.setLink(link);
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    		}
+    		this.m_sb = new StringBuffer();
+
+    	}
+    	
+    	if(qName.equals("description") && !this.m_channelOpen){
+    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
+    		if (item != null){
+	    		item.setDescription(this.m_sb.toString());
+    		}
+    		this.m_sb = new StringBuffer();
+
+    	}
+    	
+    	if(qName.equals("guid")){
+    		UUID guid = UUID.fromString(this.m_sb.toString());
+    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
+    		if (item != null){
+	    		item.setGuid(guid);
+    		}
+    		this.m_sb = new StringBuffer();
+    	}
+    	
+    	if(qName.equals("author")){
+    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
+    		if (item != null){
+	    		item.setAuthor(this.m_sb.toString());
+    		}
+    		this.m_sb = new StringBuffer();
+    	}
+    	
+    	if(qName.equals("category")){
+    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
+    		if (item != null){
+	    		item.setCategory(this.m_sb.toString());
+    		}
+    		this.m_sb = new StringBuffer();
+    	}
+    	
+     	
     }
 
     /**
@@ -55,7 +170,7 @@ public class RssHandler extends DefaultHandler {
      */
     public void characters(char[] ch,int start,int len){
 
-    	this.sb.append( ch, start, len );
+    	this.m_sb.append( ch, start, len );
     }
 
 	/**
@@ -68,12 +183,11 @@ public class RssHandler extends DefaultHandler {
     public void endElement( String uri, String lName, String qName ) {
 
 
-    	if ( qName.equals("filter") ){
-
-    		this.filters.add( new Filter(this.name, this.args) );
-    		this.sb = new StringBuffer();
+    	if ( qName.equals("channel") ){
+    		this.m_channelOpen = false;
     	}
+    	
 
-        this.stack.pop();
+        this.m_stack.pop();
     }
 }
