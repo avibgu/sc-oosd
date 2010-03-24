@@ -1,8 +1,7 @@
 package config.filter;
 
-import java.util.Vector;
+import rss.Item;
 
-import rss.RSSFeed;
 
 public class FilterByAuthor extends Filter {
 
@@ -12,9 +11,12 @@ public class FilterByAuthor extends Filter {
 	}
 
 	@Override
-	public Vector<RSSFeed> filter(Vector<RSSFeed> rssFeeds) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean filterByType(Item item) {
+		String author = item.getM_author();
+		return author.equals(this.arg);
+
 	}
+
+
 
 }

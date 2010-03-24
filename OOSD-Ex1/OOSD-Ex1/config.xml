@@ -6,7 +6,7 @@
 
 	<filter>
 		<name>content</name>
-		<arg>published</arg>
+		<arg>hours</arg>
 	</filter>
 
 	<filter>

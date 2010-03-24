@@ -2,12 +2,13 @@ package rss;
 
 import java.net.URL;
 import java.util.UUID;
+import java.util.Vector;
 
 public class Item extends RSSElement{
 
 	private UUID m_guid;
 	private String m_author;
-	private String m_category;
+	private Vector<String> m_categories;
 
 	public Item(){
 
@@ -33,19 +34,15 @@ public class Item extends RSSElement{
 		this.m_author = author;
 	}
 
-	public void setCategory(String category){
-		this.m_category = category;
-	}
-
 	public UUID getM_guid() {
-		return m_guid;
+		return this.m_guid;
 	}
 
 	public String getM_author() {
-		return m_author;
+		return this.m_author;
 	}
 
-	public String getM_category() {
-		return m_category;
+	public Vector<String> getM_categories() {
+		return this.m_categories;
 	}
 }

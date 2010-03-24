@@ -42,21 +42,25 @@ public abstract class Filter extends ConfImpl {
 	}
 
 	public final Vector<RSSFeed> filter (Vector<RSSFeed> rssFeeds){
-		for (RSSFeed feed: rssFeeds){
 
-			Vector <Channel> channels = feed.getChannels();
+		for (int i=0; i < rssFeeds.size(); i++){
 
-			for (Channel channel: channels){
+			Vector <Channel> channels = rssFeeds.get(i).getChannels();
 
+			for (int j=0; j < channels.size(); j++){
+
+				Channel channel = channels.get(j);
 				Vector <Item> items = channel.getItems();
+				Vector <Item> newItems = new Vector<Item>( items.size() );
 
-				for (Item item: items){
+				for (int k=0; k < items.size(); k++){
 
-					if(!filterByType(item)){
-						items.remove(item);
+					if (this.filterByType(items.get(k)))
 
-					}
+						newItems.add(items.get(k));
 				}
+
+				channel.setItems(newItems);
 			}
 		}
 

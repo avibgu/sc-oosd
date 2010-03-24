@@ -14,7 +14,10 @@ public class FilterByCategory extends Filter{
 
 	@Override
 	public boolean filterByType(Item item) {
-		// TODO Auto-generated method stub
+		Vector<String> categories = item.getM_categories();
+		for(String catergory : categories){
+			if(catergory.equals(this.arg)) return true;
+		}
 		return false;
 	}
 

@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Stack;
 import java.util.UUID;
+import java.util.Vector;
 
 
 public class RssHandler extends DefaultHandler {
@@ -184,7 +185,10 @@ public class RssHandler extends DefaultHandler {
     	if(qName.equals("category") && !this.m_readingchannelspecs){
     		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
     		if (item != null){
-	    		item.setCategory(this.m_sb.toString().trim());
+	    		Vector<String> categories = item.getM_categories();
+	    		if(categories != null){
+	    			categories.add(this.m_sb.toString().trim());
+	    		}
     		}
     		this.m_sb = new StringBuffer();
     	}

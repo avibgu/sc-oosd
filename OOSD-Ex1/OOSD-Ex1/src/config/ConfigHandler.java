@@ -145,16 +145,16 @@ public class ConfigHandler extends DefaultHandler{
 
     		Filter newFilter = null;
 
-    		if (this.name == "title")
+    		if (this.name.equals("title"))
     			newFilter = new FilterByTitle(this.name, this.arg);
 
-    		if (this.name == "category")
+    		if (this.name.equals("category"))
     			newFilter = new FilterByCategory(this.name, this.arg);
 
-    		if (this.name == "content")
+    		if (this.name.equals("content"))
     			newFilter = new FilterByContent(this.name, this.arg);
 
-    		if (this.name == "author")
+    		if (this.name.equals("author"))
     			newFilter = new FilterByAuthor(this.name, this.arg);
 
     		this.filters.add( newFilter );
