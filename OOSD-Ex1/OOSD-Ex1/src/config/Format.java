@@ -1,6 +1,10 @@
 package config;
 
-public class Format extends ConfImpl {
+import java.util.Vector;
+
+import rss.RSSFeed;
+
+public abstract class Format extends ConfImpl {
 
 	private String format;
 
@@ -21,4 +25,6 @@ public class Format extends ConfImpl {
 
 		return this.format;
 	}
+
+	public abstract String convertToMyFormat(Vector<RSSFeed> rssFeeds);
 }

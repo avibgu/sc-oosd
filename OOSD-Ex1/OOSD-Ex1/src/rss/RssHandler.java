@@ -58,8 +58,6 @@ public class RssHandler extends DefaultHandler {
 
     	}
 
-
-//parsing the title, link and description of the item
     	if(qName.equals("item")){
     		Item item = new Item();
     		Channel channel = this.m_feed.getChannels().lastElement();
@@ -67,9 +65,7 @@ public class RssHandler extends DefaultHandler {
     		this.m_readingchannelspecs = false;
 			this.m_sb = new StringBuffer();
     	}
-
-
-
+		this.m_sb = new StringBuffer();
 
     }
 
@@ -133,6 +129,7 @@ public class RssHandler extends DefaultHandler {
 
     	}
 
+//parsing the title, link and description of the item
     	if(qName.equals("title") && !this.m_readingchannelspecs){
     		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
 			if (item != null){
@@ -148,6 +145,7 @@ public class RssHandler extends DefaultHandler {
 	    		try {
 					URL link = new URL(this.m_sb.toString());
 	    			item.setLink(link);
+
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -166,7 +164,7 @@ public class RssHandler extends DefaultHandler {
 
     	}
 
-    	if(qName.equals("guid")){
+    	if(qName.equals("guid") && !this.m_readingchannelspecs){
     		UUID guid = UUID.fromString(this.m_sb.toString());
     		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
     		if (item != null){
@@ -175,7 +173,7 @@ public class RssHandler extends DefaultHandler {
     		this.m_sb = new StringBuffer();
     	}
 
-    	if(qName.equals("author")){
+    	if(qName.equals("author") && !this.m_readingchannelspecs){
     		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
     		if (item != null){
 	    		item.setAuthor(this.m_sb.toString().trim());
@@ -183,7 +181,7 @@ public class RssHandler extends DefaultHandler {
     		this.m_sb = new StringBuffer();
     	}
 
-    	if(qName.equals("category")){
+    	if(qName.equals("category") && !this.m_readingchannelspecs){
     		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
     		if (item != null){
 	    		item.setCategory(this.m_sb.toString().trim());
@@ -194,6 +192,7 @@ public class RssHandler extends DefaultHandler {
     	if(qName.equals("item")){
     		this.m_readingchannelspecs = true;
     	}
-        this.m_stack.pop();
+
+    	this.m_stack.pop();
     }
 }
