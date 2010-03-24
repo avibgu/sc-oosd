@@ -4,12 +4,14 @@ import java.util.Vector;
 
 import config.ConfImpl;
 
+import rss.Channel;
+import rss.Item;
 import rss.RSSFeed;
 
 public abstract class Filter extends ConfImpl {
 
-	private String name;
-	private String arg;
+	protected String name;
+	protected String arg;
 
 	/**
 	 * ctor
@@ -39,5 +41,29 @@ public abstract class Filter extends ConfImpl {
 		return this.arg;
 	}
 
-	public abstract Vector<RSSFeed> filter (Vector<RSSFeed> rssFeeds);
+	public final Vector<RSSFeed> filter (Vector<RSSFeed> rssFeeds){
+		for (RSSFeed feed: rssFeeds){
+
+			Vector <Channel> channels = feed.getChannels();
+
+			for (Channel channel: channels){
+
+				Vector <Item> items = channel.getItems();
+
+				for (Item item: items){
+
+					if(!filterByType(item)){
+						items.remove(item);
+
+					}
+				}
+			}
+		}
+
+		return rssFeeds;
+	}
+
+	//TODO change method name
+	public abstract boolean filterByType(Item item);
+
 }

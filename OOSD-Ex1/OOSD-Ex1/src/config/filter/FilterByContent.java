@@ -2,6 +2,7 @@ package config.filter;
 
 import java.util.Vector;
 
+import rss.Item;
 import rss.RSSFeed;
 
 public class FilterByContent extends Filter {
@@ -12,9 +13,13 @@ public class FilterByContent extends Filter {
 	}
 
 	@Override
-	public Vector<RSSFeed> filter(Vector<RSSFeed> rssFeeds) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean filterByType(Item item) {
+		String title = item.getM_title();
+		String description = item.getM_description();
+		return (title.contains(this.arg) || description.contains(this.arg));
+
 	}
+
+
 
 }
