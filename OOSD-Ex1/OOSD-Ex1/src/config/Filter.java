@@ -4,7 +4,7 @@ import java.util.Vector;
 
 import rss.RSSFeed;
 
-public class Filter extends ConfImpl {
+public abstract class Filter extends ConfImpl {
 
 	private String name;
 	private String arg;
@@ -37,9 +37,5 @@ public class Filter extends ConfImpl {
 		return this.arg;
 	}
 
-	public Vector<RSSFeed> filter (Vector<RSSFeed> rssFeeds){
-
-		// TODO
-		return null;
-	}
+	public abstract Vector<RSSFeed> filter (Vector<RSSFeed> rssFeeds);
 }

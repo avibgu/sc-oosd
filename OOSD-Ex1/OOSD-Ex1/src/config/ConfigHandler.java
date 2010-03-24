@@ -70,6 +70,7 @@ public class ConfigHandler extends DefaultHandler{
     public void startElement( String uri, String lName, String qName, Attributes attribs ) {
 
     	this.stack.push(qName);
+    	this.sb = new StringBuffer();
     }
 
     /**
@@ -121,7 +122,22 @@ public class ConfigHandler extends DefaultHandler{
 
     	if ( qName.equals("filter") ){
 
-    		this.filters.add( new Filter(this.name, this.arg) );
+    		Filter newFilter = null;
+
+    		if (this.name == "title")
+    			newFilter = new FilterByTitle(this.name, this.arg);
+
+    		if (this.name == "category")
+    			newFilter = new FilterByCategory(this.name, this.arg);
+
+    		if (this.name == "content")
+    			newFilter = new FilterByContent(this.name, this.arg);
+
+    		if (this.name == "author")
+    			newFilter = new FilterByAuthor(this.name, this.arg);
+
+    		this.filters.add( newFilter );
+
     		this.name = null;
     		this.arg = null;
     		this.sb = new StringBuffer();
