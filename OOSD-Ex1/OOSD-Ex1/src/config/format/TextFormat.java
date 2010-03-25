@@ -21,7 +21,16 @@ public class TextFormat extends Format {
 		String ans = "";
 
 		ans += item.getM_title() + "\n";
-		ans += "* " + item.getM_description() + "\n\n";
+		
+		String description = item.getM_description();
+		
+		String[] splitted = description.split("\n");
+		
+		for (int i=0; i < splitted.length; i++)
+			
+			ans += "* " + splitted[i] + "\n";
+		
+		ans += "\n";
 
 		return ans;
 	}
