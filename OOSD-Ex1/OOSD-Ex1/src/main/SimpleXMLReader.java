@@ -34,10 +34,10 @@ public class SimpleXMLReader {
 	 * @param _fn the file name to parse from
 	 * @param _handler the handler
 	 */
-	public SimpleXMLReader(String _fn, DefaultHandler _handler){
+	public SimpleXMLReader(File _file, DefaultHandler _handler){
 
 		this.handler = _handler;
-		this.file = new File( _fn );
+		this.file = _file;
 		this.feed = null;
 
 		this.read();
