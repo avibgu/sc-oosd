@@ -1,7 +1,6 @@
 package rss;
 
 import java.net.URL;
-import java.util.UUID;
 import java.util.Vector;
 
 public class Item extends RSSElement{

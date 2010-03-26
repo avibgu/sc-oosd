@@ -6,7 +6,6 @@ import org.xml.sax.Attributes;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Stack;
-import java.util.UUID;
 import java.util.Vector;
 
 
