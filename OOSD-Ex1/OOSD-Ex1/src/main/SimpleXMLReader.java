@@ -3,6 +3,7 @@ package main;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -92,6 +93,9 @@ public class SimpleXMLReader {
 			else {
 
 				InputStream src2 = this.feed.getStream();
+				
+				if (src2 == null) throw new MalformedURLException();
+				
 				saxParser.parse( src2 , this.handler );
 			}
 		}
@@ -104,6 +108,10 @@ public class SimpleXMLReader {
 			System.out.println("can't read form - " + this.feed.getAddress().toString() );
 		}
 		catch (ParserConfigurationException e) {
+
+			System.out.println("can't read form - " + this.feed.getAddress().toString() );
+		}
+		catch (MalformedURLException e) {
 
 			System.out.println("can't read form - " + this.feed.getAddress().toString() );
 		}

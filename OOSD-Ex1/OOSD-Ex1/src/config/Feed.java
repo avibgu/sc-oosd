@@ -29,8 +29,9 @@ public class Feed extends ConfImpl {
 			this.feedAddress = new URL(address);
 		}
 		catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			System.out.println("an error occurred when tried to open url - "
+					+ address );
 		}
 	}
 
@@ -44,20 +45,14 @@ public class Feed extends ConfImpl {
 
 	/**
 	 * @return the input stream of the feed
+	 * @throws IOException if there is a problem to open a stream
 	 */
-	public InputStream getStream(){
+	public InputStream getStream() throws IOException{
 
-		InputStream is = null;
-
-		try{
-
-			is = this.feedAddress.openStream();
-		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		if (this.feedAddress == null) return null;
+		
+		InputStream is = this.feedAddress.openStream();
+		
 		return is;
 	}
 }
