@@ -5,8 +5,14 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * This class holds information about a feed
+ */
 public class Feed extends ConfImpl {
 
+	/**
+	 * the feed address
+	 */
 	private URL feedAddress;
 
 	/**

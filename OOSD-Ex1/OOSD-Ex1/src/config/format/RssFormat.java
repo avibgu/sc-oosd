@@ -4,13 +4,27 @@ import java.util.Vector;
 
 import rss.Item;
 
+/**
+ * this class represents a RSS format type
+ */
 public class RssFormat extends Format {
 
+	/**
+	 * ctor 
+	 * 
+	 * @param _format the format type
+	 */
 	public RssFormat(String _format) {
 
 		super(_format);
 	}
 
+	/**
+	 * this method is overridden.
+	 * it implements an action to perform before the convert process
+	 * 
+	 * @return a String object to add to the general output String
+	 */
 	protected String before() {
 
 		String ans = "";
@@ -24,6 +38,12 @@ public class RssFormat extends Format {
 		return ans;
 	}
 
+	/**
+	 * this method is overridden.
+	 * it implements an action to perform for each converted item
+	 * 
+	 * @return a String object to add to the general output String
+	 */
 	protected String forEachItem(Item item) {
 
 		String ans = "";
@@ -51,6 +71,12 @@ public class RssFormat extends Format {
 		return ans;
 	}
 
+	/**
+	 * this method is overridden.
+	 * it implements an action to perform after the convert process
+	 * 
+	 * @return a String object to add to the general output String
+	 */
 	protected String after() {
 
 		String ans = "";

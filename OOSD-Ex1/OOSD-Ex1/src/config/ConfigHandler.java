@@ -18,6 +18,9 @@ import config.format.TextFormat;
 import java.util.Stack;
 import java.util.Vector;
 
+/**
+ * This class is the handler that we use to parse the configuration file
+ */
 public class ConfigHandler extends DefaultHandler{
 
 	private Stack<String> stack;
@@ -105,8 +108,6 @@ public class ConfigHandler extends DefaultHandler{
 	 */
     public void endElement( String uri, String lName, String qName ) {
 
-    	// TODO check what are the differences between this.stack.peek().equals("name")
-    	// and qName.equals("name")
     	if ( this.stack.peek().equals("name") ){
 
     		this.name = this.sb.toString().trim();

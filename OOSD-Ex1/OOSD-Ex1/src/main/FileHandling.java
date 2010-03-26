@@ -2,6 +2,7 @@ package main;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,13 +11,27 @@ import java.io.PrintWriter;
 import exception.AbortException;
 import exception.GiveUpException;
 
+/**
+ * this class represent actions that we can do with files
+ */
 public class FileHandling {
 
+	/**
+	 * ctor
+	 */
 	public FileHandling(){}
 	
-	public File openFileForReading(String tFilename) throws GiveUpException {
+	/**
+	 * this method open a file for reading
+	 * 
+	 * @param tFilename the file that we want to open
+	 * @return the opened File object
+	 * 
+	 * @throws GiveUpException when we give up with this process
+	 */
+	public FileInputStream openFileForReading(String tFilename) throws GiveUpException {
 		
-		File file = null;
+		FileInputStream file = null;
 		
 		while (true) {
 
@@ -24,20 +39,35 @@ public class FileHandling {
 				
 				if ( tFilename == null || tFilename.isEmpty() )
 
-					tFilename = promptFile();
+					tFilename = this.promptFile();
 
-				file = new File(tFilename);
+				try {
 
-				return file;
+					file = new FileInputStream( new File(tFilename) );
+
+					return file;
+				}
+				catch (IOException e) {
+	
+					this.reportError();
+					tFilename = null;
+					continue;
+				}
 			}
 			catch (AbortException e) {
 
-				reportGiveUp();
+				this.reportGiveUp();
 				throw new GiveUpException();
 			}
 		}
 	}
 
+	/**
+	 * this method ask the user for a valid file 
+	 * 
+	 * @return the new file name
+	 * @throws AbortException when the user don't want to proceed
+	 */
 	private String promptFile() throws AbortException {
 
 		System.out.println("Please insert file name:\n");
@@ -60,6 +90,15 @@ public class FileHandling {
 		}
 	}
 
+	/**
+	 * this method write a string to a file
+	 * 
+	 * @param tFilename the file that we want to open
+	 * @param toWrite the string we want to write
+	 * @return the opened File object
+	 * 
+	 * @throws GiveUpException when we give up with this process
+	 */
 	public void writeToFile(String tFilename, String toWrite) throws GiveUpException {
 
 		while (true) {
@@ -68,7 +107,7 @@ public class FileHandling {
 
 				if ( tFilename == null || tFilename.isEmpty() )
 
-					tFilename = promptFile();
+					tFilename = this.promptFile();
 
 				try {
 
@@ -83,27 +122,32 @@ public class FileHandling {
 				}
 				catch (IOException e) {
 
-					reportError();
+					this.reportError();
+					tFilename = null;
 					continue;
 				}
 			}
 			catch (AbortException e) {
 
-				reportGiveUp();
+				this.reportGiveUp();
 				throw new GiveUpException();
 			}
 		}
 	}
 
+	/**
+	 * this method represent the action to perform when an error encountered
+	 */
 	private void reportError(){
 
-		// TODO
-		System.out.println("error");
+		System.out.println("error to open file");
 	}
 
+	/**
+	 * this method represent the action to perform when we give up
+	 */
 	private void reportGiveUp(){
 
-		// TODO
 		System.out.println("give up");
 	}
 }

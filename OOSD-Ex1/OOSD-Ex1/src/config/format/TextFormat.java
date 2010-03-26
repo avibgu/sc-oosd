@@ -2,20 +2,38 @@ package config.format;
 
 import rss.Item;
 
+/**
+ * this class represents a Text format type
+ */
 public class TextFormat extends Format {
 
+	/**
+	 * ctor 
+	 * 
+	 * @param _format the format type
+	 */
 	public TextFormat(String _format) {
 
 		super(_format);
 	}
 
-	@Override
+	/**
+	 * this method is overridden.
+	 * it implements an action to perform before the convert process
+	 * 
+	 * @return a String object to add to the general output String
+	 */
 	protected String before() {
 
 		return "";
 	}
 
-	@Override
+	/**
+	 * this method is overridden.
+	 * it implements an action to perform for each converted item
+	 * 
+	 * @return a String object to add to the general output String
+	 */
 	protected String forEachItem(Item item) {
 
 		String ans = "";
@@ -35,7 +53,12 @@ public class TextFormat extends Format {
 		return ans;
 	}
 
-	@Override
+	/**
+	 * this method is overridden.
+	 * it implements an action to perform after the convert process
+	 * 
+	 * @return a String object to add to the general output String
+	 */
 	protected String after() {
 
 		return "";

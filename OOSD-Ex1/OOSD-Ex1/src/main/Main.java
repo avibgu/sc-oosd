@@ -1,16 +1,18 @@
 package main;
 
-
-import java.io.BufferedWriter;
-import java.io.File;
+import java.io.FileInputStream;
 import java.util.Vector;
 
 import rss.*;
 import config.*;
 import config.filter.Filter;
 import config.format.Format;
+import exception.FatalErrorException;
 import exception.GiveUpException;
 
+/**
+ * The main class of the program
+ */
 public class Main {
 
 	/**
@@ -21,7 +23,7 @@ public class Main {
 	public static void main(String[] args){
 
 		FileHandling fh = new FileHandling();
-		File file = null;
+		FileInputStream file = null;
 
 		try {
 				
@@ -32,7 +34,8 @@ public class Main {
 			ConfigHandler confHandler = new ConfigHandler();
 	
 			SimpleXMLReader reader = new SimpleXMLReader(file, confHandler);
-	
+			reader.read();
+			
 			// parsing the rss feeds
 			RssHandler rssHandler = new RssHandler();
 	
@@ -43,6 +46,7 @@ public class Main {
 			for (int i=0; i < urlFeeds.size(); i++){
 	
 				reader = new SimpleXMLReader( urlFeeds.get(i), rssHandler );
+				reader.read();
 				rssFeeds.add( rssHandler.getRssFeed() );
 			}
 	
@@ -59,19 +63,22 @@ public class Main {
 	
 			Vector<Format> formats = confHandler.getFormats();
 	
-			Vector<BufferedWriter> outputFiles = new Vector<BufferedWriter>();
-	
 			for (int i=0; i < formats.size(); i++){
 	
 				String toWrite = formats.get(i).convertToMyFormat(rssFeeds);
 				String end = (formats.get(i).getFormat().equals("rss") ? "xml" : "txt");
 				fh.writeToFile("output" + i + "." + end , toWrite);
+				
+				System.out.println(toWrite);
 			}
 		}
 		catch (GiveUpException e) {
 			
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("exiting..");
+		}
+		catch (FatalErrorException e) {
+			
+			System.out.println("a fatal error occurred.. exiting..");
 		}
 	}
 }
