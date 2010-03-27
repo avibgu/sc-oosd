@@ -101,7 +101,7 @@ public class SimpleXMLReader {
 		}
 		catch (MalformedURLException e) {
 
-			System.out.println("can't read form - " + this.feed.getAddress().toString() );
+			System.out.println("can't read from - " + this.feed.getAddress().toString() );
 		}
 		
 		catch (IOException e) {
@@ -110,11 +110,17 @@ public class SimpleXMLReader {
 		}
 		catch (SAXException e) {
 
-			System.out.println("can't read form - " + this.feed.getAddress().toString() );
+			if(this.feed == null){
+				System.out.println("can't read from feed");
+
+			}
+			else{
+				System.out.println("can't read from - " + this.feed.getAddress().toString() );
+			}
 		}
 		catch (ParserConfigurationException e) {
 
-			System.out.println("can't read form - " + this.feed.getAddress().toString() );
+			System.out.println("can't read from - " + this.feed.getAddress().toString() );
 		}
 		
 	}
