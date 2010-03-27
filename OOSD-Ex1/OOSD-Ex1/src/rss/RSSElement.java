@@ -1,27 +1,44 @@
 package rss;
 
-import java.net.URL;
 
 public class RSSElement {
 
 	protected String m_title;
-	protected URL m_link;
+	protected String m_link;
 	protected String m_description;
 
+	/**
+	 * creates a new RSSElement
+	 */
 	public RSSElement(){
-
+		
+		this.m_title = "";
+		this.m_link = "";
+		this.m_description = "";
 
 	}
 
-	public String getM_title() {
-		return m_title;
+	/**
+	 * returns the element's title
+	 * @return the element's title
+	 */
+	public String getTitle() {
+		return this.m_title;
 	}
 
-	public URL getM_link() {
-		return m_link;
+	/**
+	 * returns the element's link
+	 * @return the element's link
+	 */
+	public String getLink() {
+		return this.m_link;
 	}
 
-	public String getM_description() {
-		return m_description;
+	/**
+	 * returns the element's description
+	 * @return the element's description
+	 */
+	public String getDescription() {
+		return this.m_description;
 	}
 }

@@ -5,91 +5,91 @@
     <rules>
         <rule>
             <name>AbstractClassWithoutAbstractMethod</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Design Rules</ruleset>
         </rule>
         <rule>
             <name>AvoidProtectedFieldInFinalClass</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Design Rules</ruleset>
         </rule>
         <rule>
             <name>AvoidReassigningParameters</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Design Rules</ruleset>
         </rule>
         <rule>
             <name>BrokenNullCheck</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Basic Rules</ruleset>
         </rule>
         <rule>
             <name>CompareObjectsWithEquals</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Design Rules</ruleset>
         </rule>
         <rule>
             <name>ConstructorCallsOverridableMethod</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Design Rules</ruleset>
         </rule>
         <rule>
             <name>DefaultLabelNotLastInSwitchStmt</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Design Rules</ruleset>
         </rule>
         <rule>
             <name>EmptyCatchBlock</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Basic Rules</ruleset>
         </rule>
         <rule>
             <name>EmptyFinallyBlock</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Basic Rules</ruleset>
         </rule>
         <rule>
             <name>EmptyStatementNotInLoop</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Basic Rules</ruleset>
         </rule>
         <rule>
             <name>EmptySynchronizedBlock</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Basic Rules</ruleset>
         </rule>
         <rule>
             <name>EmptyTryBlock</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Basic Rules</ruleset>
         </rule>
         <rule>
             <name>EmptyWhileStmt</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Basic Rules</ruleset>
         </rule>
         <rule>
             <name>EqualsNull</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Design Rules</ruleset>
         </rule>
         <rule>
             <name>IdempotentOperations</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Design Rules</ruleset>
         </rule>
         <rule>
             <name>MisplacedNullCheck</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Basic Rules</ruleset>
         </rule>
         <rule>
             <name>MissingBreakInSwitch</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Design Rules</ruleset>
         </rule>
         <rule>
             <name>ReturnFromFinallyBlock</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Basic Rules</ruleset>
         </rule>
         <rule>
             <name>SwitchStmtsShouldHaveDefault</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Design Rules</ruleset>
         </rule>
         <rule>
             <name>UnconditionalIfStatement</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Basic Rules</ruleset>
         </rule>
         <rule>
             <name>UselessOperationOnImmutable</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Basic Rules</ruleset>
         </rule>
         <rule>
             <name>UselessOverridingMethod</name>
-            <ruleset>exp</ruleset>
+            <ruleset>Basic Rules</ruleset>
         </rule>
     </rules>
     <includeDerivedFiles>false</includeDerivedFiles>

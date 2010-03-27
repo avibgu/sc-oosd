@@ -38,9 +38,9 @@ public class TextFormat extends Format {
 
 		String ans = "";
 
-		ans += item.getM_title() + "\n";
+		ans += item.getTitle() + "\n";
 		
-		String description = item.getM_description();
+		String description = item.getDescription();
 		
 		String[] splitted = description.split("\n");
 		

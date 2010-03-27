@@ -1,6 +1,5 @@
 package rss;
 
-import java.net.URL;
 import java.util.Vector;
 
 public class Item extends RSSElement{
@@ -9,6 +8,9 @@ public class Item extends RSSElement{
 	private String m_author;
 	private Vector<String> m_categories;
 
+	/**
+	 * creates a new Item
+	 */
 	public Item(){
 
 		this.m_guid = "";
@@ -16,35 +18,67 @@ public class Item extends RSSElement{
 		this.m_categories = new Vector<String>();
 	}
 
+	/**
+	 * sets the item's global unique identifier
+	 * @param guid the item's unique identifier
+	 */
 	public void setGuid(String guid){
 		this.m_guid = guid;
 	}
 
+	/**
+	 * sets the item's title
+	 * @param title the title to be set
+	 */
 	public void setTitle(String title){
 		this.m_title = title;
 	}
 
-	public void setLink(URL link){
+	/**
+	 * sets the item's link
+	 * @param link the link to be set
+	 */
+	public void setLink(String link){
 		this.m_link = link;
 	}
 
+	/**
+	 * sets the item's description
+	 * @param description the description to be set
+	 */
 	public void setDescription(String description){
 		this.m_description = description;
 	}
 
+	/**
+	 * sets the item's author
+	 * @param author the author to be set
+	 */
 	public void setAuthor(String author){
 		this.m_author = author;
 	}
 
-	public String getM_guid() {
+	/**
+	 * returns the item's global unique identifier
+	 * @return the item's global unique identifier
+	 */
+	public String getGuid() {
 		return this.m_guid;
 	}
 
-	public String getM_author() {
+	/**
+	 * returns the item's author
+	 * @return the item's author
+	 */
+	public String getAuthor() {
 		return this.m_author;
 	}
 
-	public Vector<String> getM_categories() {
+	/**
+	 * returns the item's categories
+	 * @return the item's categories
+	 */
+	public Vector<String> getCategories() {
 		return this.m_categories;
 	}
 }

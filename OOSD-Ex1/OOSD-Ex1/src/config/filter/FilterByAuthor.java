@@ -27,7 +27,7 @@ public class FilterByAuthor extends Filter {
 	 */
 	public boolean filterByType(Item item) {
 		
-		String author = item.getM_author();
+		String author = item.getAuthor();
 		return author.equals(this.arg);
 	}
 }

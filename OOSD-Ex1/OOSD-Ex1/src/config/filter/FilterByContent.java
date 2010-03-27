@@ -27,9 +27,9 @@ public class FilterByContent extends Filter {
 	 */
 	public boolean filterByType(Item item) {
 		
-		String title = item.getM_title();
+		String title = item.getTitle();
 		
-		String description = item.getM_description();
+		String description = item.getDescription();
 		
 		return (title.contains(this.arg) || description.contains(this.arg));
 	}

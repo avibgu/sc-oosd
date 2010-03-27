@@ -50,13 +50,13 @@ public class RssFormat extends Format {
 
 		ans += "\t\t<item>\n";
 
-		ans += "\t\t\t<guid>" + item.getM_guid() + "</guid>\n";
-		ans += "\t\t\t<title>" + item.getM_title() + "</title>\n";
-		ans += "\t\t\t<link>" + item.getM_link() + "</link>\n";
-		ans += "\t\t\t<description>" + item.getM_description() + "</description>\n";
-		ans += "\t\t\t<author>" + item.getM_author() + "</author>\n";
+		ans += "\t\t\t<guid>" + item.getGuid() + "</guid>\n";
+		ans += "\t\t\t<title>" + item.getTitle() + "</title>\n";
+		ans += "\t\t\t<link>" + item.getLink() + "</link>\n";
+		ans += "\t\t\t<description>" + item.getDescription() + "</description>\n";
+		ans += "\t\t\t<author>" + item.getAuthor() + "</author>\n";
 
-		Vector<String> categories = item.getM_categories();
+		Vector<String> categories = item.getCategories();
 
 		if (categories != null){
 

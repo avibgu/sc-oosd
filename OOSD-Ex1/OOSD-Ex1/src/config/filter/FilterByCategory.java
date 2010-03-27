@@ -29,7 +29,7 @@ public class FilterByCategory extends Filter{
 	 */
 	public boolean filterByType(Item item) {
 		
-		Vector<String> categories = item.getM_categories();
+		Vector<String> categories = item.getCategories();
 		
 		for(String catergory : categories){
 			

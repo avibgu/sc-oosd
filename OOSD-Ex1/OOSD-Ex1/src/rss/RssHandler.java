@@ -3,8 +3,6 @@ package rss;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.Attributes;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Stack;
 import java.util.Vector;
 
@@ -103,17 +101,10 @@ public class RssHandler extends DefaultHandler {
     	}
 
     	if(qName.equals("link") && this.m_readingchannelspecs){
-    		try {
-        		Channel channel = this.m_feed.getChannels().lastElement();
-    			if(channel != null){
-    				URL link = new URL(this.m_sb.toString());
-    				channel.setLink(link);
-    			}
-			}
-
-    		catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+    		Channel channel = this.m_feed.getChannels().lastElement();
+			if(channel != null){
+				String link = this.m_sb.toString();
+				channel.setLink(link);
 			}
 
 			this.m_sb = new StringBuffer();
@@ -142,14 +133,8 @@ public class RssHandler extends DefaultHandler {
     	if(qName.equals("link")&& !this.m_readingchannelspecs){
     		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
     		if (item != null){
-	    		try {
-					URL link = new URL(this.m_sb.toString());
-	    			item.setLink(link);
-
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	    		String link = this.m_sb.toString();
+				item.setLink(link);
     		}
     		this.m_sb = new StringBuffer();
 
@@ -183,7 +168,7 @@ public class RssHandler extends DefaultHandler {
     	if(qName.equals("category") && !this.m_readingchannelspecs){
     		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
     		if (item != null){
-	    		Vector<String> categories = item.getM_categories();
+	    		Vector<String> categories = item.getCategories();
 	    		if(categories != null){
 	    			categories.add(this.m_sb.toString().trim());
 	    		}

@@ -99,6 +99,11 @@ public class SimpleXMLReader {
 				saxParser.parse( src2 , this.handler );
 			}
 		}
+		catch (MalformedURLException e) {
+
+			System.out.println("can't read form - " + this.feed.getAddress().toString() );
+		}
+		
 		catch (IOException e) {
 
 			throw new FatalErrorException();
@@ -111,9 +116,6 @@ public class SimpleXMLReader {
 
 			System.out.println("can't read form - " + this.feed.getAddress().toString() );
 		}
-		catch (MalformedURLException e) {
-
-			System.out.println("can't read form - " + this.feed.getAddress().toString() );
-		}
+		
 	}
 }

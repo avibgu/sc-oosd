@@ -95,7 +95,6 @@ public class FileHandling {
 	 * 
 	 * @param tFilename the file that we want to open
 	 * @param toWrite the string we want to write
-	 * @return the opened File object
 	 * 
 	 * @throws GiveUpException when we give up with this process
 	 */
