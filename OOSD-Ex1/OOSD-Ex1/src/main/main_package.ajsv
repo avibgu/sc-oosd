@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--AgileJ Ltd. (http://www.agilej.com)-->
+<ajsv>
+    <diagram style="defaultDiagramStyle" version="1.7.0.v20100225-1415">
+        <class className="main.SimpleXMLReader" project="OOSD-Ex1" xLocation="938" yLocation="86"/>
+        <class className="main.Main" project="OOSD-Ex1" xLocation="631" yLocation="85"/>
+        <class className="main.FileHandling" project="OOSD-Ex1" xLocation="259" yLocation="290"/>
+    </diagram>
+</ajsv>

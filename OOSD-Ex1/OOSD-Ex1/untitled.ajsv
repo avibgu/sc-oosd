@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--AgileJ Ltd. (http://www.agilej.com)-->
+<ajsv>
+    <diagram style="visibilityFilteringDiagramStyle" version="1.7.0.v20100225-1415">
+        <class className="config.ConfigHandler" project="OOSD-Ex1" xLocation="1691" yLocation="-125"/>
+        <class className="config.Feed" project="OOSD-Ex1" xLocation="1276" yLocation="-185"/>
+        <class className="config.ConfImpl" project="OOSD-Ex1" xLocation="2919" yLocation="-671"/>
+        <class className="config.Conf" project="OOSD-Ex1" xLocation="2650" yLocation="-680"/>
+        <class className="config.filter.FilterByTitle" project="OOSD-Ex1" xLocation="2408" yLocation="316"/>
+        <class className="config.filter.Filter" project="OOSD-Ex1" xLocation="2401" yLocation="-19"/>
+        <class className="config.filter.FilterByContent" project="OOSD-Ex1" xLocation="1940" yLocation="328"/>
+        <class className="config.filter.FilterByAuthor" project="OOSD-Ex1" xLocation="2393" yLocation="542"/>
+        <class className="config.filter.FilterByCategory" project="OOSD-Ex1" xLocation="1468" yLocation="332"/>
+        <class className="config.format.Format" project="OOSD-Ex1" xLocation="3307" yLocation="-109"/>
+        <class className="config.format.TextFormat" project="OOSD-Ex1" xLocation="3339" yLocation="248"/>
+        <class className="config.format.RssFormat" project="OOSD-Ex1" xLocation="2927" yLocation="68"/>
+        <class className="exception.FatalErrorException" project="OOSD-Ex1" xLocation="2137" yLocation="-715"/>
+        <class className="exception.GiveUpException" project="OOSD-Ex1" xLocation="1377" yLocation="84"/>
+        <class className="exception.AbortException" project="OOSD-Ex1" xLocation="2281" yLocation="787"/>
+        <class className="main.SimpleXMLReader" project="OOSD-Ex1" xLocation="2100" yLocation="-429"/>
+        <class className="main.Main" project="OOSD-Ex1" xLocation="1789" yLocation="-330"/>
+        <class className="main.FileHandling" project="OOSD-Ex1" xLocation="1602" yLocation="558"/>
+        <class className="rss.Item" project="OOSD-Ex1" xLocation="2852" yLocation="330"/>
+        <class className="rss.Channel" project="OOSD-Ex1" xLocation="3331" yLocation="512"/>
+        <class className="rss.RSSFeed" project="OOSD-Ex1" xLocation="3828" yLocation="-58"/>
+        <class className="rss.RSSElement" project="OOSD-Ex1" xLocation="3810" yLocation="187"/>
+        <class className="rss.RssHandler" project="OOSD-Ex1" xLocation="2751" yLocation="-467"/>
+    </diagram>
+</ajsv>

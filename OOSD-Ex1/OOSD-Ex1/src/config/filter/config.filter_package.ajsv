@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--AgileJ Ltd. (http://www.agilej.com)-->
+<ajsv>
+    <diagram style="defaultDiagramStyle" version="1.7.0.v20100225-1415">
+        <class className="config.filter.FilterByTitle" project="OOSD-Ex1" xLocation="1066" yLocation="392"/>
+        <class className="config.filter.Filter" project="OOSD-Ex1" xLocation="748" yLocation="45"/>
+        <class className="config.filter.FilterByContent" project="OOSD-Ex1" xLocation="283" yLocation="161"/>
+        <class className="config.filter.FilterByAuthor" project="OOSD-Ex1" xLocation="1275" yLocation="167"/>
+        <class className="config.filter.FilterByCategory" project="OOSD-Ex1" xLocation="596" yLocation="388"/>
+    </diagram>
+</ajsv>
