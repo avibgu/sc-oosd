@@ -1,6 +1,6 @@
 <conf>
 <feed>http://www.cs.bgu.ac.il/~oosd102/wiki.files/splsample.xml</feed>
-<format>text</format>
+<format>test</format>
 <filter>
 <name>content</name>
 <arg>published</arg>

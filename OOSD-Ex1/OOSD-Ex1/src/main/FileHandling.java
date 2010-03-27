@@ -70,7 +70,7 @@ public class FileHandling {
 	 */
 	private String promptFile() throws AbortException {
 
-		System.out.println("Please insert file name:\n");
+		System.out.println("Please insert file name including suffix (e.g " + "myfile.xml" + "):\n");
 
 		BufferedReader tIn = new BufferedReader( new InputStreamReader(System.in));
 
@@ -135,15 +135,16 @@ public class FileHandling {
 	}
 
 	/**
-	 * this method represent the action to perform when an error encountered
+	 * this method represents the action to perform when an error encountered
 	 */
 	private void reportError(){
 
-		System.out.println("error to open file");
+		System.out.println("an error occured while trying to open the file");
+		System.out.println("Cause: the file was typed incorrectly or does not exist");
 	}
 
 	/**
-	 * this method represent the action to perform when we give up
+	 * this method represents the action to perform when we give up
 	 */
 	private void reportGiveUp(){
 
