@@ -38,7 +38,7 @@ public class TextFormat extends Format {
 
 		String ans = "";
 
-		ans += item.getTitle() + "\n";
+		ans += "* " + item.getTitle() + "\n";
 		
 		String description = item.getDescription();
 		
@@ -48,7 +48,7 @@ public class TextFormat extends Format {
 			
 			for (int i=0; i < splitted.length; i++)
 				
-				ans += "* " + splitted[i] + "\n";
+				ans +=  splitted[i] + "\n";
 		}
 		
 		ans += "\n";
