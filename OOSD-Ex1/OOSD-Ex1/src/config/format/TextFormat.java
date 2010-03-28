@@ -42,11 +42,14 @@ public class TextFormat extends Format {
 		
 		String description = item.getDescription();
 		
-		String[] splitted = description.split("\n");
-		
-		for (int i=0; i < splitted.length; i++)
+		if (!description.isEmpty()){
 			
-			ans += "* " + splitted[i] + "\n";
+			String[] splitted = description.split("\n");
+			
+			for (int i=0; i < splitted.length; i++)
+				
+				ans += "* " + splitted[i] + "\n";
+		}
 		
 		ans += "\n";
 
