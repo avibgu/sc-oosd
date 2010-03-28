@@ -138,7 +138,9 @@ public class ConfigHandler extends DefaultHandler{
 
     			this.formats.add( new TextFormat( formatType ) );
     		}
-
+    		else{
+    			System.out.println("formats must match " + "\"rss\" or \"text\"" );
+    		}
     		this.sb = new StringBuffer();
     	}
 
@@ -149,16 +151,19 @@ public class ConfigHandler extends DefaultHandler{
     		if (this.name.equals("title"))
     			newFilter = new FilterByTitle(this.name, this.arg);
 
-    		if (this.name.equals("category"))
+    		else if (this.name.equals("category"))
     			newFilter = new FilterByCategory(this.name, this.arg);
 
-    		if (this.name.equals("content"))
+    		else if (this.name.equals("content"))
     			newFilter = new FilterByContent(this.name, this.arg);
 
-    		if (this.name.equals("author"))
+    		else if (this.name.equals("author"))
     			newFilter = new FilterByAuthor(this.name, this.arg);
 
-    		this.filters.add( newFilter );
+    		else{
+    			System.out.println("filters must match " + "\"title\", \"category\", \"content\" or \"author\"" );
+    		}
+    		if(newFilter != null) this.filters.add( newFilter );
 
     		this.name = null;
     		this.arg = null;

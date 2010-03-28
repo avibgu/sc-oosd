@@ -63,6 +63,7 @@ public class Main {
 	
 			Vector<Format> formats = confHandler.getFormats();
 	
+			
 			for (int i=0; i < formats.size(); i++){
 	
 				String toWrite = formats.get(i).convertToMyFormat(rssFeeds);
@@ -71,6 +72,7 @@ public class Main {
 				
 				System.out.println(toWrite);
 			}
+			
 		}
 		catch (GiveUpException e) {
 			

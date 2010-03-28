@@ -63,7 +63,7 @@ public class SimpleXMLReader {
 	}
 
 	/**
-	 * this method read information from XML file
+	 * this method reads information from XML file
 	 * 
 	 * @throws FatalErrorException if a fatal error occurred
 	 */
@@ -101,7 +101,7 @@ public class SimpleXMLReader {
 		}
 		catch (MalformedURLException e) {
 
-			System.out.println("can't read from - " + this.feed.getAddress().toString() );
+			System.out.println("an error occured while trying to read from feed: " + this.feed.getAddress().toString() );
 		}
 		
 		catch (IOException e) {
@@ -110,13 +110,8 @@ public class SimpleXMLReader {
 		}
 		catch (SAXException e) {
 
-			if(this.feed == null){
-				System.out.println("can't read from feed");
-
-			}
-			else{
-				System.out.println("can't read from - " + this.feed.getAddress().toString() );
-			}
+			System.out.println("if \"Fatal Error\" the program stopped reading from feed: ");
+			System.out.println("if \"Error\" or \"Warning\" the program continued reading from feed ");
 		}
 		catch (ParserConfigurationException e) {
 
