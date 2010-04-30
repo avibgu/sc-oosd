@@ -1,4 +1,4 @@
-package exceptions;
+package exception;
 
 /**
  * this class represent an abort exception

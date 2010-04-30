@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.io.FileInputStream;
 import java.util.Vector;
 
-import rss.*;
+import rss2.*;
 import config.*;
 import config.filter.Filter;
 import config.format.Format;
