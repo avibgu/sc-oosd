@@ -14,7 +14,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
-import config.Feed;
+import config2.Feed;
 import exception.FatalErrorException;
 
 public class SimpleXMLReader {

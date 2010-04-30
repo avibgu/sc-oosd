@@ -2,7 +2,7 @@ package format;
 
 import java.util.Vector;
 
-import config.ConfImpl;
+import config2.ConfImpl;
 
 import rss.Channel;
 import rss.Item;

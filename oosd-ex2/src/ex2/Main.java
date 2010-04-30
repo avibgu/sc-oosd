@@ -9,6 +9,8 @@ import rss2.*;
 import config.*;
 import config.filter.Filter;
 import config.format.Format;
+import config2.ConfigHandler;
+import config2.Feed;
 import exception.FatalErrorException;
 import exception.GiveUpException;
 
