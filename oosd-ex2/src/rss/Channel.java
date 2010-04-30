@@ -1,4 +1,4 @@
-package rss2;
+package rss;
 
 import java.util.Vector;
 

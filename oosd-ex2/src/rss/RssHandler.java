@@ -1,4 +1,4 @@
-package rss2;
+package rss;
 
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.Attributes;

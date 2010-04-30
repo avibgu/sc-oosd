@@ -1,5 +1,5 @@
 
-package config2;
+package config;
 
 
 import org.xml.sax.helpers.DefaultHandler;

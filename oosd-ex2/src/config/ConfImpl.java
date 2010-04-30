@@ -1,4 +1,4 @@
-package config2;
+package config;
 
 /**
  * This abstract class represents the data types that can be read from the configuration file
