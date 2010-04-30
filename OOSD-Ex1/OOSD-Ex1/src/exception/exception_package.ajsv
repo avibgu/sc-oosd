@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!--AgileJ Ltd. (http://www.agilej.com)-->
-<ajsv>
-    <diagram style="defaultDiagramStyle" version="1.7.0.v20100225-1415">
-        <class className="exception.FatalErrorException" project="OOSD-Ex1" xLocation="712" yLocation="-25"/>
-        <class className="exception.GiveUpException" project="OOSD-Ex1" xLocation="323" yLocation="-28"/>
-        <class className="exception.AbortException" project="OOSD-Ex1" xLocation="-109" yLocation="-30"/>
-    </diagram>
-</ajsv>

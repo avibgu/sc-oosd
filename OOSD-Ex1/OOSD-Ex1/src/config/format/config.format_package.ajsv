@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!--AgileJ Ltd. (http://www.agilej.com)-->
-<ajsv>
-    <diagram style="defaultDiagramStyle" version="1.7.0.v20100225-1415">
-        <class className="config.format.Format" project="OOSD-Ex1" xLocation="512" yLocation="-84"/>
-        <class className="config.format.TextFormat" project="OOSD-Ex1" xLocation="846" yLocation="257"/>
-        <class className="config.format.RssFormat" project="OOSD-Ex1" xLocation="471" yLocation="259"/>
-    </diagram>
-</ajsv>
