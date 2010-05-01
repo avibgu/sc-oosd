@@ -9,25 +9,27 @@ import java.util.List;
 import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
 
-public class FileReaderWorker extends SwingWorker<Void, String> {
+import rss.Item;
 
-	private File _file;
+public class ItemReaderWorker extends SwingWorker<Void, String> {
+
+	private Item _item;
 	private JTextArea _text;
 	
-	public FileReaderWorker(File tFile, JTextArea content) {
+	public ItemReaderWorker(Item tItem, JTextArea content) {
 
-		this.setFile(tFile);
+		this.setItem(tItem);
 		this.setText(content);
 	}
 
-	public void setFile(File _file) {
+	public void setItem(Item item) {
 		
-		this._file = _file;
+		this._item = item;
 	}
 
-	public File getFile() {
+	public Item getFile() {
 		
-		return _file;
+		return _item;
 	}
 
 	public void setText(JTextArea _text) {

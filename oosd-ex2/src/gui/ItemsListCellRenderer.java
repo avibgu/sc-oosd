@@ -7,6 +7,8 @@ import java.io.File;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 
+import rss.Item;
+
 public class ItemsListCellRenderer extends DefaultListCellRenderer {
 
 	private static final long serialVersionUID = 8146672558908762353L;
@@ -18,8 +20,8 @@ public class ItemsListCellRenderer extends DefaultListCellRenderer {
 
 		super.getListCellRendererComponent(list,value,index,isSelected,cellHasFocus);
 		
-		File f = (File) value;
-		setText(f.getName());
+		Item i = (Item) value;
+		setText(i.getTitle());
 		
 		if (!isSelected && index % 2 == 0) setBackground(_ALT);
 		
