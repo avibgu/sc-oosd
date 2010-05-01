@@ -2,15 +2,21 @@ package ex2;
 
 import javax.swing.*;
 
+import java.awt.Font;
+import java.io.File;
 import java.io.FileInputStream;
 import java.util.Vector;
 
 import rss.*;
+
 import config.*;
 import config.filter.Filter;
 import config.format.Format;
+
 import exception.FatalErrorException;
 import exception.GiveUpException;
+
+import gui.FileBrowser;
 
 public class Main {
 
@@ -19,13 +25,19 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		JFrame tFrame = new JFrame("Feeds Reader");
-		tFrame.setContentPane(new gui.View1());
-		tFrame.pack();
-		tFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		tFrame.setVisible(true);
+//		JFrame tFrame = new JFrame("Feeds Reader");
+//		tFrame.setContentPane(new gui.View1());	
+//		tFrame.pack();
+//		tFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		tFrame.setVisible(true);
+		
+		Font tFont = new Font("Dialog", Font.BOLD, 16);
+		UIManager.put("List.font", tFont);
+		UIManager.put("Tree.font", tFont);
+		UIManager.put("TextArea.font", tFont);
+		new FileBrowser(new File("src") );
 	}
-	
+
 	public static void ex1_main(String[] args){
 
 		FileHandling fh = new FileHandling();

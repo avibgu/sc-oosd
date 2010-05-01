@@ -4,6 +4,8 @@ import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
@@ -42,6 +44,21 @@ public class FileBrowser extends JFrame
 		
 		// Text area
 		setContent(new JTextArea(10, 30));
+		getContent().setEditable(false);
+		getContent().setTabSize(4);
+		
+		// Prepare layout
+		JSplitPane tHorizonSplit = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+		tHorizonSplit.setLeftComponent(getTree());
+		JSplitPane tVertSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+		tHorizonSplit.setRightComponent(tVertSplit);
+		tVertSplit.setTopComponent(new JScrollPane(getFiles()));
+		tVertSplit.setBottomComponent(new JScrollPane(getContent()));
+		
+		// Put the layout pane as content pane
+		setContentPane(tHorizonSplit);
+		pack();
+		setVisible(true);
 	}
 
 	private void setTree(JTree jTree) {
