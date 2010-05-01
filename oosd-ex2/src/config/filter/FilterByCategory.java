@@ -1,4 +1,4 @@
-package filter;
+package config.filter;
 
 import java.util.Vector;
 
