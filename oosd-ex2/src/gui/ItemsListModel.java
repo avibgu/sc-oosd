@@ -12,26 +12,21 @@ import javax.swing.ListModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
+import rss.Item;
+import rss.RSSFeed;
+
 public class ItemsListModel implements ListModel{
 
-	private File _dir;
+	private RSSFeed _feed;
 	
-	private List<File> _files;
+	private List<Item> _items;
 	
 	private Collection<ListDataListener> _listeners;
-	
-	private static FileFilter _FILTER = new FileFilter() {
-		
-		public boolean accept(File f) {
-			
-			return f.isFile();
-		}
-	};
 	
 	public ItemsListModel() {
 		
 		setListeners( new LinkedList<ListDataListener>() );
-		setFiles( Collections.EMPTY_LIST );
+		setItems( Collections.EMPTY_LIST );
 	}
 	
 	private void setListeners(LinkedList<ListDataListener> linkedList) {
@@ -39,25 +34,23 @@ public class ItemsListModel implements ListModel{
 		this._listeners = linkedList;
 	}
 	
-	private void setFiles(List<File> emptyList) {
+	private void setItems(List<Item> emptyList) {
 		
-		this._files = emptyList;
+		this._items = emptyList;
 	}
 
-	public File getDir() {
+	public RSSFeed getFeed() {
 		
-		return _dir;
+		return this._feed;
 	}
 
-	public void setDir(File dir) {
+	public void setFeed(RSSFeed feed) {
 		
-		this._dir = dir;
+		this._feed = feed;
 		
 		int tOldSize = getSize();
 		
-		File[] tFiles = dir.listFiles(_FILTER);
-		
-		setFiles(Arrays.asList(tFiles));
+		setItems(feed.getChannels().get(0).getItems());
 		
 		int tMax = Math.max(tOldSize, getSize());
 		
@@ -77,17 +70,17 @@ public class ItemsListModel implements ListModel{
 	
 	public int getSize() {
 		
-		return getFiles().size();
+		return getItems().size();
 	}
 
-	private List<File> getFiles() {
+	private List<Item> getItems() {
 		
-		return this._files;
+		return this._items;
 	}
 
 	public Object getElementAt(int index) {
 	
-		return getFiles().get(index);
+		return getItems().get(index);
 	}
 	
 	public void addListDataListener(ListDataListener l) {

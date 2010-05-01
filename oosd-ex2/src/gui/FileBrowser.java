@@ -115,7 +115,7 @@ public class FileBrowser extends JFrame
 		if (e.getValueIsAdjusting()) return;
 		
 		// Gotcha 2: Don't use e's indices
-		File tFile = (File) getFiles().getSelectedValue();
+		File tFile = (File) getItems().getSelectedValue();
 		getContent().setText("");
 		
 		// Gotcha 3: Don't re-use a worker
