@@ -1,6 +1,7 @@
 package gui;
 
 import java.io.File;
+import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -16,6 +17,10 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.text.JTextComponent;
 
+import rss.Channel;
+import rss.Item;
+import rss.RSSFeed;
+
 public class FileBrowser extends JFrame
 						 implements TreeSelectionListener, ListSelectionListener{
 
@@ -25,22 +30,31 @@ public class FileBrowser extends JFrame
 	
 	private JTextArea _content;
 	
-	private JList _files;
+	private JList _items;
 	
 	public FileBrowser(File file) {
 		
 		super(file.getAbsolutePath());
 		
+		// TODO remove it - only for testing..
+		Vector<RSSFeed> feeds = new Vector<RSSFeed>();
+		feeds.add(new RSSFeed("AVI"));
+		Channel channel = new Channel();
+		Item item = new Item();
+		item.setDescription("AVI DIGMI");
+		channel.getItems().add(item);
+		feeds.get(0).getChannels().add(channel);
+		
 		// Tree
-		setTree(new JTree(new FeedsTreeModel(file)));
+		setTree(new JTree(new FeedsTreeModel(feeds)));
 		getTree().setCellRenderer(new FeedsTreeCellRenderer());
 		getTree().addTreeSelectionListener(this);
 		
 		// File list
-		setFiles(new JList( new ItemsListModel()) );
-		getFiles().setCellRenderer( new ItemsListCellRenderer() );
-		getFiles().setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
-		getFiles().addListSelectionListener(this);
+		setItems(new JList( new ItemsListModel()) );
+		getItems().setCellRenderer( new ItemsListCellRenderer() );
+		getItems().setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+		getItems().addListSelectionListener(this);
 		
 		// Text area
 		setContent(new JTextArea(10, 30));
@@ -52,7 +66,7 @@ public class FileBrowser extends JFrame
 		tHorizonSplit.setLeftComponent(getTree());
 		JSplitPane tVertSplit = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 		tHorizonSplit.setRightComponent(tVertSplit);
-		tVertSplit.setTopComponent(new JScrollPane(getFiles()));
+		tVertSplit.setTopComponent(new JScrollPane(getItems()));
 		tVertSplit.setBottomComponent(new JScrollPane(getContent()));
 		
 		// Put the layout pane as content pane
@@ -71,14 +85,14 @@ public class FileBrowser extends JFrame
 		return this._tree;
 	}
 
-	private void setFiles(JList jList) {
+	private void setItems(JList jList) {
 
-		this._files = jList;
+		this._items = jList;
 	}
 
-	private JList getFiles() {
+	private JList getItems() {
 		
-		return this._files;
+		return this._items;
 	}
 	
 	private void setContent(JTextArea jTextArea) {
@@ -88,8 +102,11 @@ public class FileBrowser extends JFrame
 
 	public void valueChanged(TreeSelectionEvent e) {
 
-		File tDir = (File) e.getPath().getLastPathComponent();
-		((ItemsListModel)getFiles().getModel()).setDir(tDir);
+//		File tDir = (File) e.getPath().getLastPathComponent();
+//		((ItemsListModel)getFiles().getModel()).setDir(tDir);
+		
+		RSSFeed tFeed = (RSSFeed) e.getPath().getLastPathComponent();
+		((ItemsListModel)getItems().getModel()).setFeed(tFeed);
 	}
 
 	public void valueChanged(ListSelectionEvent e) {

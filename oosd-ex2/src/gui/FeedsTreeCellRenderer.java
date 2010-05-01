@@ -6,6 +6,8 @@ import java.io.File;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
+import rss.RSSFeed;
+
 public class FeedsTreeCellRenderer extends DefaultTreeCellRenderer {
 
 	private static final long serialVersionUID = 7408770029078116878L;
@@ -16,10 +18,13 @@ public class FeedsTreeCellRenderer extends DefaultTreeCellRenderer {
 		
 		super.getTreeCellRendererComponent(tree,value,sel,expanded,leaf,row,hasFocus);
 		
-		File tRoot = (File) tree.getModel().getRoot();
-		File tFile = (File) value;
+//		File tRoot = (File) tree.getModel().getRoot();
+//		File tFile = (File) value;
 		
-		setText( tRoot.equals(value) ? tFile.getAbsolutePath() : tFile.getName() );
+		RSSFeed tFile = (RSSFeed) value;
+		
+//		setText( tRoot.equals(value) ? tFile.getAbsolutePath() : tFile.getName() );
+		setText( tFile.getName() );
 		setIcon( expanded ? openIcon : closedIcon );
 		
 		return this;

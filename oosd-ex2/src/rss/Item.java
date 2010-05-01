@@ -17,6 +17,13 @@ public class Item extends RSSElement{
 		this.m_author = "";
 		this.m_categories = new Vector<String>();
 	}
+	
+	public Item(String guid, String author, Vector<String> categories){
+
+		this.m_guid = guid;
+		this.m_author = author;
+		this.m_categories = categories;
+	}
 
 	/**
 	 * sets the item's global unique identifier

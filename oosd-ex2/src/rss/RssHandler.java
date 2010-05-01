@@ -23,7 +23,6 @@ public class RssHandler extends DefaultHandler {
 		this.m_sb = new StringBuffer();
 		this.m_feed = new RSSFeed();
 		this.m_readingchannelspecs = false;
-
 	}
 
 	/**
@@ -33,7 +32,6 @@ public class RssHandler extends DefaultHandler {
 	public RSSFeed getRssFeed(){
 
 		return this.m_feed;
-
 	}
 
 	/**
