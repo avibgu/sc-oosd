@@ -190,14 +190,32 @@ public class View1 extends JPanel
 		add( getContent(), tConst);
 		
 		
-		// (0-1,6) "Remove" button
+		// (0,6) "Remove" button
 		tConst = (GridBagConstraints)tButtonConst.clone();
 		tConst.gridx = 0; tConst.gridy = 6;
-		tConst.gridwidth = 2; tConst.gridheight = 1;
+		tConst.gridwidth = 1; tConst.gridheight = 1;
 		
-		JButton removeButton = new JButton("Remove Feed");
+		JButton removeButton = new JButton("Remove");
 		
 		add(removeButton, tConst);
+		
+		// (1,6) "Refresh" button
+		tConst = (GridBagConstraints)tButtonConst.clone();
+		tConst.gridx = 1; tConst.gridy = 6;
+		tConst.gridwidth = 1; tConst.gridheight = 1;
+		
+		JButton refreshButton = new JButton("Refresh");
+		
+		add(refreshButton, tConst);
+		
+		// (5,6) "Load Plugin" button
+		tConst = (GridBagConstraints)tButtonConst.clone();
+		tConst.gridx = 5; tConst.gridy = 6;
+		tConst.gridwidth = 1; tConst.gridheight = 1;
+		
+		JButton loadButton = new JButton("Load Plugin");
+		
+		add(loadButton, tConst);
 	}
 	
 	
