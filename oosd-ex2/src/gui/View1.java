@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -19,14 +20,68 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTree;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 
-public class View1 extends JPanel{
+import rss.Channel;
+import rss.Item;
+import rss.RSSFeed;
+
+public class View1 extends JPanel
+				   implements TreeSelectionListener, ListSelectionListener {
 
 	private static final long serialVersionUID = 1048997770789816933L;
+	
+	
+	private JTree _tree;
+	
+	private JTextArea _content;
+	
+	private JList _items;
+
+	private RSSFeed _emptyFeed;
+	
+
 
 	public View1() {
 
 		super(new GridBagLayout());
+		
+		
+//------------------------------------------------------------		
+		//TODO remove it..
+		Vector<RSSFeed> feeds = prepareTheFeeds();
+		
+		// Create an empty feed
+		this._emptyFeed = new RSSFeed("");
+		Channel channel = new Channel();
+		Item item = new Item();
+		channel.getItems().add(item);
+		this._emptyFeed.getChannels().add(channel);
+		
+		// Tree
+		setTree(new JTree(new FeedsTreeModel(feeds)));
+		getTree().setCellRenderer(new FeedsTreeCellRenderer());
+		getTree().addTreeSelectionListener(this);
+		
+		// Items list
+		setItems(new JList( new ItemsListModel()) );
+		getItems().setCellRenderer( new ItemsListCellRenderer() );
+		getItems().setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+		getItems().addListSelectionListener(this);
+		
+		// Text area
+		setContent(new JTextArea(10, 30));
+		getContent().setEditable(false);
+		getContent().setTabSize(4);
+
+//------------------------------------------------------------
+		
+		
 
 		setBackground(Color.decode("5462640"));
 
@@ -106,10 +161,8 @@ public class View1 extends JPanel{
 		tConst.fill = BOTH;
 		tConst.gridx = 0; tConst.gridy = 2;
 		tConst.gridwidth = 2; tConst.gridheight = 4;
-		
-		String[] listEnrties = {"enrty_1","enrty_2","enrty_3","enrty_4","enrty_5"};
-	    JList list = new JList( listEnrties );
-	    add(list, tConst);
+
+	    add( getTree(), tConst );
 	    
 	    
 		// (2-5,2-3) List of titles
@@ -118,15 +171,13 @@ public class View1 extends JPanel{
 		tConst.gridx = 2; tConst.gridy = 2;
 		tConst.gridwidth = 4; tConst.gridheight = 2;
 
+	    add( getItems(), tConst );
 
-	    list = new JList( listEnrties );
-	    add(list, tConst);
-
-
-		// (2-5,4-5)Text Area
-	    final JTextArea textArea = new JTextArea(15, 30);
 	    
-		textArea.setBorder(BorderFactory.createEtchedBorder());
+		// (2-5,4-5)Text Area
+//	    final JTextArea textArea = new JTextArea(15, 30);
+//	    
+//		textArea.setBorder(BorderFactory.createEtchedBorder());
 
 		tConst = new GridBagConstraints();
 		tConst.insets = new Insets(2, 2, 2, 2);
@@ -136,7 +187,7 @@ public class View1 extends JPanel{
 		tConst.gridx = 2; tConst.gridy = 4;
 		tConst.gridwidth = 4; tConst.gridheight = 2;
 
-		add(textArea, tConst);
+		add( getContent(), tConst);
 		
 		
 		// (0-1,6) "Remove" button
@@ -148,4 +199,73 @@ public class View1 extends JPanel{
 		
 		add(removeButton, tConst);
 	}
+	
+	
+	
+	
+	
+	
+	//---------| TODO remove it - only for testing |--------------
+	private Vector<RSSFeed> prepareTheFeeds() {
+		
+		Vector<RSSFeed> feeds = new Vector<RSSFeed>();
+
+		feeds.add(new RSSFeed("AVI"));
+		Channel channel = new Channel();
+		Item item = new Item();
+		item.setTitle("Avi's title");
+		item.setDescription("Avi's description\n");
+		channel.getItems().add(item);
+		feeds.get(0).getChannels().add(channel);
+
+		feeds.add(new RSSFeed("AVIA"));
+		channel = new Channel();
+		item = new Item();
+		item.setTitle("Avia's title");
+		item.setDescription("Avia's description\n");
+		channel.getItems().add(item);
+		feeds.get(1).getChannels().add(channel);
+		
+		return feeds;
+	}
+//-------------------------------------------------------------
+
+	public void valueChanged(TreeSelectionEvent e) {
+
+		if ( e.getPath().getLastPathComponent() instanceof String ){
+			
+			((ItemsListModel)getItems().getModel()).setFeed( this._emptyFeed );
+			getItems().clearSelection();
+			getContent().setText("");
+			return;
+		}
+		
+		RSSFeed tFeed = (RSSFeed) e.getPath().getLastPathComponent();
+		((ItemsListModel)getItems().getModel()).setFeed(tFeed);
+		
+		// clear item selection and content pane
+		getItems().clearSelection();
+		getContent().setText("");
+	}
+
+	public void valueChanged(ListSelectionEvent e) {
+        
+		Item tItem = (Item) getItems().getSelectedValue();
+		
+		if (tItem == null) return;
+			
+		getContent().setText( tItem.getDescription() );
+	}
+	
+	private void setTree(JTree jTree) { this._tree = jTree; }
+	
+	private JTree getTree() { return this._tree; }
+
+	private void setItems(JList jList) { this._items = jList; }
+
+	private JList getItems() { return this._items; }
+	
+	private void setContent(JTextArea jTextArea) { this._content = jTextArea; }
+	
+	private JTextArea getContent() { return this._content; }
 }

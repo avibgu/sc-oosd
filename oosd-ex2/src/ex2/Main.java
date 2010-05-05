@@ -24,17 +24,17 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-//		JFrame tFrame = new JFrame("Feeds Reader");
-//		tFrame.setContentPane(new gui.View1());	
-//		tFrame.pack();
-//		tFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		tFrame.setVisible(true);
+		JFrame tFrame = new JFrame("Feeds Reader");
+		tFrame.setContentPane(new gui.View1());	
+		tFrame.pack();
+		tFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		tFrame.setVisible(true);
 		
-		Font tFont = new Font("Dialog", Font.BOLD, 16);
-		UIManager.put("List.font", tFont);
-		UIManager.put("Tree.font", tFont);
-		UIManager.put("TextArea.font", tFont);
-		new FileBrowser();
+//		Font tFont = new Font("Dialog", Font.BOLD, 16);
+//		UIManager.put("List.font", tFont);
+//		UIManager.put("Tree.font", tFont);
+//		UIManager.put("TextArea.font", tFont);
+//		new FileBrowser();
 	}
 
 	public static void ex1_main(String[] args){
