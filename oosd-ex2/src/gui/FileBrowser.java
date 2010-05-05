@@ -28,6 +28,8 @@ public class FileBrowser extends JFrame
 	private JTextArea _content;
 	
 	private JList _items;
+
+	private RSSFeed _emptyFeed;
 	
 	public FileBrowser() {
 		
@@ -35,6 +37,13 @@ public class FileBrowser extends JFrame
 
 		//TODO remove it..
 		Vector<RSSFeed> feeds = prepareTheFeeds();
+		
+		// Create an empty feed
+		this._emptyFeed = new RSSFeed("");
+		Channel channel = new Channel();
+		Item item = new Item();
+		channel.getItems().add(item);
+		this._emptyFeed.getChannels().add(channel);
 		
 		// Tree
 		setTree(new JTree(new FeedsTreeModel(feeds)));
@@ -93,7 +102,11 @@ public class FileBrowser extends JFrame
 
 	public void valueChanged(TreeSelectionEvent e) {
 
-		if ( e.getPath().getLastPathComponent() instanceof String ) return;
+		if ( e.getPath().getLastPathComponent() instanceof String ){
+			
+			((ItemsListModel)getItems().getModel()).setFeed( this._emptyFeed );
+			return;
+		}
 		
 		RSSFeed tFeed = (RSSFeed) e.getPath().getLastPathComponent();
 		((ItemsListModel)getItems().getModel()).setFeed(tFeed);

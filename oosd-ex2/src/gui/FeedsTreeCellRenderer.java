@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Component;
 
+import javax.swing.ImageIcon;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
@@ -17,6 +18,8 @@ public class FeedsTreeCellRenderer extends DefaultTreeCellRenderer {
 
 		super.getTreeCellRendererComponent(tree,value,sel,expanded,leaf,row,hasFocus);
 
+		setIcon( new ImageIcon() );
+		
 		if (value instanceof String){
 			
 			setText( (String)value );
@@ -26,7 +29,6 @@ public class FeedsTreeCellRenderer extends DefaultTreeCellRenderer {
 		RSSFeed tFeed = (RSSFeed) value;
 		
 		setText( tFeed.getName() );
-		setIcon( expanded ? openIcon : closedIcon );
 		
 		return this;
 	}
