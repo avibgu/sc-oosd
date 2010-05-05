@@ -21,7 +21,7 @@ public class RssHandler extends DefaultHandler {
 
 		this.m_stack = new Stack<String>();
 		this.m_sb = new StringBuffer();
-		this.m_feed = new RSSFeed();
+		this.m_feed = new RSSFeed("rss_feed_temp_name__by_rss_handler");
 		this.m_readingchannelspecs = false;
 	}
 

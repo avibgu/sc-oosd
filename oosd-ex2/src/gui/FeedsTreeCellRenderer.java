@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Component;
-import java.io.File;
 
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
@@ -15,16 +14,18 @@ public class FeedsTreeCellRenderer extends DefaultTreeCellRenderer {
 	
 	public Component getTreeCellRendererComponent(JTree tree, Object value,
 			boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus){
-		
+
 		super.getTreeCellRendererComponent(tree,value,sel,expanded,leaf,row,hasFocus);
+
+		if (value instanceof String){
+			
+			setText( (String)value );
+			return this;
+		}
 		
-//		File tRoot = (File) tree.getModel().getRoot();
-//		File tFile = (File) value;
+		RSSFeed tFeed = (RSSFeed) value;
 		
-		RSSFeed tFile = (RSSFeed) value;
-		
-//		setText( tRoot.equals(value) ? tFile.getAbsolutePath() : tFile.getName() );
-		setText( tFile.getName() );
+		setText( tFeed.getName() );
 		setIcon( expanded ? openIcon : closedIcon );
 		
 		return this;

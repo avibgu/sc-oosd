@@ -1,6 +1,5 @@
 package gui;
 
-import java.io.File;
 import java.util.Vector;
 
 import javax.swing.JFrame;
@@ -10,12 +9,10 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingWorker;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.text.JTextComponent;
 
 import rss.Channel;
 import rss.Item;
@@ -32,18 +29,12 @@ public class FileBrowser extends JFrame
 	
 	private JList _items;
 	
-	public FileBrowser(File file) {
+	public FileBrowser() {
 		
-		super(file.getAbsolutePath());
-		
-		// TODO remove it - only for testing..
-		Vector<RSSFeed> feeds = new Vector<RSSFeed>();
-		feeds.add(new RSSFeed("AVI"));
-		Channel channel = new Channel();
-		Item item = new Item();
-		item.setDescription("AVI DIGMI");
-		channel.getItems().add(item);
-		feeds.get(0).getChannels().add(channel);
+		super();
+
+		//TODO remove it..
+		Vector<RSSFeed> feeds = prepareTheFeeds();
 		
 		// Tree
 		setTree(new JTree(new FeedsTreeModel(feeds)));
@@ -75,57 +66,61 @@ public class FileBrowser extends JFrame
 		setVisible(true);
 	}
 
-	private void setTree(JTree jTree) {
-
-		this._tree = jTree;
-	}
-	
-	private JTree getTree() {
-
-		return this._tree;
-	}
-
-	private void setItems(JList jList) {
-
-		this._items = jList;
-	}
-
-	private JList getItems() {
+//---------| TODO remove it - only for testing |--------------
+	private Vector<RSSFeed> prepareTheFeeds() {
 		
-		return this._items;
-	}
-	
-	private void setContent(JTextArea jTextArea) {
+		Vector<RSSFeed> feeds = new Vector<RSSFeed>();
 
-		this._content = jTextArea;
+		feeds.add(new RSSFeed("AVI"));
+		Channel channel = new Channel();
+		Item item = new Item();
+		item.setTitle("Avi's title");
+		item.setDescription("Avi's description\n");
+		channel.getItems().add(item);
+		feeds.get(0).getChannels().add(channel);
+
+		feeds.add(new RSSFeed("AVIA"));
+		channel = new Channel();
+		item = new Item();
+		item.setTitle("Avia's title");
+		item.setDescription("Avia's description\n");
+		channel.getItems().add(item);
+		feeds.get(1).getChannels().add(channel);
+		
+		return feeds;
 	}
+//-------------------------------------------------------------
 
 	public void valueChanged(TreeSelectionEvent e) {
 
-//		File tDir = (File) e.getPath().getLastPathComponent();
-//		((ItemsListModel)getFiles().getModel()).setDir(tDir);
+		if ( e.getPath().getLastPathComponent() instanceof String ) return;
 		
 		RSSFeed tFeed = (RSSFeed) e.getPath().getLastPathComponent();
 		((ItemsListModel)getItems().getModel()).setFeed(tFeed);
+		
+		// clear item selection and content pane
+		getItems().clearSelection();
+		getContent().setText("");
 	}
 
 	public void valueChanged(ListSelectionEvent e) {
-		
-		// Gotcha 1: Check if value is adjusting
-		if (e.getValueIsAdjusting()) return;
-		
-		// Gotcha 2: Don't use e's indices
+        
 		Item tItem = (Item) getItems().getSelectedValue();
-		getContent().setText("");
 		
-		// Gotcha 3: Don't re-use a worker
-		SwingWorker<Void, String> tWorker = new ItemReaderWorker(tItem, getContent());
-		tWorker.execute();
+		if (tItem == null) return;
+			
+		getContent().setText( tItem.getDescription() );
 	}
+	
+	private void setTree(JTree jTree) { this._tree = jTree; }
+	
+	private JTree getTree() { return this._tree; }
 
-	private JTextArea getContent() {
-		
-		return this._content;
-	}
+	private void setItems(JList jList) { this._items = jList; }
 
+	private JList getItems() { return this._items; }
+	
+	private void setContent(JTextArea jTextArea) { this._content = jTextArea; }
+	
+	private JTextArea getContent() { return this._content; }
 }

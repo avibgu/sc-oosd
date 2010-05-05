@@ -1,8 +1,5 @@
 package gui;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -26,7 +23,10 @@ public class ItemsListModel implements ListModel{
 	public ItemsListModel() {
 		
 		setListeners( new LinkedList<ListDataListener>() );
-		setItems( Collections.EMPTY_LIST );
+		
+		List<Item> emptyList = Collections.emptyList();
+		
+		setItems( emptyList );
 	}
 	
 	private void setListeners(LinkedList<ListDataListener> linkedList) {

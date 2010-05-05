@@ -3,7 +3,6 @@ package ex2;
 import javax.swing.*;
 
 import java.awt.Font;
-import java.io.File;
 import java.io.FileInputStream;
 import java.util.Vector;
 
@@ -35,7 +34,7 @@ public class Main {
 		UIManager.put("List.font", tFont);
 		UIManager.put("Tree.font", tFont);
 		UIManager.put("TextArea.font", tFont);
-		new FileBrowser(new File("src") );
+		new FileBrowser();
 	}
 
 	public static void ex1_main(String[] args){
