@@ -1,7 +1,11 @@
 package gui;
 
+import java.util.Collection;
 import java.util.Vector;
 
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
+import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
@@ -14,10 +18,13 @@ public class FeedsTreeModel implements TreeModel {
 	
 	private Vector<RSSFeed> _feeds;
 	
+	private Collection<TreeModelListener> _listeners;
+	
 	public FeedsTreeModel(Vector<RSSFeed> feeds){
 	
 		setFeeds(feeds);
-		this.setRoot("Feeds");
+		setRoot("Feeds");
+		setListeners( new Collection<TreeModelListener>() );
 	}
 	
 	private void setFeeds(Vector<RSSFeed> feeds) {
@@ -64,12 +71,36 @@ public class FeedsTreeModel implements TreeModel {
 	
 	public void valueForPathChanged(TreePath path, Object newValue) {}
 	
-	public void addTreeModelListener(TreeModelListener l) {}
-
-	public void removeTreeModelListener(TreeModelListener l) {}
-
-	private void setRoot(String root) {
+	public void addTreeModelListener(TreeModelListener l) {
 		
-		this.root = root;
+		getListeners().add(l);
+	}
+
+	public void removeTreeModelListener(TreeModelListener l) {
+		
+		getListeners().remove(l);
+	}
+
+	private void setRoot(String root) { this.root = root; }
+	
+	public void remove(RSSFeed feed){
+		
+		this._feeds.remove(feed);
+		
+		Object[] path = {this.getRoot()};
+		
+		TreeModelEvent tEvt = new TreeModelEvent(this, path);
+		
+		for (TreeModelListener tListener : getListeners()){
+		
+			tListener.treeNodesRemoved(tEvt);
+		}		
+	}
+
+	private Collection<TreeModelListener> getListeners() { return this._listeners; }
+
+	public void setListeners(Collection<TreeModelListener> _listeners) {
+		
+		this._listeners = _listeners;
 	}
 }

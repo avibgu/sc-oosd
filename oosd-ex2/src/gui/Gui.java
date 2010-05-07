@@ -7,10 +7,13 @@ import static java.awt.GridBagConstraints.HORIZONTAL;
 import static java.awt.GridBagConstraints.NONE;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -31,7 +34,7 @@ import rss.Channel;
 import rss.Item;
 import rss.RSSFeed;
 
-public class View1 extends JPanel
+public class Gui extends JPanel
 				   implements TreeSelectionListener, ListSelectionListener {
 
 	private static final long serialVersionUID = 1048997770789816933L;
@@ -44,10 +47,12 @@ public class View1 extends JPanel
 	private JList _items;
 
 	private RSSFeed _emptyFeed;
+
+	private RSSFeed _selectedFeed;
 	
 
 
-	public View1() {
+	public Gui() {
 
 		super(new GridBagLayout());
 		
@@ -55,6 +60,7 @@ public class View1 extends JPanel
 //------------------------------------------------------------		
 		//TODO remove it..
 		Vector<RSSFeed> feeds = prepareTheFeeds();
+		this._selectedFeed = null;
 		
 		// Create an empty feed
 		this._emptyFeed = new RSSFeed("");
@@ -67,6 +73,7 @@ public class View1 extends JPanel
 		setTree(new JTree(new FeedsTreeModel(feeds)));
 		getTree().setCellRenderer(new FeedsTreeCellRenderer());
 		getTree().addTreeSelectionListener(this);
+		getTree().setEditable(true);
 		
 		// Items list
 		setItems(new JList( new ItemsListModel()) );
@@ -175,9 +182,8 @@ public class View1 extends JPanel
 
 	    
 		// (2-5,4-5)Text Area
-//	    final JTextArea textArea = new JTextArea(15, 30);
-//	    
-//		textArea.setBorder(BorderFactory.createEtchedBorder());
+		getContent().setBorder(BorderFactory.createEtchedBorder());
+		getContent().setSize(15, 30);
 
 		tConst = new GridBagConstraints();
 		tConst.insets = new Insets(2, 2, 2, 2);
@@ -196,6 +202,14 @@ public class View1 extends JPanel
 		tConst.gridwidth = 1; tConst.gridheight = 1;
 		
 		JButton removeButton = new JButton("Remove");
+		
+		removeButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				((FeedsTreeModel)getTree().getModel()).remove(_selectedFeed);
+			}
+		});
 		
 		add(removeButton, tConst);
 		
@@ -260,6 +274,8 @@ public class View1 extends JPanel
 		
 		RSSFeed tFeed = (RSSFeed) e.getPath().getLastPathComponent();
 		((ItemsListModel)getItems().getModel()).setFeed(tFeed);
+		
+		this._selectedFeed = tFeed;
 		
 		// clear item selection and content pane
 		getItems().clearSelection();
