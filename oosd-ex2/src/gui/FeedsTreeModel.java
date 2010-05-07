@@ -1,6 +1,9 @@
 package gui;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.event.ListDataEvent;
@@ -10,12 +13,13 @@ import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
+import rss.Item;
 import rss.RSSFeed;
 
 public class FeedsTreeModel implements TreeModel {
 
 	private String root;
-	
+
 	private Vector<RSSFeed> _feeds;
 	
 	private Collection<TreeModelListener> _listeners;
@@ -24,7 +28,7 @@ public class FeedsTreeModel implements TreeModel {
 	
 		setFeeds(feeds);
 		setRoot("Feeds");
-		setListeners( new Collection<TreeModelListener>() );
+		setListeners( new LinkedList<TreeModelListener>() );
 	}
 	
 	private void setFeeds(Vector<RSSFeed> feeds) {
@@ -99,8 +103,8 @@ public class FeedsTreeModel implements TreeModel {
 
 	private Collection<TreeModelListener> getListeners() { return this._listeners; }
 
-	public void setListeners(Collection<TreeModelListener> _listeners) {
+	public void setListeners(LinkedList<TreeModelListener> list) {
 		
-		this._listeners = _listeners;
+		this._listeners = list;
 	}
 }
