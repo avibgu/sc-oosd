@@ -89,11 +89,14 @@ public class FeedsTreeModel implements TreeModel {
 	
 	public void remove(RSSFeed feed){
 		
-		this._feeds.remove(feed);
+		int[] index = { this._feeds.indexOf( feed ) };
 		
-		Object[] path = {this.getRoot()};
+		this._feeds.remove( feed );
 		
-		TreeModelEvent tEvt = new TreeModelEvent(this, path);
+		Object[] children = { feed };
+		
+		TreeModelEvent tEvt =
+			new TreeModelEvent( this, new TreePath( getRoot() ), index, children );
 		
 		for (TreeModelListener tListener : getListeners()){
 		

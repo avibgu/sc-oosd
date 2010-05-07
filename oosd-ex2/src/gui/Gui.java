@@ -207,7 +207,14 @@ public class Gui extends JPanel
 
 			public void actionPerformed(ActionEvent e) {
 
-				((FeedsTreeModel)getTree().getModel()).remove(_selectedFeed);
+				if ( _selectedFeed != null){
+				
+					((FeedsTreeModel)getTree().getModel()).remove(_selectedFeed);
+					
+					((ItemsListModel)getItems().getModel()).setFeed(_emptyFeed);
+					
+					getContent().setText("");
+				}
 			}
 		});
 		
@@ -269,6 +276,9 @@ public class Gui extends JPanel
 			((ItemsListModel)getItems().getModel()).setFeed( this._emptyFeed );
 			getItems().clearSelection();
 			getContent().setText("");
+			
+			this._selectedFeed = null;
+				
 			return;
 		}
 		
