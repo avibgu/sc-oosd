@@ -104,10 +104,35 @@ public class FeedsTreeModel implements TreeModel {
 		}		
 	}
 
+	public void add(RSSFeed feed){
+		this._feeds.add(feed);
+		
+		Object[] path = {this.getRoot()};
+		
+		TreeModelEvent tEvt = new TreeModelEvent(this, path);
+		
+		for (TreeModelListener tListener : getListeners()){
+		
+			tListener.treeStructureChanged(tEvt);
+		}	
+		
+	}
+	
 	private Collection<TreeModelListener> getListeners() { return this._listeners; }
 
 	public void setListeners(LinkedList<TreeModelListener> list) {
 		
 		this._listeners = list;
+	}
+	
+	public boolean contains(RSSFeed feed){
+		boolean contains = false;
+		for(RSSFeed rssFeed : this._feeds){
+			if(rssFeed.equals(feed)){
+				contains = true;
+				break;
+			}
+		}
+		return contains;
 	}
 }

@@ -14,10 +14,12 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -30,9 +32,15 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
+import main.SimpleXMLReader;
+
+import config.Feed;
+import exception.FatalErrorException;
+
 import rss.Channel;
 import rss.Item;
 import rss.RSSFeed;
+import rss.RssHandler;
 
 public class Gui extends JPanel
 				   implements TreeSelectionListener, ListSelectionListener {
@@ -135,7 +143,8 @@ public class Gui extends JPanel
 		// (2,0) [textField]
 		tConst = (GridBagConstraints)tTextConst.clone();
 		tConst.gridx = 2; tConst.gridy = 0;
-		add(new JTextField(20), tConst);
+		final JTextField url = new JTextField(20);
+		add(url, tConst);
 
 		// (3,0) "Refresh Rate"
 		tConst = (GridBagConstraints)tLabelConst.clone();
@@ -153,7 +162,33 @@ public class Gui extends JPanel
 		// (5,0) "Add" button
 		tConst = (GridBagConstraints)tButtonConst.clone();
 		tConst.gridx = 5; tConst.gridy = 0;
-		add(new JButton("Add"), tConst);
+		JButton addButton = new JButton("Add");
+		add(addButton, tConst);
+		
+		addButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				RssHandler rssHandler = new RssHandler();
+				try{
+					Feed feed = new Feed(url.getText());
+					if(feed.getAddress() != null){
+						SimpleXMLReader reader = new SimpleXMLReader(feed, rssHandler);
+						reader.read();
+						FeedsTreeModel model = ((FeedsTreeModel)getTree().getModel());
+						Vector<RSSFeed> feeds = ((FeedsTreeModel)getTree().getModel()).getFeeds();
+						if(!model.contains(rssHandler.getRssFeed())){
+							feeds.add(rssHandler.getRssFeed());
+							getTree().updateUI();
+							
+						}
+					}
+				} catch (MalformedURLException ex) {
+					//TODO create an error frame with an ok button
+					JFrame errorFrame = new JFrame("Error");
+				}
+				
+			}
+		});
 
 
 		GridBagConstraints tListConst = (GridBagConstraints)tProto.clone();
