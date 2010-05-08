@@ -93,6 +93,7 @@ public class RssHandler extends DefaultHandler {
     		Channel channel = this.m_feed.getChannels().lastElement();
     		if(channel != null){
     			channel.setTitle(this.m_sb.toString().trim());
+    			this.m_feed.setName(this.m_sb.toString().trim());
     			this.m_sb = new StringBuffer();
     		}
 

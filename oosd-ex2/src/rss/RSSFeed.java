@@ -36,4 +36,8 @@ public class RSSFeed {
 		
 		return _name;
 	}
+	
+	public boolean equals(Object other){
+		return this.m_channels.get(0).getLink().equals((((RSSFeed) other).getChannels().get(0)).getLink());
+	}
 }
