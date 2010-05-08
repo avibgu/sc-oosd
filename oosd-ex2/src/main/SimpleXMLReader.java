@@ -66,8 +66,10 @@ public class SimpleXMLReader {
 	 * this method reads information from XML file
 	 * 
 	 * @throws FatalErrorException if a fatal error occurred
+	 * @throws MalformedURLException 
+	 * @throws MalformedURLException if the url is invalid
 	 */
-	public void read() throws FatalErrorException {
+	public void read() throws MalformedURLException {
 
 		try{
 
@@ -100,13 +102,12 @@ public class SimpleXMLReader {
 			}
 		}
 		catch (MalformedURLException e) {
-
-			System.out.println("an error occured while trying to read from feed: " + this.feed.getAddress().toString() );
+			throw new MalformedURLException();
 		}
 		
 		catch (IOException e) {
 
-			throw new FatalErrorException();
+			
 		}
 		catch (SAXException e) {
 

@@ -36,7 +36,7 @@ public class Main {
 //		UIManager.put("TextArea.font", tFont);
 //		new FileBrowser();
 	}
-
+/*
 	public static void ex1_main(String[] args){
 
 		FileHandling fh = new FileHandling();
@@ -100,4 +100,5 @@ public class Main {
 			System.out.println("a fatal error occurred.. exiting..");
 		}
 	}
+	*/
 }
