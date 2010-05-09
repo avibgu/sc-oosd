@@ -19,8 +19,9 @@ public class Feed extends ConfImpl {
 	 * ctor
 	 *
 	 * @param address the address of the feed
+	 * @throws MalformedURLException 
 	 */
-	public Feed(String address){
+	public Feed(String address) throws MalformedURLException{
 
 		this.feedAddress = null;
 
@@ -30,8 +31,7 @@ public class Feed extends ConfImpl {
 		}
 		catch (MalformedURLException e) {
 
-			System.out.println("an error occurred when tried to open url - "
-					+ address );
+			throw new MalformedURLException();
 		}
 	}
 

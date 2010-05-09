@@ -15,6 +15,7 @@ import config.format.RssFormat;
 import config.format.TextFormat;
 
 
+import java.net.MalformedURLException;
 import java.util.Stack;
 import java.util.Vector;
 
@@ -122,7 +123,12 @@ public class ConfigHandler extends DefaultHandler{
 
     	if ( qName.equals("feed") ){
 
-    		this.feeds.add( new Feed( this.sb.toString() ) );
+    		try {
+				this.feeds.add( new Feed( this.sb.toString() ) );
+			} catch (MalformedURLException e) {
+				
+				
+			}
     		this.sb = new StringBuffer();
     	}
 

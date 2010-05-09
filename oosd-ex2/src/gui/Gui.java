@@ -36,6 +36,7 @@ import main.SimpleXMLReader;
 
 import config.Feed;
 import exception.FatalErrorException;
+import frames.ErrorFrame;
 
 import rss.Channel;
 import rss.Item;
@@ -184,7 +185,9 @@ public class Gui extends JPanel
 					}
 				} catch (MalformedURLException ex) {
 					//TODO create an error frame with an ok button
-					JFrame errorFrame = new JFrame("Error");
+					ErrorFrame errorFrame = new ErrorFrame("Make sure that the URL is valid");
+					errorFrame.setSize(275, 180);
+					errorFrame.setVisible(true);
 				}
 				
 			}
@@ -332,8 +335,10 @@ public class Gui extends JPanel
 		Item tItem = (Item) getItems().getSelectedValue();
 		
 		if (tItem == null) return;
-			
-		getContent().setText( tItem.getDescription() );
+		
+		String author = tItem.getAuthor();
+		
+		getContent().setText( tItem.getDescription() + " - by " + author );
 	}
 	
 	private void setTree(JTree jTree) { this._tree = jTree; }

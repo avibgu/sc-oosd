@@ -113,7 +113,7 @@ public class FeedsTreeModel implements TreeModel {
 		
 		for (TreeModelListener tListener : getListeners()){
 		
-			tListener.treeStructureChanged(tEvt);
+			tListener.treeNodesInserted(tEvt);
 		}	
 		
 	}
