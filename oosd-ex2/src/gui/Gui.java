@@ -7,7 +7,6 @@ import static java.awt.GridBagConstraints.HORIZONTAL;
 import static java.awt.GridBagConstraints.NONE;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -19,7 +18,6 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -36,7 +34,7 @@ import javax.swing.event.TreeSelectionListener;
 import main.SimpleXMLReader;
 
 import config.Feed;
-import exception.FatalErrorException;
+
 import frames.ErrorFrame;
 
 import rss.Channel;
