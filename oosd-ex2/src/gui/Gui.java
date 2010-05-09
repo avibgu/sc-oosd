@@ -205,12 +205,18 @@ public class Gui extends JPanel
 
 
 		// (0-1,2-5) List of feeds
+	    getTree().setBorder( BorderFactory.createEtchedBorder() );
+		
 		tConst = (GridBagConstraints)tListConst.clone();
 		tConst.fill = BOTH;
 		tConst.gridx = 0; tConst.gridy = 2;
 		tConst.gridwidth = 2; tConst.gridheight = 4;
 
-	    add( getTree(), tConst );
+		JScrollPane pane = new JScrollPane( getTree() );
+		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
+		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		
+	    add( pane, tConst );
 	    
 	    
 		// (2-5,2-3) List of titles
@@ -222,7 +228,7 @@ public class Gui extends JPanel
 		tConst.gridx = 2; tConst.gridy = 2;
 		tConst.gridwidth = 4; tConst.gridheight = 2;
 
-		JScrollPane pane = new JScrollPane( getItems() );
+		pane = new JScrollPane( getItems() );
 		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
 		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
