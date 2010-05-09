@@ -1,19 +1,14 @@
 package gui;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Vector;
 
-import javax.swing.event.ListDataEvent;
-import javax.swing.event.ListDataListener;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
-import rss.Item;
 import rss.RSSFeed;
 
 public class FeedsTreeModel implements TreeModel {
@@ -46,31 +41,48 @@ public class FeedsTreeModel implements TreeModel {
 		return this._feeds;
 	}
 	
-	public RSSFeed getChild(Object parent, int index) {
+	public Object getChild(Object parent, int index) {
 
-		if ( ((String)parent).equals(this.root) )
+		if ( (parent instanceof String) && ((String)parent).equals(this.root) )
 			return this._feeds.get(index);
 		
-		else
-			return null;
+		else if (index == 0)
+			return ((RSSFeed)parent).getChannels().get(0).getDescription();
+		
+		else if (index == 1)
+			return ((RSSFeed)parent).getChannels().get(0).getLink();
+		
+		else return null;
 	}
 	
 	public int getChildCount(Object parent) {
 		
-		if ( ((String)parent).equals(this.root) )
+		if ( (parent instanceof String) && ((String)parent).equals(this.root) )
 			return this._feeds.size();
+		
+		else if (parent instanceof RSSFeed) return 2;
 		
 		else return 0;
 	}
 	
 	public boolean isLeaf(Object node) {
 
-		return !(node instanceof String);
+		return getChildCount(node) == 0;
 	}
 	
 	public int getIndexOfChild(Object parent, Object child) {
 		
-		return this._feeds.indexOf((RSSFeed)child);
+		if ( (parent instanceof String) && ((String)parent).equals(this.root) )
+			return this._feeds.indexOf((RSSFeed)child);
+		
+		if (parent instanceof RSSFeed){
+			
+			if ( ((String)child).equals(
+					((RSSFeed)parent).getChannels().get(0).getDescription() ) )
+					return 0;
+		}
+		
+		return 1;
 	}
 	
 	public void valueForPathChanged(TreePath path, Object newValue) {}

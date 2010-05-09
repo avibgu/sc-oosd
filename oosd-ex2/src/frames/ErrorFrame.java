@@ -1,12 +1,9 @@
 package frames;
 
 import static java.awt.GridBagConstraints.BOTH;
-import static java.awt.GridBagConstraints.EAST;
 
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -28,10 +25,10 @@ public class ErrorFrame extends JFrame {
 		add(error);
 		c = new GridBagConstraints();
 		c.gridx = 0; c.gridy = 0; c.gridheight = 1; c.gridwidth = 3;
-		c.anchor = c.CENTER; c.fill = BOTH;
+		c.anchor = GridBagConstraints.CENTER; c.fill = BOTH;
 		add(error, c);
 		JButton tOK = new JButton("OK");
-		c.gridx = 2; c.gridy = 2; c.gridwidth = 1; c.fill = c.NONE;
+		c.gridx = 2; c.gridy = 2; c.gridwidth = 1; c.fill = GridBagConstraints.NONE;
 		add(tOK, c);
 		tOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

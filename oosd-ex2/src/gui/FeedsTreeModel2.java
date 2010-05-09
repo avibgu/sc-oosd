@@ -3,80 +3,115 @@ package gui;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
+
+import rss.RSSFeed;
 
 public class FeedsTreeModel2 implements TreeModel {
 
 	private Collection<TreeModelListener> _listeners;
 	
+	private DefaultMutableTreeNode root;
+	
 	public FeedsTreeModel2(){
 		
+		setRoot( new DefaultMutableTreeNode() );
 		setListeners( new LinkedList<TreeModelListener>() );
 	}
+
+//----------------| Listeners |------------------------------	
 	
-	
-	
-	
-	
-	
+	public FeedsTreeModel2(DefaultMutableTreeNode feeds) {
+		
+		setRoot( feeds );
+		setListeners( new LinkedList<TreeModelListener>() );
+	}
+
 	private void setListeners(LinkedList<TreeModelListener> linkedList) {
 
 		this._listeners = linkedList;		
 	}
+	
+	public Collection<TreeModelListener> getListeners() {
+		return this._listeners;
+	}
 
-
-
-
-
-
-	@Override
 	public void addTreeModelListener(TreeModelListener l) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public Object getChild(Object parent, int index) {
-		// TODO Auto-generated method stub
-		return null;
+		getListeners().add(l);
 	}
-
-	@Override
-	public int getChildCount(Object parent) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getIndexOfChild(Object parent, Object child) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Object getRoot() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isLeaf(Object node) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
+	
 	public void removeTreeModelListener(TreeModelListener l) {
-		// TODO Auto-generated method stub
-		
+
+		getListeners().remove(l);		
 	}
 
-	@Override
+
+//--------------------| Root |-------------------------------
+
+	public void setRoot(DefaultMutableTreeNode root){
+		
+		this.root = root;
+	}
+	
+	public Object getRoot(){
+		
+		return this.root;
+	}
+
+	
+//--------------------| Children |----------------------------
+
+	public Object getChild(Object parent, int index) {
+
+		return ((DefaultMutableTreeNode)parent).getChildAt( index );
+	}
+
+	public int getChildCount(Object parent) {
+
+		return ((DefaultMutableTreeNode)parent).getChildCount();
+	}
+
+	public int getIndexOfChild(Object parent, Object child) {
+
+		return ((DefaultMutableTreeNode)parent).getIndex(
+				(DefaultMutableTreeNode)child );
+	}
+
+	public boolean isLeaf(Object node) {
+
+		return ((DefaultMutableTreeNode)node).isLeaf();
+	}
+
+	
+//-------------------| Actions |-----------------------------
+	
+	public void remove(DefaultMutableTreeNode node){
+
+
+		
+		int[] index = { this.root.getIndex(node) };
+		Object[] obj = { node };
+		
+		this.root.remove( node );
+		
+		TreeModelEvent tEvt =
+			new TreeModelEvent( this, this.root.getPath(), index, obj );
+		
+		for (TreeModelListener tListener : getListeners()){
+		
+			tListener.treeNodesRemoved(tEvt);
+		}		
+	}
+	
+//--------------------| Other |------------------------------
+	
 	public void valueForPathChanged(TreePath path, Object newValue) {
 		// TODO Auto-generated method stub
 		
 	}
-
 }
