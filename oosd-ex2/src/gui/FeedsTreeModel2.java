@@ -9,8 +9,6 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
-import rss.RSSFeed;
-
 public class FeedsTreeModel2 implements TreeModel {
 
 	private Collection<TreeModelListener> _listeners;
@@ -110,8 +108,5 @@ public class FeedsTreeModel2 implements TreeModel {
 	
 //--------------------| Other |------------------------------
 	
-	public void valueForPathChanged(TreePath path, Object newValue) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void valueForPathChanged(TreePath path, Object newValue) {}
 }
