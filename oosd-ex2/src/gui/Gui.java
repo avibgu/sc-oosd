@@ -23,6 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTree;
@@ -144,7 +145,7 @@ public class Gui extends JPanel
 		// (2,0) [textField]
 		tConst = (GridBagConstraints)tTextConst.clone();
 		tConst.gridx = 2; tConst.gridy = 0;
-		final JTextField url = new JTextField(20);
+		final JTextField url = new JTextField(30);
 		add(url, tConst);
 
 		// (3,0) "Refresh Rate"
@@ -158,7 +159,8 @@ public class Gui extends JPanel
 		// (4,0) [textField]
 		tConst = (GridBagConstraints)tTextConst.clone();
 		tConst.gridx = 4; tConst.gridy = 0;
-		add(new JTextField(10), tConst);
+		final JTextField refresh = new JTextField(10);
+		add(refresh, tConst);
 
 		// (5,0) "Add" button
 		tConst = (GridBagConstraints)tButtonConst.clone();
@@ -189,7 +191,8 @@ public class Gui extends JPanel
 					errorFrame.setSize(275, 180);
 					errorFrame.setVisible(true);
 				}
-				
+				url.setText("");
+				refresh.setText("");
 			}
 		});
 
@@ -211,17 +214,23 @@ public class Gui extends JPanel
 	    
 	    
 		// (2-5,2-3) List of titles
+	    getItems().setBorder( BorderFactory.createEtchedBorder() );
+
 		tConst = (GridBagConstraints)tListConst.clone();
+		tConst.anchor = CENTER;
 		tConst.fill = BOTH;
 		tConst.gridx = 2; tConst.gridy = 2;
 		tConst.gridwidth = 4; tConst.gridheight = 2;
 
-	    add( getItems(), tConst );
+		JScrollPane pane = new JScrollPane( getItems() );
+		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
+		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-	    
+	    add( pane, tConst );
+
+
 		// (2-5,4-5)Text Area
-		getContent().setBorder(BorderFactory.createEtchedBorder());
-		getContent().setSize(15, 30);
+		getContent().setBorder( BorderFactory.createEtchedBorder() );
 
 		tConst = new GridBagConstraints();
 		tConst.insets = new Insets(2, 2, 2, 2);
@@ -231,7 +240,11 @@ public class Gui extends JPanel
 		tConst.gridx = 2; tConst.gridy = 4;
 		tConst.gridwidth = 4; tConst.gridheight = 2;
 
-		add( getContent(), tConst);
+		pane = new JScrollPane( getContent() );
+		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
+		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+		add( pane, tConst);
 		
 		
 		// (0,6) "Remove" button
