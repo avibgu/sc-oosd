@@ -12,28 +12,29 @@ import javax.swing.tree.TreePath;
 public class FeedsTreeModel2 implements TreeModel {
 
 	private Collection<TreeModelListener> _listeners;
-	
+
 	private DefaultMutableTreeNode root;
-	
+
 	public FeedsTreeModel2(){
-		
+
 		setRoot( new DefaultMutableTreeNode() );
 		setListeners( new LinkedList<TreeModelListener>() );
 	}
 
-//----------------| Listeners |------------------------------	
-	
 	public FeedsTreeModel2(DefaultMutableTreeNode feeds) {
-		
+
 		setRoot( feeds );
 		setListeners( new LinkedList<TreeModelListener>() );
 	}
 
+
+//----------------| Listeners |------------------------------
+
 	private void setListeners(LinkedList<TreeModelListener> linkedList) {
 
-		this._listeners = linkedList;		
+		this._listeners = linkedList;
 	}
-	
+
 	public Collection<TreeModelListener> getListeners() {
 		return this._listeners;
 	}
@@ -42,26 +43,26 @@ public class FeedsTreeModel2 implements TreeModel {
 
 		getListeners().add(l);
 	}
-	
+
 	public void removeTreeModelListener(TreeModelListener l) {
 
-		getListeners().remove(l);		
+		getListeners().remove(l);
 	}
 
 
 //--------------------| Root |-------------------------------
 
 	public void setRoot(DefaultMutableTreeNode root){
-		
+
 		this.root = root;
 	}
-	
+
 	public Object getRoot(){
-		
+
 		return this.root;
 	}
 
-	
+
 //--------------------| Children |----------------------------
 
 	public Object getChild(Object parent, int index) {
@@ -85,28 +86,27 @@ public class FeedsTreeModel2 implements TreeModel {
 		return ((DefaultMutableTreeNode)node).isLeaf();
 	}
 
-	
+
 //-------------------| Actions |-----------------------------
-	
+
 	public void remove(DefaultMutableTreeNode node){
 
-
-		
 		int[] index = { this.root.getIndex(node) };
 		Object[] obj = { node };
-		
+
 		this.root.remove( node );
-		
+
 		TreeModelEvent tEvt =
 			new TreeModelEvent( this, this.root.getPath(), index, obj );
-		
+
 		for (TreeModelListener tListener : getListeners()){
-		
+
 			tListener.treeNodesRemoved(tEvt);
-		}		
+		}
 	}
-	
+
+
 //--------------------| Other |------------------------------
-	
+
 	public void valueForPathChanged(TreePath path, Object newValue) {}
 }
