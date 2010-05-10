@@ -14,7 +14,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
-import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -184,24 +183,38 @@ public class Gui2 extends JPanel
 
 						FeedsTreeModel2 model = ((FeedsTreeModel2)getTree().getModel());
 
-						DefaultMutableTreeNode node = new DefaultMutableTreeNode( rssHandler.getRssFeed() );
+						RSSFeed newFeed = rssHandler.getRssFeed();
 
-						node.add( new DefaultMutableTreeNode(
-								rssHandler.getRssFeed().getChannels().get(0).getDescription() ) );
+						if(!model.contains( newFeed ) ){
 
-						node.add( new DefaultMutableTreeNode(
-								rssHandler.getRssFeed().getChannels().get(0).getLink() ) );
+							DefaultMutableTreeNode node = new DefaultMutableTreeNode( newFeed );
 
-						((DefaultMutableTreeNode)model.getRoot()).add( node );
+							node.add( new DefaultMutableTreeNode(
+									newFeed.getChannels().get(0).getDescription() ) );
 
-						getTree().updateUI();
+							node.add( new DefaultMutableTreeNode(
+									newFeed.getChannels().get(0).getLink() ) );
+
+							((DefaultMutableTreeNode)model.getRoot()).add( node );
+
+							getTree().updateUI();
+						}
+						else{
+
+							ErrorFrame errorFrame = new ErrorFrame("The URL is already exist");
+							errorFrame.setSize(275, 180);
+							errorFrame.setVisible(true);
+						}
 					}
-				} catch (MalformedURLException ex) {
+				}
+				catch (MalformedURLException ex) {
+
 					//TODO create an error frame with an ok button
 					ErrorFrame errorFrame = new ErrorFrame("Make sure that the URL is valid");
 					errorFrame.setSize(275, 180);
 					errorFrame.setVisible(true);
 				}
+
 				url.setText("");
 				refresh.setText("");
 			}

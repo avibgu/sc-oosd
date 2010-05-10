@@ -9,6 +9,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
+import rss.RSSFeed;
+
 public class FeedsTreeModel2 implements TreeModel {
 
 	private Collection<TreeModelListener> _listeners;
@@ -103,6 +105,20 @@ public class FeedsTreeModel2 implements TreeModel {
 
 			tListener.treeNodesRemoved(tEvt);
 		}
+	}
+
+	public boolean contains(RSSFeed feed){
+
+		DefaultMutableTreeNode root = (DefaultMutableTreeNode)getRoot();
+
+		for(int i=0; i < root.getChildCount(); i++ ){
+
+			if( ((DefaultMutableTreeNode)root.getChildAt( i )).getUserObject().equals(feed) )
+
+				return true;
+		}
+
+		return false;
 	}
 
 
