@@ -47,57 +47,57 @@ public class Gui2 extends JPanel
 				   implements TreeSelectionListener, ListSelectionListener {
 
 	private static final long serialVersionUID = 1048997770789816933L;
-	
-	
+
+
 	private JTree _tree;
-	
+
 	private JTextArea _content;
-	
+
 	private JList _items;
 
 	private RSSFeed _emptyFeed;
 
 	private DefaultMutableTreeNode _selectedNode;
-	
+
 
 
 	public Gui2() {
 
 		super(new GridBagLayout());
-		
-		
-//------------------------------------------------------------		
+
+
+//------------------------------------------------------------
 		//TODO remove it..
 		DefaultMutableTreeNode feeds = prepareTheFeeds();
 		this._selectedNode = null;
-		
+
 		// Create an empty feed
 		this._emptyFeed = new RSSFeed("");
 		Channel channel = new Channel();
 		Item item = new Item();
 		channel.getItems().add(item);
 		this._emptyFeed.getChannels().add(channel);
-		
+
 		// Tree
 		setTree( new JTree( new FeedsTreeModel2(feeds) ) );
 		getTree().setCellRenderer(new FeedsTreeCellRenderer2());
 		getTree().addTreeSelectionListener(this);
 		getTree().setEditable(true);
-		
+
 		// Items list
 		setItems(new JList( new ItemsListModel()) );
 		getItems().setCellRenderer( new ItemsListCellRenderer() );
 		getItems().setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
 		getItems().addListSelectionListener(this);
-		
+
 		// Text area
 		setContent(new JTextArea(10, 30));
 		getContent().setEditable(false);
 		getContent().setTabSize(4);
 
 //------------------------------------------------------------
-		
-		
+
+
 
 		setBackground(Color.decode("5462640"));
 
@@ -124,7 +124,7 @@ public class Gui2 extends JPanel
 		tButtonConst.fill = NONE;
 		tButtonConst.weightx = 0.0;
 
-	    
+
 		// (0,0) "Add New Feed"
 		GridBagConstraints tConst = (GridBagConstraints)tLabelConst.clone();
 		tConst.gridx = 0; tConst.gridy = 0;
@@ -166,34 +166,46 @@ public class Gui2 extends JPanel
 		tConst.gridx = 5; tConst.gridy = 0;
 		JButton addButton = new JButton("Add");
 		add(addButton, tConst);
-		
-//		addButton.addActionListener(new ActionListener() {
-//
-//			public void actionPerformed(ActionEvent e) {
-//				RssHandler rssHandler = new RssHandler();
-//				try{
-//					Feed feed = new Feed(url.getText());
-//					if(feed.getAddress() != null){
-//						SimpleXMLReader reader = new SimpleXMLReader(feed, rssHandler);
-//						reader.read();
-//						FeedsTreeModel model = ((FeedsTreeModel)getTree().getModel());
-//						Vector<RSSFeed> feeds = ((FeedsTreeModel)getTree().getModel()).getFeeds();
-//						if(!model.contains(rssHandler.getRssFeed())){
-//							feeds.add(rssHandler.getRssFeed());
-//							getTree().updateUI();
-//							
-//						}
-//					}
-//				} catch (MalformedURLException ex) {
-//					//TODO create an error frame with an ok button
-//					ErrorFrame errorFrame = new ErrorFrame("Make sure that the URL is valid");
-//					errorFrame.setSize(275, 180);
-//					errorFrame.setVisible(true);
-//				}
-//				url.setText("");
-//				refresh.setText("");
-//			}
-//		});
+
+		addButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				RssHandler rssHandler = new RssHandler();
+
+				try{
+
+					Feed feed = new Feed(url.getText());
+
+					if(feed.getAddress() != null){
+
+						SimpleXMLReader reader = new SimpleXMLReader(feed, rssHandler);
+						reader.read();
+
+						FeedsTreeModel2 model = ((FeedsTreeModel2)getTree().getModel());
+
+						DefaultMutableTreeNode node = new DefaultMutableTreeNode( rssHandler.getRssFeed() );
+
+						node.add( new DefaultMutableTreeNode(
+								rssHandler.getRssFeed().getChannels().get(0).getDescription() ) );
+
+						node.add( new DefaultMutableTreeNode(
+								rssHandler.getRssFeed().getChannels().get(0).getLink() ) );
+
+						((DefaultMutableTreeNode)model.getRoot()).add( node );
+
+						getTree().updateUI();
+					}
+				} catch (MalformedURLException ex) {
+					//TODO create an error frame with an ok button
+					ErrorFrame errorFrame = new ErrorFrame("Make sure that the URL is valid");
+					errorFrame.setSize(275, 180);
+					errorFrame.setVisible(true);
+				}
+				url.setText("");
+				refresh.setText("");
+			}
+		});
 
 
 		GridBagConstraints tListConst = (GridBagConstraints)tProto.clone();
@@ -205,7 +217,7 @@ public class Gui2 extends JPanel
 
 		// (0-1,2-5) List of feeds
 	    getTree().setBorder( BorderFactory.createEtchedBorder() );
-		
+
 		tConst = (GridBagConstraints)tListConst.clone();
 		tConst.fill = BOTH;
 		tConst.gridx = 0; tConst.gridy = 2;
@@ -214,10 +226,10 @@ public class Gui2 extends JPanel
 		JScrollPane pane = new JScrollPane( getTree() );
 		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
 		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		
+
 	    add( pane, tConst );
-	    
-	    
+
+
 		// (2-5,2-3) List of titles
 	    getItems().setBorder( BorderFactory.createEtchedBorder() );
 
@@ -250,62 +262,62 @@ public class Gui2 extends JPanel
 		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
 		add( pane, tConst);
-		
-		
+
+
 		// (0,6) "Remove" button
 		tConst = (GridBagConstraints)tButtonConst.clone();
 		tConst.gridx = 0; tConst.gridy = 6;
 		tConst.gridwidth = 1; tConst.gridheight = 1;
-		
+
 		JButton removeButton = new JButton("Remove");
-		
+
 		removeButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 
 				if ( _selectedNode != null){
-				
+
 					((FeedsTreeModel2)getTree().getModel()).remove(_selectedNode);
-					
+
 					((ItemsListModel)getItems().getModel()).setFeed(_emptyFeed);
-					
+
 					getContent().setText("");
 				}
 			}
 		});
-		
+
 		add(removeButton, tConst);
-		
+
 		// (1,6) "Refresh" button
 		tConst = (GridBagConstraints)tButtonConst.clone();
 		tConst.gridx = 1; tConst.gridy = 6;
 		tConst.gridwidth = 1; tConst.gridheight = 1;
-		
+
 		JButton refreshButton = new JButton("Refresh");
-		
+
 		add(refreshButton, tConst);
-		
+
 		// (5,6) "Load Plugin" button
 		tConst = (GridBagConstraints)tButtonConst.clone();
 		tConst.gridx = 5; tConst.gridy = 6;
 		tConst.gridwidth = 1; tConst.gridheight = 1;
-		
+
 		JButton loadButton = new JButton("Load Plugin");
-		
+
 		add(loadButton, tConst);
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	//---------| TODO remove it - only for testing |--------------
 	private DefaultMutableTreeNode prepareTheFeeds() {
-		
+
 		DefaultMutableTreeNode feeds =
 			new DefaultMutableTreeNode( new String("Feeds") );
-		
+
 		RSSFeed feed1 = new RSSFeed("AVI");
 		Channel channel = new Channel();
 		Item item = new Item();
@@ -321,50 +333,50 @@ public class Gui2 extends JPanel
 		item.setDescription("Avia's description\n");
 		channel.getItems().add(item);
 		feed2.getChannels().add(channel);
-		
+
 		DefaultMutableTreeNode node1 = new DefaultMutableTreeNode( feed1 );
 		DefaultMutableTreeNode node2 = new DefaultMutableTreeNode( feed2 );
-		
+
 		node1.add( new DefaultMutableTreeNode( "node1.description" ) );
 		node1.add( new DefaultMutableTreeNode( "node1.link" ) );
-		
+
 		node2.add( new DefaultMutableTreeNode( "node2.description" ) );
 		node2.add( new DefaultMutableTreeNode( "node2.link" ) );
-		
+
 		feeds.add( node1 );
 		feeds.add( node2 );
-		
+
 		return feeds;
 	}
 //-------------------------------------------------------------
 
 	public void valueChanged(TreeSelectionEvent e) {
-		
+
 		DefaultMutableTreeNode tNode =
 			(DefaultMutableTreeNode) e.getPath().getLastPathComponent();
-		
+
 		if (tNode.getUserObject() instanceof RSSFeed){
-		
+
 			((ItemsListModel)getItems().getModel()).setFeed(
 					((RSSFeed)tNode.getUserObject()) );
-			
+
 			this._selectedNode = tNode;
 		}
 		else{
-			
+
 			String str = (String)tNode.getUserObject();
-			
+
 			if ( str.equals("Feeds") ){
-				
+
 				((ItemsListModel)getItems().getModel()).setFeed( this._emptyFeed );
 			}
 			else{
-				
+
 				((ItemsListModel)getItems().getModel()).setFeed(
 						((RSSFeed)((DefaultMutableTreeNode)
 								tNode.getParent()).getUserObject()) );
 			}
-			
+
 			this._selectedNode = null;
 		}
 
@@ -374,25 +386,25 @@ public class Gui2 extends JPanel
 	}
 
 	public void valueChanged(ListSelectionEvent e) {
-        
+
 		Item tItem = (Item) getItems().getSelectedValue();
-		
+
 		if (tItem == null) return;
-		
+
 		String author = tItem.getAuthor();
-		
+
 		getContent().setText( tItem.getDescription() + " - by " + author );
 	}
-	
+
 	private void setTree(JTree jTree) { this._tree = jTree; }
-	
+
 	private JTree getTree() { return this._tree; }
 
 	private void setItems(JList jList) { this._items = jList; }
 
 	private JList getItems() { return this._items; }
-	
+
 	private void setContent(JTextArea jTextArea) { this._content = jTextArea; }
-	
+
 	private JTextArea getContent() { return this._content; }
 }
