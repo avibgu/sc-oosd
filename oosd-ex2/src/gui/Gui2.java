@@ -170,7 +170,7 @@ public class Gui2 extends JPanel
 			public void actionPerformed(ActionEvent e) {
 
 				new AddButtonWorker( url, getTree(), refresh,
-						_nodeToTimerMap ).execute();
+						_nodeToTimerMap, getItems() ).execute();
 			}
 		});
 
@@ -269,7 +269,8 @@ public class Gui2 extends JPanel
 
 			public void actionPerformed(ActionEvent e) {
 				
-				new RefreshButtonWorker( _selectedNode, getTree() ).execute();
+				new RefreshButtonWorker( _selectedNode,
+						getTree(), getItems() ).execute();
 			}
 		});
 		

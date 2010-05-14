@@ -7,6 +7,7 @@ import frames.ErrorFrame;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.swing.JList;
 import javax.swing.JTree;
 import javax.swing.SwingWorker;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -22,11 +23,13 @@ public class RefreshButtonWorker extends SwingWorker<Void, Void>{
 	
 	private DefaultMutableTreeNode _selectedNode;
 	private JTree _tree;
+	private JList _items;
 
-	public RefreshButtonWorker(DefaultMutableTreeNode selectedNode, JTree tree){
+	public RefreshButtonWorker(DefaultMutableTreeNode selectedNode, JTree tree, JList items){
 		
 		this._selectedNode = selectedNode;
 		this._tree = tree;
+		this._items = items;
 	}
 	
 	protected Void doInBackground() throws Exception {
@@ -66,5 +69,6 @@ public class RefreshButtonWorker extends SwingWorker<Void, Void>{
 	protected void done(){
 		
 		_tree.updateUI();
+		_items.updateUI();
 	}
 }
