@@ -2,7 +2,7 @@ package gui.workers;
 
 import exception.AbortException;
 import frames.ErrorFrame;
-import gui.FeedsTreeModel2;
+import gui.FeedsTreeModel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,7 +54,7 @@ public class AddButtonWorker extends SwingWorker<Void, Void>{
 				SimpleXMLReader reader = new SimpleXMLReader(feed, rssHandler);
 				reader.read();
 
-				FeedsTreeModel2 model = ((FeedsTreeModel2)_tree.getModel());
+				FeedsTreeModel model = ((FeedsTreeModel)_tree.getModel());
 
 				RSSFeed newFeed = rssHandler.getRssFeed();
 

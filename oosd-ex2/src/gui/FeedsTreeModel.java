@@ -11,19 +11,19 @@ import javax.swing.tree.TreePath;
 
 import rss.RSSFeed;
 
-public class FeedsTreeModel2 implements TreeModel {
+public class FeedsTreeModel implements TreeModel {
 
 	private Collection<TreeModelListener> _listeners;
 
 	private DefaultMutableTreeNode root;
 
-	public FeedsTreeModel2(){
+	public FeedsTreeModel(){
 
 		setRoot( new DefaultMutableTreeNode() );
 		setListeners( new LinkedList<TreeModelListener>() );
 	}
 
-	public FeedsTreeModel2(DefaultMutableTreeNode feeds) {
+	public FeedsTreeModel(DefaultMutableTreeNode feeds) {
 
 		setRoot( feeds );
 		setListeners( new LinkedList<TreeModelListener>() );

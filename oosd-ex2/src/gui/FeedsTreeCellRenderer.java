@@ -7,7 +7,7 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
-public class FeedsTreeCellRenderer2 extends DefaultTreeCellRenderer {
+public class FeedsTreeCellRenderer extends DefaultTreeCellRenderer {
 
 	private static final long serialVersionUID = 216029601162006965L;
 

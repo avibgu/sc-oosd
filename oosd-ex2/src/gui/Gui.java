@@ -40,7 +40,7 @@ import rss.Channel;
 import rss.Item;
 import rss.RSSFeed;
 
-public class Gui2 extends JPanel
+public class Gui extends JPanel
 				   implements TreeSelectionListener, ListSelectionListener {
 
 	private static final long serialVersionUID = 1048997770789816933L;
@@ -59,7 +59,7 @@ public class Gui2 extends JPanel
 	private HashMap<DefaultMutableTreeNode,Timer> _nodeToTimerMap;
 	
 
-	public Gui2() {
+	public Gui() {
 
 		super(new GridBagLayout());
 
@@ -78,8 +78,8 @@ public class Gui2 extends JPanel
 		_nodeToTimerMap = new HashMap<DefaultMutableTreeNode,Timer>();
 
 		// Tree
-		setTree( new JTree( new FeedsTreeModel2(feeds) ) );
-		getTree().setCellRenderer(new FeedsTreeCellRenderer2());
+		setTree( new JTree( new FeedsTreeModel(feeds) ) );
+		getTree().setCellRenderer(new FeedsTreeCellRenderer());
 		getTree().addTreeSelectionListener(this);
 		getTree().setEditable(true);
 
@@ -247,7 +247,7 @@ public class Gui2 extends JPanel
 					
 					timer.stop();
 					
-					((FeedsTreeModel2)getTree().getModel()).remove(_selectedNode);
+					((FeedsTreeModel)getTree().getModel()).remove(_selectedNode);
 
 					((ItemsListModel)getItems().getModel()).setFeed(_emptyFeed);
 
