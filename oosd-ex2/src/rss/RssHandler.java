@@ -3,6 +3,9 @@ package rss;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.Attributes;
 
+import config.Feed;
+import exception.AbortException;
+
 import java.util.Stack;
 import java.util.Vector;
 
@@ -12,6 +15,7 @@ public class RssHandler extends DefaultHandler {
 	private Stack<String> m_stack;
 	private StringBuffer m_sb;
 	private RSSFeed m_feed;
+	private Feed m_configFeed;
 	private boolean m_readingchannelspecs;
 
 	/**
@@ -22,6 +26,7 @@ public class RssHandler extends DefaultHandler {
 		this.m_stack = new Stack<String>();
 		this.m_sb = new StringBuffer();
 		this.m_feed = new RSSFeed("rss_feed_temp_name__by_rss_handler");
+		this.m_configFeed = null;
 		this.m_readingchannelspecs = false;
 	}
 
@@ -29,8 +34,11 @@ public class RssHandler extends DefaultHandler {
 	 * returns the Rss feed being modified
 	 * @return the Rss feed being modified
 	 */
-	public RSSFeed getRssFeed(){
-
+	public RSSFeed getRssFeed() throws AbortException{
+		this.m_feed.setAddress(this.m_configFeed.getAddress());
+		if(this.m_feed.getChannels().size() == 0){
+			throw new AbortException();
+		}
 		return this.m_feed;
 	}
 
@@ -180,5 +188,9 @@ public class RssHandler extends DefaultHandler {
     	}
 
     	this.m_stack.pop();
+    }
+    
+    public void setConfigFeed(Feed feed){
+    	this.m_configFeed = feed;
     }
 }

@@ -1,5 +1,6 @@
 package rss;
 
+import java.net.URL;
 import java.util.Vector;
 
 public class RSSFeed {
@@ -8,6 +9,8 @@ public class RSSFeed {
 	private Vector<Channel> m_channels;
 	
 	private String _name;
+	
+	private URL feedAddress;
 
 	/**
 	 * creates a new RSSFeed
@@ -35,6 +38,14 @@ public class RSSFeed {
 	public String getName() {
 		
 		return _name;
+	}
+	
+	public void setAddress(URL address){
+		feedAddress = address;
+	}
+	
+	public URL getAddress(){
+		return feedAddress;
 	}
 	
 	public boolean equals(Object other){

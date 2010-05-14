@@ -35,6 +35,7 @@ import main.SimpleXMLReader;
 
 import config.Feed;
 
+import exception.AbortException;
 import frames.ErrorFrame;
 
 import rss.Channel;
@@ -211,6 +212,10 @@ public class Gui2 extends JPanel
 
 					//TODO create an error frame with an ok button
 					ErrorFrame errorFrame = new ErrorFrame("Make sure that the URL is valid");
+					errorFrame.setSize(275, 180);
+					errorFrame.setVisible(true);
+				} catch (AbortException ex) {
+					ErrorFrame errorFrame = new ErrorFrame("Not a RSS link!");
 					errorFrame.setSize(275, 180);
 					errorFrame.setVisible(true);
 				}

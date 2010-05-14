@@ -14,6 +14,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
+import rss.RssHandler;
+
 import config.Feed;
 import exception.FatalErrorException;
 
@@ -58,6 +60,7 @@ public class SimpleXMLReader {
 	public SimpleXMLReader(Feed _feed, DefaultHandler _handler){
 
 		this.handler = _handler;
+		((RssHandler) this.handler).setConfigFeed(_feed);
 		this.file = null;
 		this.feed = _feed;
 	}
