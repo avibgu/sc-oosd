@@ -14,9 +14,11 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -37,6 +39,7 @@ import config.Feed;
 
 import exception.AbortException;
 import frames.ErrorFrame;
+import gui.workers.AddButtonWorker;
 
 import rss.Channel;
 import rss.Item;
@@ -158,7 +161,9 @@ public class Gui2 extends JPanel
 		// (4,0) [textField]
 		tConst = (GridBagConstraints)tTextConst.clone();
 		tConst.gridx = 4; tConst.gridy = 0;
-		final JTextField refresh = new JTextField(10);
+		String[] timeStrings = { " 5 sec", " 10 sec", " 30 sec", " 1 min", " 10 min" };
+		final JComboBox refresh = new JComboBox( timeStrings );
+		refresh.setSelectedIndex(0);
 		add(refresh, tConst);
 
 		// (5,0) "Add" button
@@ -171,60 +176,9 @@ public class Gui2 extends JPanel
 
 			public void actionPerformed(ActionEvent e) {
 
-				RssHandler rssHandler = new RssHandler();
-
-				try{
-
-					Feed feed = new Feed(url.getText());
-
-					if(feed.getAddress() != null){
-
-						SimpleXMLReader reader = new SimpleXMLReader(feed, rssHandler);
-						reader.read();
-
-						FeedsTreeModel2 model = ((FeedsTreeModel2)getTree().getModel());
-
-						RSSFeed newFeed = rssHandler.getRssFeed();
-
-						if(!model.contains( newFeed ) ){
-
-							DefaultMutableTreeNode node = new DefaultMutableTreeNode( newFeed );
-
-							node.add( new DefaultMutableTreeNode(
-									newFeed.getChannels().get(0).getDescription() ) );
-
-							node.add( new DefaultMutableTreeNode(
-									newFeed.getChannels().get(0).getLink() ) );
-
-							((DefaultMutableTreeNode)model.getRoot()).add( node );
-
-							getTree().updateUI();
-						}
-						else{
-
-							ErrorFrame errorFrame = new ErrorFrame("The URL is already exist");
-							errorFrame.setSize(275, 180);
-							errorFrame.setVisible(true);
-						}
-					}
-				}
-				catch (MalformedURLException ex) {
-
-					//TODO create an error frame with an ok button
-					ErrorFrame errorFrame = new ErrorFrame("Make sure that the URL is valid");
-					errorFrame.setSize(275, 180);
-					errorFrame.setVisible(true);
-				} catch (AbortException ex) {
-					ErrorFrame errorFrame = new ErrorFrame("Not a RSS link!");
-					errorFrame.setSize(275, 180);
-					errorFrame.setVisible(true);
-				}
-
-				url.setText("");
-				refresh.setText("");
+				new AddButtonWorker( url, getTree(), refresh ).execute();
 			}
 		});
-
 
 		GridBagConstraints tListConst = (GridBagConstraints)tProto.clone();
 		tListConst.anchor = CENTER;
@@ -313,6 +267,59 @@ public class Gui2 extends JPanel
 
 		JButton refreshButton = new JButton("Refresh");
 
+//		refreshButton.addActionListener(new ActionListener() {
+//
+//			public void actionPerformed(ActionEvent e) {
+//				
+//				if(_selectedNode != null){
+//					
+//					RssHandler rssHandler = new RssHandler();
+//					
+//					try{
+//						
+//						Feed feed = new Feed(_selectedFeed.getAddress().toString());
+//						
+//						SimpleXMLReader reader = new SimpleXMLReader(feed, rssHandler);
+//						reader.read();
+//						
+//						FeedsTreeModel model = ((FeedsTreeModel)getTree().getModel());
+//						Vector<RSSFeed> feeds = ((FeedsTreeModel)getTree().getModel()).getFeeds();
+//						
+//						RSSFeed rssFeed = rssHandler.getRssFeed();
+//						
+//						if(!model.contains(rssFeed) && rssFeed.getChannels().get(0).getLink() != null){
+//							
+//							feeds.add(rssHandler.getRssFeed());
+//							getTree().updateUI();	
+//						}
+//						else{
+//							
+//							int feedIndex = feeds.indexOf(_selectedFeed);
+//							
+//							feeds.remove(feedIndex);
+//							feeds.add(feedIndex, rssHandler.getRssFeed());
+//							
+//							getTree().updateUI();
+//						}
+//						
+//					}
+//					catch (MalformedURLException ex) {
+//						
+//						ErrorFrame errorFrame = new ErrorFrame("Make sure that the URL is valid");
+//						errorFrame.setSize(275, 180);
+//						errorFrame.setVisible(true);
+//					}
+//					catch (AbortException ex) {
+//						ErrorFrame errorFrame = new ErrorFrame("Not a RSS link!");
+//						errorFrame.setSize(275, 180);
+//						errorFrame.setVisible(true);
+//					}
+//					url.setText("");
+//					refresh.setText("");
+//				}
+//			}
+//		});
+		
 		add(refreshButton, tConst);
 
 		// (5,6) "Load Plugin" button
@@ -324,10 +331,6 @@ public class Gui2 extends JPanel
 
 		add(loadButton, tConst);
 	}
-
-
-
-
 
 
 	//---------| TODO remove it - only for testing |--------------
