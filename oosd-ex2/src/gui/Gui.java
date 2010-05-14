@@ -305,6 +305,7 @@ public class Gui extends JPanel
 				t.setBounds(300, 200, 500, 500);
 				t.show();
 				
+				
 		        tDlg.setFileFilter( new FileFilter() {
 		        	
 		            public boolean accept(File f) {
