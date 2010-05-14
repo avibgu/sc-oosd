@@ -13,8 +13,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
-import java.util.Vector;
+import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -27,25 +26,19 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
+import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import main.SimpleXMLReader;
-
-import config.Feed;
-
-import exception.AbortException;
-import frames.ErrorFrame;
 import gui.workers.AddButtonWorker;
 import gui.workers.RefreshButtonWorker;
 
 import rss.Channel;
 import rss.Item;
 import rss.RSSFeed;
-import rss.RssHandler;
 
 public class Gui2 extends JPanel
 				   implements TreeSelectionListener, ListSelectionListener {
@@ -62,25 +55,27 @@ public class Gui2 extends JPanel
 	private RSSFeed _emptyFeed;
 
 	private DefaultMutableTreeNode _selectedNode;
-
-
+	
+	private HashMap<DefaultMutableTreeNode,Timer> _nodeToTimerMap;
+	
 
 	public Gui2() {
 
 		super(new GridBagLayout());
 
-
-//------------------------------------------------------------
 		//TODO remove it..
 		DefaultMutableTreeNode feeds = prepareTheFeeds();
 		this._selectedNode = null;
 
-		// Create an empty feed
+		// Creates an empty feed
 		this._emptyFeed = new RSSFeed("");
 		Channel channel = new Channel();
 		Item item = new Item();
 		channel.getItems().add(item);
 		this._emptyFeed.getChannels().add(channel);
+		
+		// Creates an empty map
+		_nodeToTimerMap = new HashMap<DefaultMutableTreeNode,Timer>();
 
 		// Tree
 		setTree( new JTree( new FeedsTreeModel2(feeds) ) );
@@ -98,9 +93,6 @@ public class Gui2 extends JPanel
 		setContent(new JTextArea(10, 30));
 		getContent().setEditable(false);
 		getContent().setTabSize(4);
-
-//------------------------------------------------------------
-
 
 
 		setBackground(Color.decode("5462640"));
@@ -177,7 +169,8 @@ public class Gui2 extends JPanel
 
 			public void actionPerformed(ActionEvent e) {
 
-				new AddButtonWorker( url, getTree(), refresh ).execute();
+				new AddButtonWorker( url, getTree(), refresh,
+						_nodeToTimerMap ).execute();
 			}
 		});
 
@@ -250,7 +243,9 @@ public class Gui2 extends JPanel
 
 				if ( _selectedNode != null){
 
-					//TODO remove the relevant RefreshTimerWorker also
+					Timer timer = _nodeToTimerMap.remove( _selectedNode );
+					
+					timer.stop();
 					
 					((FeedsTreeModel2)getTree().getModel()).remove(_selectedNode);
 

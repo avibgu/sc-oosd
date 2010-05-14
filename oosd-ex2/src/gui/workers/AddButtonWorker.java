@@ -4,12 +4,16 @@ import exception.AbortException;
 import frames.ErrorFrame;
 import gui.FeedsTreeModel2;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
+import java.util.HashMap;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.SwingWorker;
+import javax.swing.Timer;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import main.SimpleXMLReader;
@@ -22,13 +26,16 @@ public class AddButtonWorker extends SwingWorker<Void, Void>{
 	private JTextField _url;
 	private JTree _tree;
 	private JComboBox _refresh;
-	private int[] timeInts = { 5, 10, 30, 60, 600 };
+	private int[] timeInts = { 5000, 10000, 30000, 60000, 600000 };
+	private HashMap<DefaultMutableTreeNode,Timer> _nodeToTimerMap;
 
-	public AddButtonWorker(JTextField url, JTree tree, JComboBox refresh){
+	public AddButtonWorker(JTextField url, JTree tree,
+			JComboBox refresh, HashMap<DefaultMutableTreeNode,Timer> nodeToTimerMap){
 		
 		this._url = url;
 		this._tree = tree;
 		this._refresh = refresh;
+		this._nodeToTimerMap = nodeToTimerMap;
 	}
 	
 	protected Void doInBackground() throws Exception {
@@ -50,7 +57,7 @@ public class AddButtonWorker extends SwingWorker<Void, Void>{
 
 				if(!model.contains( newFeed ) ){
 
-					DefaultMutableTreeNode node = new DefaultMutableTreeNode( newFeed );
+					final DefaultMutableTreeNode node = new DefaultMutableTreeNode( newFeed );
 
 					node.add( new DefaultMutableTreeNode(
 							newFeed.getChannels().get(0).getDescription() ) );
@@ -59,11 +66,22 @@ public class AddButtonWorker extends SwingWorker<Void, Void>{
 							newFeed.getChannels().get(0).getLink() ) );
 
 					((DefaultMutableTreeNode)model.getRoot()).add( node );
-					
-					//TODO add refresh timer..
+
+					// adds a refresh timer
 					int refreshTime = timeInts[ this._refresh.getSelectedIndex() ];
 					
+					ActionListener tUpdate = new ActionListener() {
 					
+						public void actionPerformed(ActionEvent e) {
+							
+							new RefreshButtonWorker( node, _tree ).execute();
+						}
+					};
+					
+					Timer timer = new Timer(refreshTime, tUpdate);
+					timer.start();
+					
+					_nodeToTimerMap.put(node, timer);
 				}
 				else{
 
