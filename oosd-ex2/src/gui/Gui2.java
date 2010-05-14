@@ -366,8 +366,6 @@ public class Gui2 extends JPanel
 
 		if (tItem == null) return;
 
-		String author = tItem.getAuthor();
-
 		getContent().setText( tItem.getDescription() );
 	}
 
