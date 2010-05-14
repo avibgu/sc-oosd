@@ -368,7 +368,7 @@ public class Gui2 extends JPanel
 
 		String author = tItem.getAuthor();
 
-		getContent().setText( tItem.getDescription() + " - by " + author );
+		getContent().setText( tItem.getDescription() );
 	}
 
 	private void setTree(JTree jTree) { this._tree = jTree; }
