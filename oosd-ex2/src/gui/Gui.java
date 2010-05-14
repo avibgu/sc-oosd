@@ -7,19 +7,25 @@ import static java.awt.GridBagConstraints.HORIZONTAL;
 import static java.awt.GridBagConstraints.NONE;
 
 import java.awt.Color;
+import java.awt.FileDialog;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -31,7 +37,10 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
+
+import plugin.PluginWrapper;
 
 import gui.workers.AddButtonWorker;
 import gui.workers.RefreshButtonWorker;
@@ -58,7 +67,9 @@ public class Gui extends JPanel
 	
 	private HashMap<DefaultMutableTreeNode,Timer> _nodeToTimerMap;
 	
-
+	private Map<String, PluginWrapper> _pluginsMap;
+	
+	
 	public Gui() {
 
 		super(new GridBagLayout());
@@ -282,6 +293,47 @@ public class Gui extends JPanel
 		tConst.gridwidth = 1; tConst.gridheight = 1;
 
 		JButton loadButton = new JButton("Load Plugin");
+		
+		loadButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				
+				JFileChooser tDlg = new JFileChooser(".");
+
+				// TODO windows style..
+				FileDialog t = new FileDialog( new JFrame() );
+				t.setBounds(300, 200, 500, 500);
+				t.show();
+				
+		        tDlg.setFileFilter( new FileFilter() {
+		        	
+		            public boolean accept(File f) {
+		            	
+		                return f.isDirectory() || f.getName().endsWith(".jar");
+		            }
+
+		            public String getDescription() { return "Jar files"; }
+		        });
+		        
+		        int tRes = tDlg.showOpenDialog( new JFrame() );
+		        
+		        if (tRes == JFileChooser.APPROVE_OPTION) {
+		        	
+		            File tFile = tDlg.getSelectedFile();
+		            
+		            try{
+		            	
+		                PluginWrapper tWrap = new PluginWrapper(tFile);
+		                getPluginsMap().put(tWrap.getExt(), tWrap);
+		            }
+		            catch (Exception e1) {
+		                
+		            	JOptionPane.showMessageDialog(
+		            			new JFrame(), e1.getMessage(), "Cannot load plugin", JOptionPane.ERROR_MESSAGE);
+		            }
+		        }
+			}
+		});
 
 		add(loadButton, tConst);
 	}
@@ -380,4 +432,6 @@ public class Gui extends JPanel
 	private void setContent(JTextArea jTextArea) { this._content = jTextArea; }
 
 	private JTextArea getContent() { return this._content; }
+
+	public Map<String, PluginWrapper> getPluginsMap() { return _pluginsMap; }
 }
