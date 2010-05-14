@@ -35,6 +35,11 @@ public class Feed extends ConfImpl {
 		}
 	}
 
+	public Feed(URL address) {
+	
+		if ( address != null ) this.feedAddress = address;
+	}
+
 	/**
 	 * @return the address of the feed
 	 */

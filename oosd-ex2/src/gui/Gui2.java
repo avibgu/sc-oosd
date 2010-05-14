@@ -40,6 +40,7 @@ import config.Feed;
 import exception.AbortException;
 import frames.ErrorFrame;
 import gui.workers.AddButtonWorker;
+import gui.workers.RefreshButtonWorker;
 
 import rss.Channel;
 import rss.Item;
@@ -249,6 +250,8 @@ public class Gui2 extends JPanel
 
 				if ( _selectedNode != null){
 
+					//TODO remove the relevant RefreshTimerWorker also
+					
 					((FeedsTreeModel2)getTree().getModel()).remove(_selectedNode);
 
 					((ItemsListModel)getItems().getModel()).setFeed(_emptyFeed);
@@ -267,58 +270,13 @@ public class Gui2 extends JPanel
 
 		JButton refreshButton = new JButton("Refresh");
 
-//		refreshButton.addActionListener(new ActionListener() {
-//
-//			public void actionPerformed(ActionEvent e) {
-//				
-//				if(_selectedNode != null){
-//					
-//					RssHandler rssHandler = new RssHandler();
-//					
-//					try{
-//						
-//						Feed feed = new Feed(_selectedFeed.getAddress().toString());
-//						
-//						SimpleXMLReader reader = new SimpleXMLReader(feed, rssHandler);
-//						reader.read();
-//						
-//						FeedsTreeModel model = ((FeedsTreeModel)getTree().getModel());
-//						Vector<RSSFeed> feeds = ((FeedsTreeModel)getTree().getModel()).getFeeds();
-//						
-//						RSSFeed rssFeed = rssHandler.getRssFeed();
-//						
-//						if(!model.contains(rssFeed) && rssFeed.getChannels().get(0).getLink() != null){
-//							
-//							feeds.add(rssHandler.getRssFeed());
-//							getTree().updateUI();	
-//						}
-//						else{
-//							
-//							int feedIndex = feeds.indexOf(_selectedFeed);
-//							
-//							feeds.remove(feedIndex);
-//							feeds.add(feedIndex, rssHandler.getRssFeed());
-//							
-//							getTree().updateUI();
-//						}
-//						
-//					}
-//					catch (MalformedURLException ex) {
-//						
-//						ErrorFrame errorFrame = new ErrorFrame("Make sure that the URL is valid");
-//						errorFrame.setSize(275, 180);
-//						errorFrame.setVisible(true);
-//					}
-//					catch (AbortException ex) {
-//						ErrorFrame errorFrame = new ErrorFrame("Not a RSS link!");
-//						errorFrame.setSize(275, 180);
-//						errorFrame.setVisible(true);
-//					}
-//					url.setText("");
-//					refresh.setText("");
-//				}
-//			}
-//		});
+		refreshButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				
+				new RefreshButtonWorker( _selectedNode, getTree() ).execute();
+			}
+		});
 		
 		add(refreshButton, tConst);
 
