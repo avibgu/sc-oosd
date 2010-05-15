@@ -256,7 +256,7 @@ public class Gui extends JPanel
 
 					Timer timer = _nodeToTimerMap.remove( _selectedNode );
 					
-					timer.stop();
+					if ( timer !=null ) timer.stop();	
 					
 					((FeedsTreeModel)getTree().getModel()).remove(_selectedNode);
 
