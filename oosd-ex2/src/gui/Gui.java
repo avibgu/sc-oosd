@@ -64,12 +64,12 @@ public class Gui extends JPanel
 	private RSSFeed _emptyFeed;
 
 	private DefaultMutableTreeNode _selectedNode;
-	
+
 	private HashMap<DefaultMutableTreeNode,Timer> _nodeToTimerMap;
-	
+
 	private Map<String, PluginWrapper> _pluginsMap;
-	
-	
+
+
 	public Gui() {
 
 		super(new GridBagLayout());
@@ -84,7 +84,7 @@ public class Gui extends JPanel
 		Item item = new Item();
 		channel.getItems().add(item);
 		this._emptyFeed.getChannels().add(channel);
-		
+
 		// Creates an empty map
 		_nodeToTimerMap = new HashMap<DefaultMutableTreeNode,Timer>();
 
@@ -255,9 +255,9 @@ public class Gui extends JPanel
 				if ( _selectedNode != null){
 
 					Timer timer = _nodeToTimerMap.remove( _selectedNode );
-					
-					if ( timer !=null ) timer.stop();	
-					
+
+					if ( timer !=null ) timer.stop();
+
 					((FeedsTreeModel)getTree().getModel()).remove(_selectedNode);
 
 					((ItemsListModel)getItems().getModel()).setFeed(_emptyFeed);
@@ -279,12 +279,12 @@ public class Gui extends JPanel
 		refreshButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				
+
 				new RefreshButtonWorker( _selectedNode,
 						getTree(), getItems() ).execute();
 			}
 		});
-		
+
 		add(refreshButton, tConst);
 
 		// (5,6) "Load Plugin" button
@@ -293,42 +293,36 @@ public class Gui extends JPanel
 		tConst.gridwidth = 1; tConst.gridheight = 1;
 
 		JButton loadButton = new JButton("Load Plugin");
-		
+
 		loadButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				
+
 				JFileChooser tDlg = new JFileChooser(".");
 
-				// TODO windows style..
-				FileDialog t = new FileDialog( new JFrame() );
-				t.setBounds(300, 200, 500, 500);
-				t.show();
-				
-				
 		        tDlg.setFileFilter( new FileFilter() {
-		        	
+
 		            public boolean accept(File f) {
-		            	
+
 		                return f.isDirectory() || f.getName().endsWith(".jar");
 		            }
 
 		            public String getDescription() { return "Jar files"; }
 		        });
-		        
+
 		        int tRes = tDlg.showOpenDialog( new JFrame() );
-		        
+
 		        if (tRes == JFileChooser.APPROVE_OPTION) {
-		        	
+
 		            File tFile = tDlg.getSelectedFile();
-		            
+
 		            try{
-		            	
+
 		                PluginWrapper tWrap = new PluginWrapper(tFile);
 		                getPluginsMap().put(tWrap.getExt(), tWrap);
 		            }
 		            catch (Exception e1) {
-		                
+
 		            	JOptionPane.showMessageDialog(
 		            			new JFrame(), e1.getMessage(), "Cannot load plugin", JOptionPane.ERROR_MESSAGE);
 		            }
