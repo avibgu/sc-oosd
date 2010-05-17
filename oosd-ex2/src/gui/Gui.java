@@ -14,7 +14,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +43,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import plugin.PluginWrapper;
 
 import gui.workers.AddButtonWorker;
+import gui.workers.GetHTMLWorker;
 import gui.workers.RefreshButtonWorker;
 
 import rss.Channel;
@@ -75,7 +75,7 @@ public class Gui extends JPanel
 
 	public Gui() {
 
-		super(new GridBagLayout());
+		super( new GridBagLayout() );
 
 		//TODO remove it..
 		DefaultMutableTreeNode feeds = prepareTheFeeds();
@@ -233,8 +233,7 @@ public class Gui extends JPanel
 		tConst.insets = new Insets(5, 2, 5, 2);
 		tConst.fill = BOTH;
 		tConst.anchor = CENTER;
-		tConst.weighty = 1.0;
-		tConst.weightx = 1.0;
+		tConst.weighty = 1.0; tConst.weightx = 1.0;
 		tConst.gridx = 2; tConst.gridy = 4;
 		tConst.gridwidth = 4; tConst.gridheight = 2;
 
@@ -246,7 +245,6 @@ public class Gui extends JPanel
 		//TODO html..
 		_content2 = new JEditorPane();
 		_content2.setBorder( BorderFactory.createEtchedBorder() );
-		_content2.setBounds(0, 0, 700, 800);
 		_content2.setEditable(false);
 		pane = new JScrollPane( _content2 );
 		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
@@ -430,13 +428,7 @@ public class Gui extends JPanel
 		getContent().setText( tItem.getDescription() );
 		
 		//TODO html..
-		System.out.println( tItem.getLink() );
-		try {
-			_content2.setPage( tItem.getLink() );
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		new GetHTMLWorker( _content2, tItem.getLink() ).execute();
 	}
 
 	private void setTree(JTree jTree) { this._tree = jTree; }
