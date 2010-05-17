@@ -14,6 +14,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -229,10 +230,11 @@ public class Gui extends JPanel
 		getContent().setBorder( BorderFactory.createEtchedBorder() );
 
 		tConst = new GridBagConstraints();
-		tConst.insets = new Insets(2, 2, 2, 2);
+		tConst.insets = new Insets(5, 2, 5, 2);
 		tConst.fill = BOTH;
 		tConst.anchor = CENTER;
 		tConst.weighty = 1.0;
+		tConst.weightx = 1.0;
 		tConst.gridx = 2; tConst.gridy = 4;
 		tConst.gridwidth = 4; tConst.gridheight = 2;
 
@@ -240,6 +242,16 @@ public class Gui extends JPanel
 		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
 		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
+		
+		//TODO html..
+		_content2 = new JEditorPane();
+		_content2.setBorder( BorderFactory.createEtchedBorder() );
+		_content2.setBounds(0, 0, 700, 800);
+		_content2.setEditable(false);
+		pane = new JScrollPane( _content2 );
+		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
+		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		
 		add( pane, tConst);
 
 
@@ -416,6 +428,15 @@ public class Gui extends JPanel
 		if (tItem == null) return;
 
 		getContent().setText( tItem.getDescription() );
+		
+		//TODO html..
+		System.out.println( tItem.getLink() );
+		try {
+			_content2.setPage( tItem.getLink() );
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	private void setTree(JTree jTree) { this._tree = jTree; }

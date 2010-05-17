@@ -13,7 +13,7 @@ public class Main {
 		tFrame.setContentPane( new gui.Gui() );	
 		tFrame.pack();
 		tFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		tFrame.setBounds(200, 100, 850, 500);
+		tFrame.setBounds(125, 50, 1000, 650);
 		tFrame.setVisible( true );
 	}
 }
