@@ -15,7 +15,7 @@ public class PluginWrapper {
 
 	private Object _plugin;
 	private Method _method;
-	private String _ext;
+	private String _view;
 
     private String getAttr(Attributes attrs, String key) {
         return (String) attrs.get(new Attributes.Name(key));
@@ -25,9 +25,9 @@ public class PluginWrapper {
 		JarFile tJar = new JarFile(file);
 		Manifest tManifest = tJar.getManifest();
 		Attributes tAttrs = tManifest.getMainAttributes();
-		String tClassName = getAttr(tAttrs, "Browser-Plugin-Class");
-		String tMethodName = getAttr(tAttrs, "Browser-Plugin-Method");
-		setExt(getAttr(tAttrs, "Browser-Plugin-Ext"));
+		String tClassName = getAttr(tAttrs, "Reader-Plugin-Class");
+		String tMethodName = getAttr(tAttrs, "Reader-Plugin-Method");
+		setView(getAttr(tAttrs, "Reader-Plugin-view"));
 		URL tURL = file.toURI().toURL();
 		URL[] tPath = new URL[] { tURL };
 		ClassLoader tLoader = new URLClassLoader(tPath);
@@ -45,12 +45,12 @@ public class PluginWrapper {
 		return (Component) getMethod().invoke(getPlugin(), tArgs);
 	}
 
-	public String getExt() {
-		return _ext;
+	public String getView() {
+		return _view;
 	}
 
-	public void setExt(String ext) {
-		_ext = ext;
+	public void setView(String view) {
+		_view = view;
 	}
 
     private Object getPlugin() {

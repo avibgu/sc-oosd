@@ -42,6 +42,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import plugin.PluginWrapper;
 
+import gui.listeners.LoadButtonListener;
 import gui.workers.AddButtonWorker;
 import gui.workers.GetHTMLWorker;
 import gui.workers.RefreshButtonWorker;
@@ -306,41 +307,7 @@ public class Gui extends JPanel
 
 		JButton loadButton = new JButton("Load Plugin");
 
-		loadButton.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-
-				JFileChooser tDlg = new JFileChooser(".");
-
-		        tDlg.setFileFilter( new FileFilter() {
-
-		            public boolean accept(File f) {
-
-		                return f.isDirectory() || f.getName().endsWith(".jar");
-		            }
-
-		            public String getDescription() { return "Jar files"; }
-		        });
-
-		        int tRes = tDlg.showOpenDialog( new JFrame() );
-
-		        if (tRes == JFileChooser.APPROVE_OPTION) {
-
-		            File tFile = tDlg.getSelectedFile();
-
-		            try{
-
-		                PluginWrapper tWrap = new PluginWrapper(tFile);
-		                //getPluginsMap().put(tWrap.getExt(), tWrap);
-		            }
-		            catch (Exception e1) {
-
-		            	JOptionPane.showMessageDialog(
-		            			new JFrame(), e1.getMessage(), "Cannot load plugin", JOptionPane.ERROR_MESSAGE);
-		            }
-		        }
-			}
-		});
+		loadButton.addActionListener(new LoadButtonListener(this,this._items) );
 
 		add(loadButton, tConst);
 	}
