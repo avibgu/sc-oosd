@@ -1,5 +1,6 @@
 package gui.listeners;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -11,8 +12,6 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
 
-import gui.*;
-
 import plugin.PluginWrapper;
 
 public class LoadButtonListener implements ActionListener {
@@ -20,11 +19,14 @@ public class LoadButtonListener implements ActionListener {
 	private ListSelectionListener m_Gui;
 
 	private JList m_items;
+	
+	private Component m_content;
 
-
-	public LoadButtonListener(ListSelectionListener gui, JList items){
+	public LoadButtonListener(ListSelectionListener gui, JList items, Component content){
+		
 		this.m_Gui = gui;
 		this.m_items = items;
+		this.m_content = content;
 	}
 
 
@@ -52,13 +54,19 @@ public class LoadButtonListener implements ActionListener {
             try{
 
                 PluginWrapper tWrap = new PluginWrapper(tFile);
-                if(tWrap.getView() == "Items"){
+                
+                if( tWrap.getView() == "Items" ){
+                	
                 	JList newItems = (JList)tWrap.getComponent(tFile);
-                	setItems(newItems);
+                	setItems( newItems );
                 	this.m_items.addListSelectionListener(this.m_Gui);
-
                 }
-                // getPluginsMap().put(tWrap.getExt(), tWrap);
+                else if( tWrap.getView() == "Content" ){
+                	
+                	Component newContent = (Component)tWrap.getComponent(tFile);
+                	setContent( newContent );
+                	this.m_items.addListSelectionListener(this.m_Gui);
+                }
             }
             catch (Exception e1) {
 
@@ -66,12 +74,15 @@ public class LoadButtonListener implements ActionListener {
             			new JFrame(), e1.getMessage(), "Cannot load plugin", JOptionPane.ERROR_MESSAGE);
             }
         }
+	}
 
+	private void setContent(Component newContent) {
+
+		this.m_content = newContent;
 	}
 
 	public void setItems(JList items){
+		
 		this.m_items = items;
 	}
-
-
 }
