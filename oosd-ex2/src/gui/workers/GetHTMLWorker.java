@@ -23,11 +23,7 @@ public class GetHTMLWorker extends SwingWorker<Void, Void>{
 
 		StyleSheet ss = new StyleSheet();
 
-		System.out.println("before: " + ss);
-
 		ss.importStyleSheet( new URL(this._url) );
-
-		System.out.println("after: " + ss);
 
 		HTMLEditorKit htmlEditorKit = new HTMLEditorKit();
 		htmlEditorKit.setStyleSheet( ss );
