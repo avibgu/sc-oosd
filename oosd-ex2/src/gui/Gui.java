@@ -241,15 +241,15 @@ public class Gui extends JPanel
 		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
 		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-		
+
 		//TODO html..
 		_content2 = new JEditorPane();
 		_content2.setBorder( BorderFactory.createEtchedBorder() );
 		_content2.setEditable(false);
-		pane = new JScrollPane( _content2 );
-		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
-		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		
+//		pane = new JScrollPane( _content2 );
+//		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
+//		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+
 		add( pane, tConst);
 
 
@@ -331,7 +331,7 @@ public class Gui extends JPanel
 		            try{
 
 		                PluginWrapper tWrap = new PluginWrapper(tFile);
-		                getPluginsMap().put(tWrap.getExt(), tWrap);
+		                //getPluginsMap().put(tWrap.getExt(), tWrap);
 		            }
 		            catch (Exception e1) {
 
@@ -426,7 +426,7 @@ public class Gui extends JPanel
 		if (tItem == null) return;
 
 		getContent().setText( tItem.getDescription() );
-		
+
 		//TODO html..
 		new GetHTMLWorker( _content2, tItem.getLink() ).execute();
 	}
