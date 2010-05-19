@@ -18,14 +18,11 @@ public class LoadButtonListener implements ActionListener {
 
 	private ListSelectionListener m_Gui;
 
-	private JList m_items;
-	
 	private Component m_content;
 
-	public LoadButtonListener(ListSelectionListener gui, JList items, Component content){
+	public LoadButtonListener(ListSelectionListener gui, Component content){
 		
 		this.m_Gui = gui;
-		this.m_items = items;
 		this.m_content = content;
 	}
 
@@ -55,13 +52,13 @@ public class LoadButtonListener implements ActionListener {
 
                 PluginWrapper tWrap = new PluginWrapper(tFile);
                 
-                if( tWrap.getView() == "Items" ){
+                if( tWrap.getView().equals("Items")){
                 	
                 	//TODO change it to Component or something like this..
                 	
                 	JList newItems = (JList)tWrap.getComponent(tFile);
-                	setItems( newItems );
-                	this.m_items.addListSelectionListener(this.m_Gui);
+                	//setItems( newItems );
+                	newItems.addListSelectionListener(this.m_Gui);
                 }
             }
             catch (Exception e1) {
@@ -76,9 +73,5 @@ public class LoadButtonListener implements ActionListener {
 
 		this.m_content = newContent;
 	}
-
-	public void setItems(JList items){
-		
-		this.m_items = items;
-	}
+	
 }

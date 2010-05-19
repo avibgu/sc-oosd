@@ -6,6 +6,7 @@ public class RSSElement {
 	protected String m_title;
 	protected String m_link;
 	protected String m_description;
+	protected String m_pubDate;
 
 	/**
 	 * creates a new RSSElement
@@ -15,6 +16,7 @@ public class RSSElement {
 		this.m_title = "";
 		this.m_link = "";
 		this.m_description = "";
+		this.m_pubDate = "";
 
 	}
 
@@ -40,5 +42,13 @@ public class RSSElement {
 	 */
 	public String getDescription() {
 		return this.m_description;
+	}
+	
+	/**
+	 * returns the element's PubDate
+	 * @return the element's PubDate
+	 */
+	public String getPubDate(){
+		return this.m_pubDate;
 	}
 }

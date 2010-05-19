@@ -50,7 +50,7 @@ public class Channel extends RSSElement{
 	}
 
 	/**
-	 * sets the channels items by conducting a deep copy
+	 * sets the channel's items by conducting a deep copy
 	 * of the items parameter
 	 * @param items the items to be copied
 	 */
@@ -60,5 +60,12 @@ public class Channel extends RSSElement{
 			this.m_items.add(items.get(i));
 		}
 	}
-
+	
+	/**
+	 * sets the channel's publish date 
+	 * @param pubDate the date to be set
+	 */
+	public void setPubDate(String pubDate){
+		this.m_pubDate = pubDate;
+	}
 }

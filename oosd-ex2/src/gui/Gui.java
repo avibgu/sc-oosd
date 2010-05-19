@@ -68,8 +68,10 @@ public class Gui extends JPanel
 	private HashMap<DefaultMutableTreeNode,Timer> _nodeToTimerMap;
 
 	private Map<String, PluginWrapper> _pluginsMap;
+	
+	private JScrollPane _titlePane;
 
-
+	
 	public Gui() {
 
 		super( new GridBagLayout() );
@@ -200,11 +202,11 @@ public class Gui extends JPanel
 		tConst.gridx = 0; tConst.gridy = 2;
 		tConst.gridwidth = 2; tConst.gridheight = 4;
 
-		JScrollPane pane = new JScrollPane( getTree() );
-		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
-		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		JScrollPane feedsPane = new JScrollPane( getTree() );
+		feedsPane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
+		feedsPane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-	    add( pane, tConst );
+	    add( feedsPane, tConst );
 
 
 		// (2-5,2-3) List of titles
@@ -216,11 +218,11 @@ public class Gui extends JPanel
 		tConst.gridx = 2; tConst.gridy = 2;
 		tConst.gridwidth = 4; tConst.gridheight = 2;
 
-		pane = new JScrollPane( getItems() );
-		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
-		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		_titlePane = new JScrollPane( getItems() );
+		_titlePane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
+		_titlePane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-	    add( pane, tConst );
+	    add( _titlePane, tConst );
 
 
 		// (2-5,4-5)Text Area
@@ -234,9 +236,9 @@ public class Gui extends JPanel
 		tConst.gridx = 2; tConst.gridy = 4;
 		tConst.gridwidth = 4; tConst.gridheight = 2;
 
-		pane = new JScrollPane( getContent() );
-		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
-		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		JScrollPane TextPane = new JScrollPane( getContent() );
+		TextPane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
+		TextPane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
 
 		//TODO html..
@@ -252,7 +254,7 @@ public class Gui extends JPanel
 //		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
 //		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-		add( pane, tConst);
+		add( TextPane, tConst);
 
 
 		// (0,6) "Remove" button
@@ -307,10 +309,14 @@ public class Gui extends JPanel
 		tConst.gridwidth = 1; tConst.gridheight = 1;
 
 		JButton loadButton = new JButton("Load Plugin");
-
-		loadButton.addActionListener(new LoadButtonListener( this,getItems(), getContent() ) );
-
+		
+		LoadButtonListener buttonListener = new LoadButtonListener( this, getContent() );
+		
+		loadButton.addActionListener( buttonListener);
+		
 		add(loadButton, tConst);
+		
+		
 	}
 
 
@@ -396,20 +402,23 @@ public class Gui extends JPanel
 		getContent().setText( tItem.getDescription() );
 
 		//TODO html..
-		new GetHTMLWorker( _content2, tItem.getLink() ).execute();
+		//new GetHTMLWorker( _content2, tItem.getLink() ).execute();
 	}
 
 	private void setTree(JTree jTree) { this._tree = jTree; }
 
 	private JTree getTree() { return this._tree; }
 
-	private void setItems(JList jList) { this._items = jList; }
+	public void setItems(JList jList) { this._items = jList; }
 
-	private JList getItems() { return this._items; }
+	public JList getItems() { return this._items; }
 
 	private void setContent(JTextArea jTextArea) { this._content = jTextArea; }
 
 	private JTextArea getContent() { return this._content; }
 
 	public Map<String, PluginWrapper> getPluginsMap() { return _pluginsMap; }
+	
+	public JScrollPane getTitlePane(){ return this._titlePane;}
+	
 }

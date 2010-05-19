@@ -126,6 +126,15 @@ public class RssHandler extends DefaultHandler {
     		}
 
     	}
+    	
+    	if(qName.equals("pubDate") && this.m_readingchannelspecs){
+    		Channel channel = this.m_feed.getChannels().lastElement();
+    		if(channel != null){
+    			channel.setPubDate(this.m_sb.toString().trim());
+    			this.m_sb = new StringBuffer();
+    		}
+
+    	}
 
 //parsing the title, link and description of the item
     	if(qName.equals("title") && !this.m_readingchannelspecs){
@@ -142,6 +151,16 @@ public class RssHandler extends DefaultHandler {
     		if (item != null){
 	    		String link = this.m_sb.toString();
 				item.setLink(link);
+    		}
+    		this.m_sb = new StringBuffer();
+
+    	}
+    	
+    	if(qName.equals("pubDate")&& !this.m_readingchannelspecs){
+    		Item item = this.m_feed.getChannels().lastElement().getItems().lastElement();
+    		if (item != null){
+	    		String pubDate = this.m_sb.toString();
+				item.setPubDate(pubDate);
     		}
     		this.m_sb = new StringBuffer();
 

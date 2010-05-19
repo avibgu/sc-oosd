@@ -64,6 +64,14 @@ public class Item extends RSSElement{
 	public void setAuthor(String author){
 		this.m_author = author;
 	}
+	
+	/**
+	 * sets the item's publish date
+	 * @param pubDate the date to be set
+	 */
+	public void setPubDate(String pubDate){
+		this.m_pubDate = pubDate;
+	}
 
 	/**
 	 * returns the item's global unique identifier
