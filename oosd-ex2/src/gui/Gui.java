@@ -100,7 +100,8 @@ public class Gui extends JPanel
 		getTree().setEditable(true);
 
 		// Items list
-		setItems(new ItemListComponent());
+		ItemComponent list = new ItemListComponent();
+		setItems(list);
 		((ItemListComponent) getItems()).setModel(new ItemsListModel());
 		((ItemListComponent) getItems()).setCellRenderer( new ItemsListCellRenderer() );
 		((ItemListComponent) getItems()).setSelectionMode( ListSelectionModel.SINGLE_SELECTION );

@@ -17,11 +17,6 @@ public class ItemTableComponent extends JTable implements ItemComponent {
 	}
 
 	@Override
-	public TableModel getModel() {
-		return this.getModel();
-	}
-
-	@Override
 	public Object getSelectedValue() {
 		// TODO Auto-generated method stub
 		return null;
