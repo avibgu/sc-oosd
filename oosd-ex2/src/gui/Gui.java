@@ -36,6 +36,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import plugin.PluginWrapper;
+import plugin.betterContent.ContentPlugin;
 
 import gui.listeners.LoadButtonListener;
 import gui.workers.AddButtonWorker;
@@ -242,9 +243,14 @@ public class Gui extends JPanel
 		_content2 = new JEditorPane();
 		_content2.setBorder( BorderFactory.createEtchedBorder() );
 		_content2.setEditable(false);
-//		pane = new JScrollPane( _content2 );
-//		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
-//		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		pane = new JScrollPane( _content2 );
+		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
+		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		
+		//TODO font and color
+		pane = new JScrollPane( new ContentPlugin().make() );
+		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
+		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
 		add( pane, tConst);
 
