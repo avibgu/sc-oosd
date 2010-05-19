@@ -4,24 +4,29 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Vector;
 
+import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
+
+import rss.Item;
+import rss.RSSFeed;
 
 
 public class ItemsTablePluginModel implements TableModel {
 
 	private final String[] _columnNames = {"Title", "Author", "Categories"};
-    private Vector< Vector<String> > _data;
+    
+	private Vector< Vector<Item> > _data;
     
 	private Collection<TableModelListener> _listeners;
 	
 	public ItemsTablePluginModel(){
 		
-		this._data = new Vector< Vector<String> >();
+		this._data = new Vector< Vector<Item> >();
 		
-		this._data.add( new Vector<String>() );
-		this._data.add( new Vector<String>() );
-		this._data.add( new Vector<String>() );
+		this._data.add( new Vector<Item>() );
+		this._data.add( new Vector<Item>() );
+		this._data.add( new Vector<Item>() );
 		
 		setListeners( new LinkedList<TableModelListener>() );
 	}
@@ -48,7 +53,7 @@ public class ItemsTablePluginModel implements TableModel {
 
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 
-		this._data.get( columnIndex ).set( rowIndex, (String)aValue );
+		this._data.get( columnIndex ).set( rowIndex, (Item)aValue );
 		
 	}
 	
@@ -92,10 +97,21 @@ public class ItemsTablePluginModel implements TableModel {
 
 
 
-
-
-
-
-
-
+//-------------| New Feed |------------------
+	
+	public void setFeed(RSSFeed feed) {
+			
+			Vector<Item> items = feed.getChannels().get(0).getItems();
+			
+			this._data.set(0, items);
+			this._data.set(1, items);
+			this._data.set(2, items);
+			
+			TableModelEvent tEvt = new TableModelEvent(this);
+			
+			for (TableModelListener tListener : getListeners()){
+			
+				tListener.tableChanged( tEvt );
+			}
+	}
 }

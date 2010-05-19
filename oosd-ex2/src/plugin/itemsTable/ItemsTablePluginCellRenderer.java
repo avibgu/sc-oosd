@@ -1,6 +1,7 @@
 package plugin.itemsTable;
 
 import java.awt.Component;
+import java.util.Vector;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -11,7 +12,7 @@ public class ItemsTablePluginCellRenderer extends DefaultTableCellRenderer{
 
 	private static final long serialVersionUID = 7318261549021180210L;
 	
-	public Component getListCellRendererComponent(JTable table, Object value,
+	public Component getTableCellRendererComponent(JTable table, Object value,
 			boolean isSelected, boolean hasFocus, int row, int column) {
 
 		super.getTableCellRendererComponent(table, value, isSelected, hasFocus,
@@ -19,9 +20,32 @@ public class ItemsTablePluginCellRenderer extends DefaultTableCellRenderer{
 
 		Item i = (Item) value;
 		
-		//TODO change getTitle to a new method that shows the plugin view
+		switch (column){
 		
-		setText( i.getTitle() );
+			case 0:
+				
+				setText( i.getTitle() );
+				return this;
+				
+			case 1:
+				
+				setText( i.getAuthor() );
+				return this;
+				
+			case 2:
+				
+				Vector<String> cats = i.getCategories();
+				
+				String text = "";
+				
+				for (String cat: cats) text += cat;
+				
+				setText( text );
+				
+				return this;
+
+			default: setText( "" );
+		}
 
 		return this;
 	}
