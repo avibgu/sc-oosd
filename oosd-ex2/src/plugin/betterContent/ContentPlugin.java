@@ -17,7 +17,7 @@ public class ContentPlugin {
 
 		final JTextArea tText = new JTextArea();
 		
-		String[] fontStrings = { " 5 sec", " 10 sec", " 30 sec", " 1 min", " 10 min" };
+		String[] fontStrings = { "Arial", " 10 sec", " 30 sec", " 1 min", " 10 min" };
 		
 		JComboBox tFont = new JComboBox( fontStrings );
 

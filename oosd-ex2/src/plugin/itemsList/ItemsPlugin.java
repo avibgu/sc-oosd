@@ -1,9 +1,10 @@
-package plugin.items;
+package plugin.itemsList;
 
 
 import java.awt.Component;
+
 import java.io.File;
-import javax.swing.JLabel;
+
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 

@@ -1,4 +1,4 @@
-package plugin.items;
+package plugin.itemsList;
 
 import java.util.Collection;
 import java.util.Collections;

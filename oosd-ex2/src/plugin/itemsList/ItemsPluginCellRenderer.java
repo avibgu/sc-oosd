@@ -1,4 +1,4 @@
-package plugin.items;
+package plugin.itemsList;
 
 import java.awt.Color;
 import java.awt.Component;
