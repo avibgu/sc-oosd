@@ -32,7 +32,7 @@ public class GetHTMLWorker extends SwingWorker<Void, Void>{
 		
 		Attribute[] atts = CSS.getAllAttributeKeys();
 		
-		ss.addAttributes( ss.getEmptySet(), atts );
+		//ss.addAttributes( ss.getEmptySet(), atts );
 
 		HTMLEditorKit htmlEditorKit = new HTMLEditorKit();
 		htmlEditorKit.setStyleSheet( ss );

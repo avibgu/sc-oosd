@@ -57,14 +57,10 @@ public class LoadButtonListener implements ActionListener {
                 
                 if( tWrap.getView() == "Items" ){
                 	
+                	//TODO change it to Component or something like this..
+                	
                 	JList newItems = (JList)tWrap.getComponent(tFile);
                 	setItems( newItems );
-                	this.m_items.addListSelectionListener(this.m_Gui);
-                }
-                else if( tWrap.getView() == "Content" ){
-                	
-                	Component newContent = (Component)tWrap.getComponent(tFile);
-                	setContent( newContent );
                 	this.m_items.addListSelectionListener(this.m_Gui);
                 }
             }
