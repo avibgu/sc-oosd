@@ -1,62 +1,101 @@
 package plugin.itemsTable;
 
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Vector;
+
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
-public class ItemsTablePluginModel implements TableModel{
 
-	@Override
-	public void addTableModelListener(TableModelListener l) {
-		// TODO Auto-generated method stub
+public class ItemsTablePluginModel implements TableModel {
+
+	private final String[] _columnNames = {"Title", "Author", "Categories"};
+    private Vector< Vector<String> > _data;
+    
+	private Collection<TableModelListener> _listeners;
+	
+	public ItemsTablePluginModel(){
 		
+		this._data = new Vector< Vector<String> >();
+		
+		this._data.add( new Vector<String>() );
+		this._data.add( new Vector<String>() );
+		this._data.add( new Vector<String>() );
+		
+		setListeners( new LinkedList<TableModelListener>() );
 	}
 
-	@Override
-	public Class<?> getColumnClass(int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public String getColumnName(int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return this._data.get(0).size();
 	}
 
-	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+	public Class<?> getColumnClass(int columnIndex) {
+
+		return Vector.class;
 	}
 
-	@Override
+	public String getColumnName(int columnIndex) {
+
+		return this._columnNames[columnIndex];
+	}
+
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return false;
+
+		return true;
 	}
 
-	@Override
-	public void removeTableModelListener(TableModelListener l) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
+
+		this._data.get( columnIndex ).set( rowIndex, (String)aValue );
 		
 	}
+	
+	public Object getValueAt(int rowIndex, int columnIndex) {
+
+		return this._data.get( columnIndex ).get( rowIndex );
+	}
+
+
+	
+//-------------------| Listeners |----------------------------------------
+	
+	public void setListeners(Collection<TableModelListener> listeners) {
+		
+		this._listeners = listeners;
+	}
+
+	public Collection<TableModelListener> getListeners() {
+		
+		return _listeners;
+	}
+	
+	public void addTableModelListener(TableModelListener l) {
+		
+		getListeners().add(l);
+	}
+
+	public void removeTableModelListener(TableModelListener l) {
+
+		getListeners().remove(l);
+	}
+
+	
+	
+//-------------| Columns |------------------
+	
+	public String[] getColumnNames() { return _columnNames; }
+
+	public int getColumnCount() { return getColumnNames().length; }
+
+
+
+
+
+
+
+
+
 
 }
