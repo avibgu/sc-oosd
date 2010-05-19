@@ -7,6 +7,7 @@ import static java.awt.GridBagConstraints.HORIZONTAL;
 import static java.awt.GridBagConstraints.NONE;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -19,6 +20,7 @@ import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -40,7 +42,7 @@ import plugin.betterContent.ContentPlugin;
 
 import gui.listeners.LoadButtonListener;
 import gui.workers.AddButtonWorker;
-import gui.workers.GetHTMLWorker;
+
 import gui.workers.RefreshButtonWorker;
 
 import rss.Channel;
@@ -59,7 +61,8 @@ public class Gui extends JPanel
 
 	private JEditorPane _content2;
 
-	private JList _items;
+	private ItemComponent _items;
+	//private JList _items;
 
 	private RSSFeed _emptyFeed;
 
@@ -97,10 +100,11 @@ public class Gui extends JPanel
 		getTree().setEditable(true);
 
 		// Items list
-		setItems(new JList( new ItemsListModel()) );
-		getItems().setCellRenderer( new ItemsListCellRenderer() );
-		getItems().setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
-		getItems().addListSelectionListener(this);
+		setItems(new ItemListComponent());
+		((JList)this._items).setModel(new ItemsListModel());
+		((ItemListComponent) getItems()).setCellRenderer( new ItemsListCellRenderer() );
+		((ItemListComponent) getItems()).setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+		((ItemListComponent) getItems()).addListSelectionListener(this);
 
 		// Text area
 		setContent(new JTextArea(10, 30));
@@ -183,7 +187,7 @@ public class Gui extends JPanel
 			public void actionPerformed(ActionEvent e) {
 
 				new AddButtonWorker( url, getTree(), refresh,
-						_nodeToTimerMap, getItems() ).execute();
+						_nodeToTimerMap, (JComponent) getItems() ).execute();
 			}
 		});
 
@@ -210,7 +214,7 @@ public class Gui extends JPanel
 
 
 		// (2-5,2-3) List of titles
-	    getItems().setBorder( BorderFactory.createEtchedBorder() );
+	    ((JComponent) getItems()).setBorder( BorderFactory.createEtchedBorder() );
 
 		tConst = (GridBagConstraints)tListConst.clone();
 		tConst.anchor = CENTER;
@@ -218,7 +222,7 @@ public class Gui extends JPanel
 		tConst.gridx = 2; tConst.gridy = 2;
 		tConst.gridwidth = 4; tConst.gridheight = 2;
 
-		_titlePane = new JScrollPane( getItems() );
+		_titlePane = new JScrollPane( (Component) getItems() );
 		_titlePane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
 		_titlePane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
@@ -276,7 +280,7 @@ public class Gui extends JPanel
 
 					((FeedsTreeModel)getTree().getModel()).remove(_selectedNode);
 
-					((ItemsListModel)getItems().getModel()).setFeed(_emptyFeed);
+					((ItemsModel)getItems().getModel()).setFeed(_emptyFeed);
 
 					getContent().setText("");
 				}
@@ -297,7 +301,7 @@ public class Gui extends JPanel
 			public void actionPerformed(ActionEvent e) {
 
 				new RefreshButtonWorker( _selectedNode,
-						getTree(), getItems() ).execute();
+						getTree(), (JComponent) getItems() ).execute();
 			}
 		});
 
@@ -365,7 +369,7 @@ public class Gui extends JPanel
 
 		if (tNode.getUserObject() instanceof RSSFeed){
 
-			((ItemsListModel)getItems().getModel()).setFeed(
+			((ItemsModel)getItems().getModel()).setFeed(
 					((RSSFeed)tNode.getUserObject()) );
 
 			this._selectedNode = tNode;
@@ -376,11 +380,11 @@ public class Gui extends JPanel
 
 			if ( str.equals("Feeds") ){
 
-				((ItemsListModel)getItems().getModel()).setFeed( this._emptyFeed );
+				((ItemsModel)getItems().getModel()).setFeed( this._emptyFeed );
 			}
 			else{
 
-				((ItemsListModel)getItems().getModel()).setFeed(
+				((ItemsModel)getItems().getModel()).setFeed(
 						((RSSFeed)((DefaultMutableTreeNode)
 								tNode.getParent()).getUserObject()) );
 			}
@@ -409,9 +413,9 @@ public class Gui extends JPanel
 
 	private JTree getTree() { return this._tree; }
 
-	public void setItems(JList jList) { this._items = jList; }
+	public void setItems(JComponent items) { this._items = (ItemComponent) items; }
 
-	public JList getItems() { return this._items; }
+	public ItemComponent getItems() { return this._items; }
 
 	private void setContent(JTextArea jTextArea) { this._content = jTextArea; }
 

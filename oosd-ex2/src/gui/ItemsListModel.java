@@ -12,7 +12,7 @@ import javax.swing.event.ListDataListener;
 import rss.Item;
 import rss.RSSFeed;
 
-public class ItemsListModel implements ListModel{
+public class ItemsListModel implements ItemsModel{
 
 	private RSSFeed _feed;
 	
