@@ -10,7 +10,7 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 
 import javax.swing.JComboBox;
-import javax.swing.JList;
+import javax.swing.JComponent;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.SwingWorker;
@@ -29,10 +29,10 @@ public class AddButtonWorker extends SwingWorker<Void, Void>{
 	private JComboBox _refresh;
 	private int[] timeInts = { 5000, 10000, 30000, 60000, 600000 };
 	private HashMap<DefaultMutableTreeNode,Timer> _nodeToTimerMap;
-	private JList _items;
+	private JComponent _items;
 
 	public AddButtonWorker(JTextField url, JTree tree, JComboBox refresh,
-			HashMap<DefaultMutableTreeNode,Timer> nodeToTimerMap, JList items){
+			HashMap<DefaultMutableTreeNode,Timer> nodeToTimerMap, JComponent items){
 		
 		this._url = url;
 		this._tree = tree;
