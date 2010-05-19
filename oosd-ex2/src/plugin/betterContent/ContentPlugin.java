@@ -1,17 +1,47 @@
 package plugin.betterContent;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JColorChooser;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
-
-import rss.Item;
 
 public class ContentPlugin {
 
-	public Component make(Item item) {
+	public Component make() {
 
-		JTextArea tText = new JTextArea();
+		final JTextArea tText = new JTextArea();
+		
+		String[] fontStrings = { " 5 sec", " 10 sec", " 30 sec", " 1 min", " 10 min" };
+		
+		JComboBox tFont = new JComboBox( fontStrings );
 
-		return tText; //TODO return some of panel component with the desired options..
+		tFont.setSelectedIndex(0);
+
+		JButton tColor = new JButton( "Color" );
+		
+		tColor.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				JColorChooser tcc = new JColorChooser( tText.getForeground() );				
+				tcc.setVisible(true);
+			}
+		});
+
+		BorderLayout tBorder = new BorderLayout();
+		
+		tBorder.addLayoutComponent( tFont, BorderLayout.NORTH );
+		tBorder.addLayoutComponent( tColor, BorderLayout.CENTER );
+		tBorder.addLayoutComponent( tText, BorderLayout.SOUTH );
+		
+		JPanel tPanel = new JPanel( tBorder );
+
+		return tPanel;
 	}
 }
