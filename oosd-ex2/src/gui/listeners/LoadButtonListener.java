@@ -1,5 +1,7 @@
 package gui.listeners;
 
+import gui.Gui;
+
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +15,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
 
 import plugin.PluginWrapper;
+import plugin.items.ItemsPluginCellRenderer;
 
 public class LoadButtonListener implements ActionListener {
 
@@ -57,8 +60,9 @@ public class LoadButtonListener implements ActionListener {
                 	//TODO change it to Component or something like this..
                 	
                 	JList newItems = (JList)tWrap.getComponent(tFile);
-                	//setItems( newItems );
-                	newItems.addListSelectionListener(this.m_Gui);
+                	ItemsPluginCellRenderer pluginCellRenderer = (ItemsPluginCellRenderer) newItems.getCellRenderer();
+                	((JList) ((Gui)this.m_Gui).getItems()).setCellRenderer(pluginCellRenderer);
+                	
                 }
             }
             catch (Exception e1) {
