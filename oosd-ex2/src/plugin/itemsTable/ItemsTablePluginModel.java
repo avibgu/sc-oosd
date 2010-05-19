@@ -1,5 +1,7 @@
 package plugin.itemsTable;
 
+import gui.ItemsListModelI;
+
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Vector;
@@ -12,7 +14,7 @@ import rss.Item;
 import rss.RSSFeed;
 
 
-public class ItemsTablePluginModel implements TableModel {
+public class ItemsTablePluginModel implements ItemsTablePluginModelI,TableModel {
 
 	private final String[] _columnNames = {"Title", "Author", "Categories"};
     

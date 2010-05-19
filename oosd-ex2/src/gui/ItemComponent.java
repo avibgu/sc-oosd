@@ -6,7 +6,7 @@ public interface ItemComponent {
 	
 	public Object getSelectedValue();
 
-	public ListModel getModel();
+	public Object getModel();
 
 	public void clearSelection();
 }

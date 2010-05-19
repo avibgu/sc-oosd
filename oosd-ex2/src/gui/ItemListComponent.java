@@ -1,18 +1,17 @@
 package gui;
 
 import javax.swing.JList;
+import javax.swing.ListModel;
 
 public class ItemListComponent extends JList implements ItemComponent {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6589045104905654652L;
+	private static final long serialVersionUID = 3206812814239282104L;
 
-//	@Override
-//	public Object getSelectedValue() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	public ListModel getModel(){
+		return this.getModel(); 
+	}
 
 }

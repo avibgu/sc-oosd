@@ -101,7 +101,7 @@ public class Gui extends JPanel
 
 		// Items list
 		setItems(new ItemListComponent());
-		((JList)this._items).setModel(new ItemsListModel());
+		((ItemListComponent) getItems()).setModel(new ItemsListModel());
 		((ItemListComponent) getItems()).setCellRenderer( new ItemsListCellRenderer() );
 		((ItemListComponent) getItems()).setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
 		((ItemListComponent) getItems()).addListSelectionListener(this);
@@ -280,7 +280,7 @@ public class Gui extends JPanel
 
 					((FeedsTreeModel)getTree().getModel()).remove(_selectedNode);
 
-					((ItemsModel)getItems().getModel()).setFeed(_emptyFeed);
+					((Model)getItems().getModel()).setFeed(_emptyFeed);
 
 					getContent().setText("");
 				}
@@ -369,7 +369,7 @@ public class Gui extends JPanel
 
 		if (tNode.getUserObject() instanceof RSSFeed){
 
-			((ItemsModel)getItems().getModel()).setFeed(
+			((Model)getItems().getModel()).setFeed(
 					((RSSFeed)tNode.getUserObject()) );
 
 			this._selectedNode = tNode;
@@ -380,11 +380,11 @@ public class Gui extends JPanel
 
 			if ( str.equals("Feeds") ){
 
-				((ItemsModel)getItems().getModel()).setFeed( this._emptyFeed );
+				((Model)getItems().getModel()).setFeed( this._emptyFeed );
 			}
 			else{
 
-				((ItemsModel)getItems().getModel()).setFeed(
+				((Model)getItems().getModel()).setFeed(
 						((RSSFeed)((DefaultMutableTreeNode)
 								tNode.getParent()).getUserObject()) );
 			}
@@ -413,7 +413,7 @@ public class Gui extends JPanel
 
 	private JTree getTree() { return this._tree; }
 
-	public void setItems(JComponent items) { this._items = (ItemComponent) items; }
+	public void setItems(ItemComponent items) { this._items = (ItemComponent) items; }
 
 	public ItemComponent getItems() { return this._items; }
 
