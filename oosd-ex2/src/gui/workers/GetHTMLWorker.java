@@ -2,10 +2,15 @@ package gui.workers;
 
 import java.net.URL;
 
+import javax.print.attribute.DocAttribute;
+import javax.print.attribute.HashDocAttributeSet;
 import javax.swing.JEditorPane;
 import javax.swing.SwingWorker;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.html.CSS;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
+import javax.swing.text.html.CSS.Attribute;
 
 public class GetHTMLWorker extends SwingWorker<Void, Void>{
 
@@ -23,7 +28,11 @@ public class GetHTMLWorker extends SwingWorker<Void, Void>{
 
 		StyleSheet ss = new StyleSheet();
 
-		ss.importStyleSheet( new URL(this._url) );
+		//ss.importStyleSheet( new URL(this._url) );
+		
+		Attribute[] atts = CSS.getAllAttributeKeys();
+		
+		ss.addAttributes( ss.getEmptySet(), atts );
 
 		HTMLEditorKit htmlEditorKit = new HTMLEditorKit();
 		htmlEditorKit.setStyleSheet( ss );
