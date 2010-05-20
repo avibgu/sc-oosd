@@ -24,11 +24,11 @@
 				<attribute name="Main-Class" value="${main-class}"/>
 			</manifest>
 		</jar>
-        <jar basedir="${build}" jarfile="${jar.dir}/ItemsPlugin.jar"
+        <jar basedir="${classes.dir}" jarfile="${jar.dir}/ItemsPlugin.jar"
 			 manifest="${basedir}/src/plugin/items/MANIFEST.MF"
 			 includes="target/plugin/items/*.class">
 		</jar>
-        <jar basedir="${build}" jarfile="${jar.dir}/ItemsPlugin.jar"
+        <jar basedir="${classes.dir}" jarfile="${jar.dir}/textToolbarPlugin.jar"
 			 manifest="${basedir}/src/plugin/textToolbar/MANIFEST.MF"
 			 includes="target/plugin/textToolbar/*.class">
 		</jar>
