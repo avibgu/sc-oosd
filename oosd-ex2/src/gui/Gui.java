@@ -417,7 +417,7 @@ public class Gui extends JPanel
 				getContent().setText(tItem.getDescription());
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(
-            			new JFrame(), e1.getMessage(), "Cannot color and change the text", JOptionPane.ERROR_MESSAGE);
+            			new JFrame(), e1.getMessage(), "Error displaying the text", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		
