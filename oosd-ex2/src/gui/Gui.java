@@ -18,12 +18,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
+import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JEditorPane;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -39,6 +42,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import plugin.PluginWrapper;
 import plugin.betterContent.ContentPlugin;
+import plugin.textToolbar.TextToolbarPlugin;
 
 import gui.listeners.LoadButtonListener;
 import gui.workers.AddButtonWorker;
@@ -403,23 +407,23 @@ public class Gui extends JPanel
 		Item tItem = (Item) getItems().getSelectedValue();
 
 		if (tItem == null) return;
-
 		
 		if(this._pluginsMap.containsKey("Text")){
+			
 			PluginWrapper tWrap = getPluginsMap().get("Text");
 			
 			try {
 				Component tComp = tWrap.getComponent(tWrap.getFile(), getContent());
 				getContent().setText(tItem.getDescription());
 			} catch (Exception e1) {
-		//		getContent().setViewportView(new JLabel(e1.getMessage()));
+				JOptionPane.showMessageDialog(
+            			new JFrame(), e1.getMessage(), "Cannot color and change the text", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		
-		else getContent().setText( tItem.getDescription() );
 		
-		//TODO html..
-		//new GetHTMLWorker( _content2, tItem.getLink() ).execute();
+		else getContent().setText( tItem.getDescription() );
+				
 	}
 
 	private void setTree(JTree jTree) { this._tree = jTree; }

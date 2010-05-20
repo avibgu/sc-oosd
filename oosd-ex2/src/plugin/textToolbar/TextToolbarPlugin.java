@@ -7,7 +7,7 @@ import java.io.File;
 import javax.swing.*;
 import javax.swing.event.*;
 
-public class TextToolbarPlugin extends JApplet
+public class TextToolbarPlugin extends JFrame
 {
     // assign default values to the font fields
     private int fontSize = 12;
@@ -120,7 +120,8 @@ public class TextToolbarPlugin extends JApplet
                                                  textArea.getSelectionColor());
                     if (color != null)
                     {
-                    	textArea.setSelectedTextColor(color);
+                    	textArea.setForeground(color);
+                    	textArea.repaint();
                     }
                 }
             });
@@ -139,7 +140,7 @@ public class TextToolbarPlugin extends JApplet
         // add the applet to the frame
         frame.getContentPane().add(toolBar);
         // set the size of the frame (applet will be width by height in size)
-        int height = 150;
+        int height = 100;
         int width = 450;
         // pack the frame to get correct insets
         frame.pack();
@@ -151,7 +152,7 @@ public class TextToolbarPlugin extends JApplet
         // make the frame visible
         frame.setVisible(true);
         
-        return textArea;
+        return this;
     }
 
      
