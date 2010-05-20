@@ -2,8 +2,8 @@
 <!--AgileJ Ltd. (http://www.agilej.com)-->
 <ajsv>
     <diagram style="defaultDiagramStyle" version="1.7.0.v20100225-1415">
-        <class className="exception.AbortException" project="oosd-ex2" xLocation="0" yLocation="0"/>
-        <class className="exception.GiveUpException" project="oosd-ex2" xLocation="20" yLocation="20"/>
-        <class className="exception.FatalErrorException" project="oosd-ex2" xLocation="40" yLocation="40"/>
+        <class className="exception.AbortException" project="oosd-ex2" xLocation="-131" yLocation="350"/>
+        <class className="exception.GiveUpException" project="oosd-ex2" xLocation="-131" yLocation="-24"/>
+        <class className="exception.FatalErrorException" project="oosd-ex2" xLocation="-126" yLocation="164"/>
     </diagram>
 </ajsv>

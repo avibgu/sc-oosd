@@ -2,8 +2,8 @@
 <!--AgileJ Ltd. (http://www.agilej.com)-->
 <ajsv>
     <diagram style="defaultDiagramStyle" version="1.7.0.v20100225-1415">
-        <class className="config.format.TextFormat" project="oosd-ex2" xLocation="0" yLocation="0"/>
-        <class className="config.format.RssFormat" project="oosd-ex2" xLocation="20" yLocation="20"/>
-        <class className="config.format.Format" project="oosd-ex2" xLocation="40" yLocation="40"/>
+        <class className="config.format.TextFormat" project="oosd-ex2" xLocation="168" yLocation="253"/>
+        <class className="config.format.RssFormat" project="oosd-ex2" xLocation="-170" yLocation="253"/>
+        <class className="config.format.Format" project="oosd-ex2" xLocation="-82" yLocation="-37"/>
     </diagram>
 </ajsv>

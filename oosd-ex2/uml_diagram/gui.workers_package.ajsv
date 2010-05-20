@@ -2,7 +2,7 @@
 <!--AgileJ Ltd. (http://www.agilej.com)-->
 <ajsv>
     <diagram style="defaultDiagramStyle" version="1.7.0.v20100225-1415">
-        <class className="gui.workers.AddButtonWorker" project="oosd-ex2" xLocation="0" yLocation="0"/>
-        <class className="gui.workers.RefreshButtonWorker" project="oosd-ex2" xLocation="20" yLocation="20"/>
+        <class className="gui.workers.AddButtonWorker" project="oosd-ex2" xLocation="-135" yLocation="151"/>
+        <class className="gui.workers.RefreshButtonWorker" project="oosd-ex2" xLocation="-123" yLocation="-252"/>
     </diagram>
 </ajsv>

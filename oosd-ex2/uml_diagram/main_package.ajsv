@@ -2,8 +2,8 @@
 <!--AgileJ Ltd. (http://www.agilej.com)-->
 <ajsv>
     <diagram style="defaultDiagramStyle" version="1.7.0.v20100225-1415">
-        <class className="main.SimpleXMLReader" project="oosd-ex2" xLocation="0" yLocation="0"/>
-        <class className="main.Main" project="oosd-ex2" xLocation="20" yLocation="20"/>
-        <class className="main.FileHandling" project="oosd-ex2" xLocation="40" yLocation="40"/>
+        <class className="main.SimpleXMLReader" project="oosd-ex2" xLocation="-9" yLocation="-5"/>
+        <class className="main.Main" project="oosd-ex2" xLocation="108" yLocation="-121"/>
+        <class className="main.FileHandling" project="oosd-ex2" xLocation="-24" yLocation="205"/>
     </diagram>
 </ajsv>

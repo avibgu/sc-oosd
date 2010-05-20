@@ -2,9 +2,9 @@
 <!--AgileJ Ltd. (http://www.agilej.com)-->
 <ajsv>
     <diagram style="defaultDiagramStyle" version="1.7.0.v20100225-1415">
-        <class className="config.Feed" project="oosd-ex2" xLocation="0" yLocation="0"/>
-        <class className="config.Conf" project="oosd-ex2" xLocation="20" yLocation="20"/>
-        <class className="config.ConfigHandler" project="oosd-ex2" xLocation="40" yLocation="40"/>
-        <class className="config.ConfImpl" project="oosd-ex2" xLocation="60" yLocation="60"/>
+        <class className="config.ConfigHandler" project="oosd-ex2" xLocation="-195" yLocation="-245"/>
+        <class className="config.Conf" project="oosd-ex2" xLocation="472" yLocation="-245"/>
+        <class className="config.Feed" project="oosd-ex2" xLocation="45" yLocation="162"/>
+        <class className="config.ConfImpl" project="oosd-ex2" xLocation="459" yLocation="-87"/>
     </diagram>
 </ajsv>
