@@ -78,7 +78,7 @@ public class Gui extends JPanel
 	public Gui() {
 
 		super( new GridBagLayout() );
-
+		setPluginsMap(new HashMap<String, PluginWrapper>());
 		//TODO remove it..
 		DefaultMutableTreeNode feeds = prepareTheFeeds();
 		this._selectedNode = null;
@@ -404,8 +404,20 @@ public class Gui extends JPanel
 
 		if (tItem == null) return;
 
-		getContent().setText( tItem.getDescription() );
-
+		
+		if(this._pluginsMap.containsKey("Text")){
+			PluginWrapper tWrap = getPluginsMap().get("Text");
+			
+			try {
+				Component tComp = tWrap.getComponent(tWrap.getFile(), getContent());
+				getContent().setText(tItem.getDescription());
+			} catch (Exception e1) {
+		//		getContent().setViewportView(new JLabel(e1.getMessage()));
+			}
+		}
+		
+		else getContent().setText( tItem.getDescription() );
+		
 		//TODO html..
 		//new GetHTMLWorker( _content2, tItem.getLink() ).execute();
 	}
@@ -424,6 +436,8 @@ public class Gui extends JPanel
 
 	public Map<String, PluginWrapper> getPluginsMap() { return _pluginsMap; }
 	
-	public JScrollPane getTitlePane(){ return this._titlePane;}
-	
+	private void setPluginsMap(Map<String, PluginWrapper> pluginsMap) {
+        _pluginsMap = pluginsMap;
+    }
+		
 }

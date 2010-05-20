@@ -57,12 +57,15 @@ public class LoadButtonListener implements ActionListener {
                 
                 if( tWrap.getView().equals("Items")){
                 	
-                	JList newItems = (JList)tWrap.getComponent(tFile);
+                	JList newItems = (JList)tWrap.getComponent(tFile, null);
                 	ItemsPluginCellRenderer pluginCellRenderer = (ItemsPluginCellRenderer) newItems.getCellRenderer();
                 	((JList) ((Gui)this.m_Gui).getItems()).setCellRenderer(pluginCellRenderer);
                 	                	
                 }
                 
+                if( tWrap.getView().equals("Text")){
+                	((Gui)this.m_Gui).getPluginsMap().put(tWrap.getView(), tWrap);
+                }
                 
             }
             catch (Exception e1) {

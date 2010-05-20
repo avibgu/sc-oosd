@@ -11,18 +11,22 @@ import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
+import javax.swing.JTextArea;
+
 public class PluginWrapper {
 
 	private Object _plugin;
 	private Method _method;
 	private String _view;
+	private File _file;
 
     private String getAttr(Attributes attrs, String key) {
         return (String) attrs.get(new Attributes.Name(key));
     }
 
     public PluginWrapper(File file) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException {
-		JarFile tJar = new JarFile(file);
+		_file = file;
+    	JarFile tJar = new JarFile(file);
 		Manifest tManifest = tJar.getManifest();
 		Attributes tAttrs = tManifest.getMainAttributes();
 		String tClassName = getAttr(tAttrs, "Reader-Plugin-Class");
@@ -33,15 +37,15 @@ public class PluginWrapper {
 		ClassLoader tLoader = new URLClassLoader(tPath);
 		Class tClass = tLoader.loadClass(tClassName);
 		setPlugin(tClass.newInstance());
-		Class[] tArgTypes = new Class[] { File.class };
+		Class[] tArgTypes = new Class[] { File.class, JTextArea.class};
 		setMethod(tClass.getMethod(tMethodName, tArgTypes));
 		if (!Component.class.isAssignableFrom(getMethod().getReturnType())) {
 			throw new NoSuchMethodException(getMethod().getName());
 		}
 	}
 
-	public Component getComponent(File file) throws InvocationTargetException, IllegalAccessException {
-		Object[] tArgs = { file };
+	public Component getComponent(File file, JTextArea textArea) throws InvocationTargetException, IllegalAccessException {
+		Object[] tArgs = { file , textArea};
 		return (Component) getMethod().invoke(getPlugin(), tArgs);
 	}
 
@@ -68,5 +72,8 @@ public class PluginWrapper {
     private void setMethod(Method method) {
         _method = method;
     }
-
+    
+    public File getFile(){
+    	return _file;
+    }
 }
