@@ -150,6 +150,7 @@ public class TextToolbarPlugin extends JFrame
         Dimension sD = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setLocation((sD.width - width)/2, (sD.height - height)/2);
         // make the frame visible
+       
         frame.setVisible(true);
         
         return this;

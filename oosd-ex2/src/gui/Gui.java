@@ -18,14 +18,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
-import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -41,8 +38,6 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import plugin.PluginWrapper;
-import plugin.betterContent.ContentPlugin;
-import plugin.textToolbar.TextToolbarPlugin;
 
 import gui.listeners.LoadButtonListener;
 import gui.workers.AddButtonWorker;
@@ -63,10 +58,7 @@ public class Gui extends JPanel
 
 	private JTextArea _content;
 
-	private JEditorPane _content2;
-
 	private ItemComponent _items;
-	//private JList _items;
 
 	private RSSFeed _emptyFeed;
 
@@ -83,8 +75,9 @@ public class Gui extends JPanel
 
 		super( new GridBagLayout() );
 		setPluginsMap(new HashMap<String, PluginWrapper>());
-		//TODO remove it..
-		DefaultMutableTreeNode feeds = prepareTheFeeds();
+
+		DefaultMutableTreeNode feeds =
+			new DefaultMutableTreeNode( new String("Feeds") );
 		this._selectedNode = null;
 
 		// Creates an empty feed
@@ -249,20 +242,6 @@ public class Gui extends JPanel
 		TextPane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
 		TextPane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-
-		//TODO html..
-		_content2 = new JEditorPane();
-		_content2.setBorder( BorderFactory.createEtchedBorder() );
-		_content2.setEditable(false);
-//		pane = new JScrollPane( _content2 );
-//		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
-//		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-//		
-//		//TODO font and color
-//		pane = new JScrollPane( new ContentPlugin().make() );
-//		pane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS );
-//		pane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-
 		add( TextPane, tConst);
 
 
@@ -328,44 +307,6 @@ public class Gui extends JPanel
 		
 	}
 
-
-	//---------| TODO remove it - only for testing |--------------
-	private DefaultMutableTreeNode prepareTheFeeds() {
-
-		DefaultMutableTreeNode feeds =
-			new DefaultMutableTreeNode( new String("Feeds") );
-
-		RSSFeed feed1 = new RSSFeed("AVI");
-		Channel channel = new Channel();
-		Item item = new Item();
-		item.setTitle("Avi's title");
-		item.setDescription("Avi's description\n");
-		channel.getItems().add(item);
-		feed1.getChannels().add(channel);
-
-		RSSFeed feed2 = new RSSFeed("AVIA");
-		channel = new Channel();
-		item = new Item();
-		item.setTitle("Avia's title");
-		item.setDescription("Avia's description\n");
-		channel.getItems().add(item);
-		feed2.getChannels().add(channel);
-
-		DefaultMutableTreeNode node1 = new DefaultMutableTreeNode( feed1 );
-		DefaultMutableTreeNode node2 = new DefaultMutableTreeNode( feed2 );
-
-		node1.add( new DefaultMutableTreeNode( "node1.description" ) );
-		node1.add( new DefaultMutableTreeNode( "node1.link" ) );
-
-		node2.add( new DefaultMutableTreeNode( "node2.description" ) );
-		node2.add( new DefaultMutableTreeNode( "node2.link" ) );
-
-		feeds.add( node1 );
-		feeds.add( node2 );
-
-		return feeds;
-	}
-//-------------------------------------------------------------
 
 	public void valueChanged(TreeSelectionEvent e) {
 
