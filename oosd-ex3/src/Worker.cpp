@@ -1,17 +1,17 @@
 /*
- * Resource.cpp
+ * Worker.cpp
  *
  *  Created on: May 23, 2010
  *      Author: shai
  */
 
-#include "../h/Resource.h"
+#include "../h/Worker.h"
 
-Resource::Resource() {
+Worker::Worker() {
 	// TODO Auto-generated constructor stub
 
 }
 
-Resource::~Resource() {
+Worker::~Worker() {
 	// TODO Auto-generated destructor stub
 }

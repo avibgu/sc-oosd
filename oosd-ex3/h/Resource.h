@@ -10,6 +10,7 @@
 
 class Resource {
 public:
+	virtual void accept(ResourceVisitor visitor) = 0;
 	Resource();
 	virtual ~Resource();
 };
