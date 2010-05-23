@@ -8,11 +8,19 @@
 #ifndef WORKER_H_
 #define WORKER_H_
 
+#include <iostream>
+#include <string>
 #include "Resource.h"
+using namespace std;
+
 
 class Worker: public Resource {
+private:
+	string m_firstName;
+	string m_lastName;
 public:
-	Worker();
+	Worker(string firstName, string lastName);
+	void accept(ResourceVisitor* visitor);
 	virtual ~Worker();
 };
 

@@ -7,11 +7,14 @@
 
 #include "../h/Worker.h"
 
-Worker::Worker() {
-	// TODO Auto-generated constructor stub
+Worker::Worker(string firstName, string lastName): m_firstName(firstName), m_lastName(lastName) {
 
 }
 
 Worker::~Worker() {
-	// TODO Auto-generated destructor stub
+
+}
+
+void Worker::accept(ResourceVisitor* visitor) {
+	cout << "hello" << endl;
 }

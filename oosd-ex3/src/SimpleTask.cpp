@@ -7,7 +7,7 @@
 
 #include "../h/SimpleTask.h"
 
-SimpleTask::SimpleTask(vector<Resource*> resources) : m_resources(resources){
+SimpleTask::SimpleTask(vector<Resource*> resources, string description) : Task(description), m_resources(resources){
 
 }
 
