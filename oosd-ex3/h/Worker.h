@@ -12,8 +12,7 @@
 #include <string>
 #include "Resource.h"
 using namespace std;
-
-
+class ResourceVisitor;
 class Worker: public Resource {
 private:
 	string m_firstName;

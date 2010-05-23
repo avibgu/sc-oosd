@@ -8,7 +8,7 @@
 #ifndef RESOURCE_H_
 #define RESOURCE_H_
 
-class ResourceVisitor;
+#include "../h/ResourceVisitor.h"
 class Resource {
 public:
 	virtual void accept(ResourceVisitor* visitor) = 0;

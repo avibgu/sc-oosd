@@ -16,9 +16,9 @@ ResourceVisitor::~ResourceVisitor() {
 }
 
 void ResourceVisitor::visit(Worker* worker){
-	//TODO implement visit
+	cout << "I visited worker" << endl;
 }
 
-//void ResourceVisitor::visit(Machine machine){
-	//TODO implement visit
-//}
+void ResourceVisitor::visit(Machine* machine){
+	cout << "I visited machine" << endl;
+}

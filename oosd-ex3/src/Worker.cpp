@@ -16,5 +16,5 @@ Worker::~Worker() {
 }
 
 void Worker::accept(ResourceVisitor* visitor) {
-	cout << "hello" << endl;
+	visitor->visit(this);
 }
