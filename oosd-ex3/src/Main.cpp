@@ -21,5 +21,8 @@ int main(int argc, char** argv) {
 	cout << "I am the " + mainTask->getDescription()<< endl;
 	cout << "my duration is " << mainTask->getDuration()<< endl;
 	cout << "my resources are " + ((Worker*)mainTask->getResources().at(0))->getFirstName() << ", "<< ((Machine*)mainTask->getResources().at(1))->getInventoryId() << endl;
-    return 0;
+
+
+    delete mainTask;
+	return 0;
 }
