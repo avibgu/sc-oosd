@@ -13,6 +13,10 @@ Task(description), ProjectTask(description, subTasks), SimpleTask(description, d
 
 }
 
+void DedicatedTask::accept(TaskVisitor* visitor){
+	visitor->visit(this);
+}
+
 DedicatedTask::~DedicatedTask() {
 
 }

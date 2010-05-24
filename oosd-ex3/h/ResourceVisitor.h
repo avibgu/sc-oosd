@@ -16,9 +16,9 @@ class Machine;
 class ResourceVisitor {
 public:
 	ResourceVisitor();
-	virtual ~ResourceVisitor();
 	void visit(Worker* worker);
 	void visit(Machine* machine);
+	virtual ~ResourceVisitor();
 };
 
 #endif /* RESOURCEVISITOR_H_ */

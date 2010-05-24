@@ -11,14 +11,14 @@ ResourceVisitor::ResourceVisitor() {
 
 }
 
-ResourceVisitor::~ResourceVisitor() {
-
-}
-
 void ResourceVisitor::visit(Worker* worker){
 	cout << "I visited worker" << endl;
 }
 
 void ResourceVisitor::visit(Machine* machine){
 	cout << "I visited machine" << endl;
+}
+
+ResourceVisitor::~ResourceVisitor() {
+
 }

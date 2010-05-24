@@ -10,10 +10,11 @@
 
 #include "ProjectTask.h"
 #include "SimpleTask.h"
-
+class TaskVisitor;
 class DedicatedTask: public ProjectTask, public SimpleTask {
 public:
 	DedicatedTask(string description, int duration, vector<Resource*> resources, vector<Task*> subTasks);
+	void accept(TaskVisitor* visitor);
 	virtual ~DedicatedTask();
 };
 

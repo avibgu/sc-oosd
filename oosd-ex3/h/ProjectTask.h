@@ -9,13 +9,14 @@
 #define PROJECTTASK_H_
 
 #include "Task.h"
-
+class TaskVisitor;
 class ProjectTask: public virtual Task {
 protected:
 	vector<Task*> m_subTasks;
 public:
 	ProjectTask(string description, vector<Task*> subTasks);
 	vector<Task*> getSubTasks();
+	void accept(TaskVisitor* visitor);
 	virtual ~ProjectTask();
 };
 

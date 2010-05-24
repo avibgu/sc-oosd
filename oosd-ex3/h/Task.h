@@ -10,7 +10,7 @@
 
 #include <string>
 #include <vector>
-
+#include "../h/TaskVisitor.h"
 using namespace std;
 
 class Task {
@@ -19,6 +19,7 @@ protected:
 public:
 	Task(string description);
 	string getDescription();
+	virtual void accept(TaskVisitor* visitor) = 0;
 	virtual ~Task();
 };
 

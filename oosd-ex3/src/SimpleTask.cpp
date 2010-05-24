@@ -19,6 +19,10 @@ vector<Resource*> SimpleTask::getResources(){
 	return m_resources;
 }
 
+void SimpleTask::accept(TaskVisitor* visitor){
+	visitor->visit(this);
+}
+
 SimpleTask::~SimpleTask() {
 	vector<Resource*>::iterator iterator;
 	for(iterator = m_resources.begin(); iterator != m_resources.end(); iterator++){

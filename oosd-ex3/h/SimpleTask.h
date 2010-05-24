@@ -10,6 +10,7 @@
 
 #include "Task.h"
 #include "../h/Resource.h"
+class TaskVisitor;
 class SimpleTask: public virtual Task {
 protected:
 	int m_duration;
@@ -18,6 +19,7 @@ public:
 	SimpleTask(string description, int duration, vector<Resource*> resources);
 	int getDuration();
 	vector<Resource*> getResources();
+	void accept(TaskVisitor* visitor);
 	virtual ~SimpleTask();
 };
 

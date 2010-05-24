@@ -15,6 +15,9 @@ vector<Task*> ProjectTask::getSubTasks(){
 	return m_subTasks;
 }
 
+void ProjectTask::accept(TaskVisitor* visitor){
+	visitor->visit(this);
+}
 
 ProjectTask::~ProjectTask() {
 	vector<Task*>::iterator iterator;
