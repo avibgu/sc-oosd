@@ -11,6 +11,10 @@ Task::Task(string description) : m_description(description){
 
 }
 
+string Task::getDescription(){
+	return m_description;
+}
+
 Task::~Task() {
 
 }

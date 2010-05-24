@@ -11,10 +11,14 @@ Machine::Machine(int inventoryId) : m_inventoryId(inventoryId){
 
 }
 
-Machine::~Machine() {
-
+int Machine::getInventoryId(){
+	return m_inventoryId;
 }
 
 void Machine::accept(ResourceVisitor* visitor){
 	visitor->visit(this);
+}
+
+Machine::~Machine() {
+
 }

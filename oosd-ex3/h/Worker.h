@@ -19,6 +19,8 @@ private:
 	string m_lastName;
 public:
 	Worker(string firstName, string lastName);
+	string getFirstName();
+	string getLastName();
 	void accept(ResourceVisitor* visitor);
 	virtual ~Worker();
 };

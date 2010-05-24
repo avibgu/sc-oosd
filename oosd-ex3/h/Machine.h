@@ -18,8 +18,9 @@ private:
 	int m_inventoryId;
 public:
 	Machine(int inventoryId);
-	virtual ~Machine();
+	int getInventoryId();
 	void accept(ResourceVisitor* visitor);
+	virtual ~Machine();
 
 };
 

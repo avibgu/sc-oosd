@@ -11,10 +11,18 @@ Worker::Worker(string firstName, string lastName): m_firstName(firstName), m_las
 
 }
 
-Worker::~Worker() {
+string Worker::getFirstName(){
+	return m_firstName;
+}
 
+string Worker::getLastName(){
+	return m_lastName;
 }
 
 void Worker::accept(ResourceVisitor* visitor) {
 	visitor->visit(this);
+}
+
+Worker::~Worker() {
+
 }

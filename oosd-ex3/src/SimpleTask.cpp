@@ -7,8 +7,16 @@
 
 #include "../h/SimpleTask.h"
 
-SimpleTask::SimpleTask(vector<Resource*> resources, string description) : Task(description), m_resources(resources){
+SimpleTask::SimpleTask(string description, int duration, vector<Resource*> resources) : Task(description), m_duration(duration), m_resources(resources){
 
+}
+
+int SimpleTask::getDuration(){
+	return m_duration;
+}
+
+vector<Resource*> SimpleTask::getResources(){
+	return m_resources;
 }
 
 SimpleTask::~SimpleTask() {

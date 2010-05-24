@@ -11,10 +11,13 @@
 #include "Task.h"
 #include "../h/Resource.h"
 class SimpleTask: public virtual Task {
-private:
+protected:
+	int m_duration;
 	vector<Resource*> m_resources;
 public:
-	SimpleTask(vector<Resource*> resources, string description);
+	SimpleTask(string description, int duration, vector<Resource*> resources);
+	int getDuration();
+	vector<Resource*> getResources();
 	virtual ~SimpleTask();
 };
 

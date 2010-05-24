@@ -14,10 +14,11 @@
 using namespace std;
 
 class Task {
-private:
+protected:
 	string m_description;
 public:
 	Task(string description);
+	string getDescription();
 	virtual ~Task();
 };
 
