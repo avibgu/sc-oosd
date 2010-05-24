@@ -7,6 +7,7 @@
 #include "../h/DedicatedTask.h"
 #include "../h/Worker.h"
 #include "../h/Machine.h"
+#include "../h/Duration.h"
 int main(int argc, char** argv) {
 	vector<Resource*> resources2;
 	vector<Resource*> resources1;
@@ -21,6 +22,16 @@ int main(int argc, char** argv) {
 	cout << "I am the " + mainTask->getDescription()<< endl;
 	cout << "my duration is " << mainTask->getDuration()<< endl;
 	cout << "my resources are " + ((Worker*)mainTask->getResources().at(0))->getFirstName() << ", "<< ((Machine*)mainTask->getResources().at(1))->getInventoryId() << endl;
+
+
+//------------------------------------------
+
+	Query<int>* query = new Duration();
+
+	cout<< "Duration: " << query->calc( do_this ) << endl;
+
+
+//------------------------------------------
 
 
     delete mainTask;
