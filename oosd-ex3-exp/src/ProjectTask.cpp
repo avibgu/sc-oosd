@@ -5,6 +5,12 @@
  *      Author: Avi
  */
 
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
 #include "../h/TasksVisitor.h"
 #include "../h/Task.h"
 #include "../h/ProjectTask.h"

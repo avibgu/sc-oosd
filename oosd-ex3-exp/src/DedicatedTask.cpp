@@ -5,8 +5,16 @@
  *      Author: Avi
  */
 
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
 #include "../h/TasksVisitor.h"
 #include "../h/Task.h"
+#include "../h/SimpleTask.h"
+#include "../h/ProjectTask.h"
 #include "../h/DedicatedTask.h"
 
 DedicatedTask::DedicatedTask() {
