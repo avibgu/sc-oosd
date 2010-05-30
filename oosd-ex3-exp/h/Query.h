@@ -11,7 +11,7 @@
 class Task;
 
 template<class R>
-class Query : public TasksVisitor<R>{
+class Query : public TasksVisitor{
 
 public:
 

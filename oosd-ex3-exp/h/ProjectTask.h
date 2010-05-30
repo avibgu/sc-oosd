@@ -8,7 +8,6 @@
 #ifndef PROJECTTASK_H_
 #define PROJECTTASK_H_
 
-template<class R>
 class TasksVisitor;
 
 class ProjectTask : public Task{
@@ -19,8 +18,7 @@ public:
 
 	virtual ~ProjectTask();
 
-	template<class R>
-	R accept(TasksVisitor<R>* v){}
+	void accept(TasksVisitor* v);
 };
 
 #endif /* PROJECTTASK_H_ */

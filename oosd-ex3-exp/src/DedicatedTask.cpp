@@ -17,3 +17,8 @@ DedicatedTask::DedicatedTask() {
 DedicatedTask::~DedicatedTask() {
 	// TODO Auto-generated destructor stub
 }
+
+void DedicatedTask::accept(TasksVisitor* v){
+
+	v->visit( this );
+}

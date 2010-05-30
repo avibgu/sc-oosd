@@ -8,7 +8,6 @@
 #ifndef DEDICATEDTASK_H_
 #define DEDICATEDTASK_H_
 
-template<class R>
 class TasksVisitor;
 
 class DedicatedTask : public Task{
@@ -19,8 +18,7 @@ public:
 
 	virtual ~DedicatedTask();
 
-	template<class R>
-	R accept(TasksVisitor<R>* v){}
+	void accept(TasksVisitor* v);
 };
 
 #endif /* DEDICATEDTASK_H_ */

@@ -12,12 +12,13 @@ class SimpleTask;
 class ProjectTask;
 class DedicatedTask;
 
-template<class R>
 class TasksVisitor {
 
-	virtual R visit(SimpleTask* task) = 0;
-	virtual R visit(ProjectTask* task) = 0;
-	virtual R visit(DedicatedTask* task) = 0;
+public:
+
+	virtual void visit(SimpleTask* task) = 0;
+	virtual void visit(ProjectTask* task) = 0;
+	virtual void visit(DedicatedTask* task) = 0;
 };
 
 #endif /* TASKSVISITOR_H_ */

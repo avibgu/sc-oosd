@@ -15,6 +15,10 @@ class DedicatedTask;
 
 class Duration: public Query<int> {
 
+private:
+
+	int duration;
+
 public:
 
 	Duration();
@@ -23,11 +27,11 @@ public:
 
 	int calc(Task* task);
 
-	int visit(SimpleTask* task);
+	void visit(SimpleTask* task);
 
-	int visit(ProjectTask* task);
+	void visit(ProjectTask* task);
 
-	int visit(DedicatedTask* task);
+	void visit(DedicatedTask* task);
 };
 
 #endif /* DURATION_H_ */

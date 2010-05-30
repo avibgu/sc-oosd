@@ -25,3 +25,7 @@ SimpleTask::~SimpleTask() {
 	// TODO Auto-generated destructor stub
 }
 
+void SimpleTask::accept(TasksVisitor* v){
+
+	v->visit( this );
+}

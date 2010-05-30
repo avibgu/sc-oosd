@@ -21,6 +21,7 @@ using namespace std;
 
 Duration::Duration() {
 	// TODO Auto-generated constructor stub
+	this->duration = -1;
 
 }
 
@@ -30,24 +31,26 @@ Duration::~Duration() {
 
 int Duration::calc(Task* task){
 
-	return task.accept( this );
+	task->accept( this );
+
+	return this->duration;
 }
 
 /**
  * the purpose of visit is to calculate the duration of the given task.
  */
 
-int Duration::visit(SimpleTask* task){
+void Duration::visit(SimpleTask* task){
 
-	return 0;
+	// calc duration of SimpleTask and update 'this->duration'
 }
 
-int Duration::visit(ProjectTask* task){
+void Duration::visit(ProjectTask* task){
 
-	return 0;
+
 }
 
-int Duration::visit(DedicatedTask* task){
+void Duration::visit(DedicatedTask* task){
 
-	return 0;
+
 }

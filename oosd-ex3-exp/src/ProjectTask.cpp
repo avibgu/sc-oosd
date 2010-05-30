@@ -17,3 +17,8 @@ ProjectTask::ProjectTask() {
 ProjectTask::~ProjectTask() {
 	// TODO Auto-generated destructor stub
 }
+
+void ProjectTask::accept(TasksVisitor* v){
+
+	v->visit( this );
+}
