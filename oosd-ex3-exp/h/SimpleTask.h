@@ -10,7 +10,7 @@
 
 class TasksVisitor;
 
-class SimpleTask : public Task{
+class SimpleTask : public virtual Task{
 
 public:
 
@@ -18,7 +18,7 @@ public:
 
 	virtual ~SimpleTask();
 
-	void accept(TasksVisitor* v);
+	virtual void accept(TasksVisitor* v);	//TODO should be virtual?..
 };
 
 #endif /* SIMPLETASK_H_ */

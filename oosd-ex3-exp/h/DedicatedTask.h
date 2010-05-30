@@ -10,7 +10,7 @@
 
 class TasksVisitor;
 
-class DedicatedTask : public Task{
+class DedicatedTask : public ProjectTask, public SimpleTask{
 
 public:
 
