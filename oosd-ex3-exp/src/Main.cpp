@@ -11,9 +11,19 @@
 
 using namespace std;
 
+#include "../h/TasksVisitor.h"
+#include "../h/Task.h"
+#include "../h/SimpleTask.h"
+#include "../h/Query.h"
+#include "../h/Duration.h"
+
 int main(){
 
-	cout << "Avi Digmi !!" << endl;
+	Query<int>* dr = new Duration();
+
+	Task* st = new SimpleTask();
+
+	cout << "Duration: " << dr->calc( st ) << endl;
 
 	return 0;
 }
