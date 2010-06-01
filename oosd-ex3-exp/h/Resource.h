@@ -8,13 +8,13 @@
 #ifndef RESOURCE_H_
 #define RESOURCE_H_
 
+class ResourcesVisitor;
+
 class Resource {
 
 public:
 
-	Resource();
-
-	virtual ~Resource();
+	virtual bool accept(ResourcesVisitor* v) = 0;
 };
 
 #endif /* RESOURCE_H_ */

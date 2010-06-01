@@ -8,6 +8,8 @@
 #ifndef WORKER_H_
 #define WORKER_H_
 
+class ResourcesVisitor;
+
 class Worker: public Resource {
 
 public:
@@ -15,6 +17,8 @@ public:
 	Worker();
 
 	virtual ~Worker();
+
+	bool accept(ResourcesVisitor* v);
 };
 
 #endif /* WORKER_H_ */

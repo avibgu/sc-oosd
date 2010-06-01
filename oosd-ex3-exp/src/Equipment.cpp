@@ -5,6 +5,13 @@
  *      Author: Avi
  */
 
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+#include "../h/ResourcesVisitor.h"
 #include "../h/Resource.h"
 #include "../h/Equipment.h"
 
