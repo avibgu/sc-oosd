@@ -21,7 +21,7 @@ int main(){
 
 	Query<int>* dr = new Duration();
 
-	Task* st = new SimpleTask();
+	Task* st = new SimpleTask(17);
 
 	cout << "Duration: " << dr->calc( st ) << endl;
 

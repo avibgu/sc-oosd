@@ -15,10 +15,10 @@ using namespace std;
 #include "../h/Task.h"
 #include "../h/SimpleTask.h"
 
+SimpleTask::SimpleTask() : _duration(-1){}
 
-SimpleTask::SimpleTask() {
+SimpleTask::SimpleTask( int duration ): _duration( duration ) {
 	// TODO Auto-generated constructor stub
-
 }
 
 SimpleTask::~SimpleTask() {
@@ -28,4 +28,9 @@ SimpleTask::~SimpleTask() {
 void SimpleTask::accept(TasksVisitor* v){
 
 	v->visit( this );
+}
+
+int SimpleTask::getDuration(){
+
+	return this->_duration;
 }

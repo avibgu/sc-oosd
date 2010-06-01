@@ -17,16 +17,21 @@ using namespace std;
 #include "../h/ProjectTask.h"
 #include "../h/DedicatedTask.h"
 
-DedicatedTask::DedicatedTask() {
+DedicatedTask::DedicatedTask(){
 	// TODO Auto-generated constructor stub
+	this->_duration = -1;
+}
 
+DedicatedTask::DedicatedTask( int duration ) {
+	// TODO Auto-generated constructor stub
+	this->_duration = duration;
 }
 
 DedicatedTask::~DedicatedTask() {
 	// TODO Auto-generated destructor stub
 }
 
-void DedicatedTask::accept(TasksVisitor* v){
+void DedicatedTask::accept( TasksVisitor* v ){
 
 	v->visit( this );
 }

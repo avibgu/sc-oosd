@@ -17,7 +17,7 @@ class Duration: public Query<int> {
 
 private:
 
-	int duration;
+	int _duration;
 
 public:
 

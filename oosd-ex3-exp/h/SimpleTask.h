@@ -12,13 +12,21 @@ class TasksVisitor;
 
 class SimpleTask : public virtual Task{
 
+protected:
+
+		int _duration;
+
 public:
 
 	SimpleTask();
 
+	SimpleTask( int duration );
+
 	virtual ~SimpleTask();
 
-	virtual void accept(TasksVisitor* v);	//TODO should be virtual?..
+	virtual void accept( TasksVisitor* v );	//TODO should be virtual?..
+
+	int getDuration();
 };
 
 #endif /* SIMPLETASK_H_ */

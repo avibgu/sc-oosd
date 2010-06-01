@@ -21,7 +21,7 @@ using namespace std;
 
 Duration::Duration() {
 	// TODO Auto-generated constructor stub
-	this->duration = -1;
+	this->_duration = -1;
 
 }
 
@@ -33,7 +33,7 @@ int Duration::calc(Task* task){
 
 	task->accept( this );
 
-	return this->duration;
+	return this->_duration;
 }
 
 /**

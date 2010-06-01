@@ -16,6 +16,8 @@ public:
 
 	DedicatedTask();
 
+	DedicatedTask(int duration);
+
 	virtual ~DedicatedTask();
 
 	void accept(TasksVisitor* v);
