@@ -23,3 +23,8 @@ Worker::Worker() {
 Worker::~Worker() {
 	// TODO Auto-generated destructor stub
 }
+
+void Worker::accept(ResourcesVisitor* v){
+
+	v->visit( this );
+}

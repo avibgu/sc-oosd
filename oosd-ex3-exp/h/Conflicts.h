@@ -12,12 +12,16 @@ class Task;
 class ProjectTask;
 class DedicatedTask;
 class Resource;
+class Worker;
+class Equipment;
 
-class Conflicts : Query< vector<Resource*>* >{
+class Conflicts : public Query< vector<Resource*>* >, public ResourcesVisitor{
 
 private:
 
 	vector<Resource*>* conflicts;
+
+	bool isEquipment;
 
 public:
 
@@ -30,6 +34,10 @@ public:
 	void visit(ProjectTask* task);
 
 	void visit(DedicatedTask* task);
+
+	void visit(Worker* resource);
+
+	void visit(Equipment* resource);
 };
 
 #endif /* CONFLICTS_H_ */

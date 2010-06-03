@@ -14,7 +14,7 @@ class Resource {
 
 public:
 
-	virtual bool accept(ResourcesVisitor* v) = 0;
+	virtual void accept(ResourcesVisitor* v) = 0;
 };
 
 #endif /* RESOURCE_H_ */

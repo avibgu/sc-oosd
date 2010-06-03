@@ -18,12 +18,16 @@ using namespace std;
 #include "../h/DedicatedTask.h"
 #include "../h/Query.h"
 #include "../h/Resource.h"
+#include "../h/ResourcesVisitor.h"
+#include "../h/Worker.h"
+#include "../h/Equipment.h"
 #include "../h/Conflicts.h"
 
 Conflicts::Conflicts() {
 	// TODO Auto-generated constructor stub
 
 	this->conflicts = new vector<Resource*>();
+	this->isEquipment = false;
 }
 
 Conflicts::~Conflicts() {
@@ -50,4 +54,14 @@ void Conflicts::visit(ProjectTask* task){
 void Conflicts::visit(DedicatedTask* task){
 
 
+}
+
+void Conflicts::visit(Worker* resource){
+
+	this->isEquipment = false;
+}
+
+void Conflicts::visit(Equipment* resource){
+
+	this->isEquipment = true;
 }

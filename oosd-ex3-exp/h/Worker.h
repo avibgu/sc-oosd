@@ -18,7 +18,7 @@ public:
 
 	virtual ~Worker();
 
-	bool accept(ResourcesVisitor* v);
+	void accept(ResourcesVisitor* v);
 };
 
 #endif /* WORKER_H_ */

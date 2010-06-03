@@ -17,12 +17,17 @@ using namespace std;
 #include "../h/ProjectTask.h"
 #include "../h/DedicatedTask.h"
 #include "../h/Query.h"
+#include "../h/Resource.h"
+#include "../h/ResourcesVisitor.h"
+#include "../h/Worker.h"
+#include "../h/Equipment.h"
 #include "../h/Manpower.h"
 
 Manpower::Manpower() {
 	// TODO Auto-generated constructor stub
 
 	this->manpower = -1;
+	this->isWorker = false;
 }
 
 Manpower::~Manpower() {
@@ -54,3 +59,15 @@ void Manpower::visit(DedicatedTask* task){
 
 
 }
+
+void Manpower::visit(Worker* resource){
+
+	this->isWorker = true;
+}
+
+void Manpower::visit(Equipment* resource){
+
+	this->isWorker = false;
+}
+
+

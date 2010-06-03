@@ -18,7 +18,7 @@ public:
 
 	virtual ~Equipment();
 
-	bool accept(ResourcesVisitor* v);
+	void accept(ResourcesVisitor* v);
 };
 
 #endif /* EQUIPMENT_H_ */

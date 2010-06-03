@@ -23,3 +23,8 @@ Equipment::Equipment() {
 Equipment::~Equipment() {
 	// TODO Auto-generated destructor stub
 }
+
+void Equipment::accept(ResourcesVisitor* v){
+
+	v->visit( this );
+}
