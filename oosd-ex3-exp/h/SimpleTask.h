@@ -27,7 +27,7 @@ public:
 
 	virtual ~SimpleTask();
 
-	virtual void accept( TasksVisitor* v );	//TODO should be virtual?..
+	virtual void accept( TasksVisitor* v );
 
 	virtual int getDuration();
 

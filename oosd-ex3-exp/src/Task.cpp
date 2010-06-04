@@ -18,10 +18,7 @@ Task::Task(){
 	this->_description = "task";
 }
 
-Task::~Task(){
-
-	//TODO
-}
+Task::~Task(){}
 
 string Task::getDescription(){
 

@@ -20,11 +20,11 @@ public:
 
 	ProjectTask();
 
-	ProjectTask( vector< Task* >* tasks, string description );
+	ProjectTask( string description, vector< Task* >* tasks );
 
 	virtual ~ProjectTask();
 
-	virtual void accept( TasksVisitor* v );	//TODO should be virtual?..
+	virtual void accept( TasksVisitor* v );
 
 	virtual vector< Task* >* getTasks();
 };

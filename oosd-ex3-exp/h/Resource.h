@@ -15,6 +15,8 @@ class Resource {
 public:
 
 	virtual void accept( ResourcesVisitor* v ) = 0;
+
+	virtual string getName() = 0;
 };
 
 #endif /* RESOURCE_H_ */

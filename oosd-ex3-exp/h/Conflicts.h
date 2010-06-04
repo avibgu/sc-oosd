@@ -15,13 +15,16 @@ class Resource;
 class Worker;
 class Equipment;
 
-class Conflicts : public Query< vector<Resource*>* >, public ResourcesVisitor{
+class Conflicts : public Query< set<string> >, public ResourcesVisitor{
 
 private:
 
-	vector<Resource*>* conflicts;
+	set<string> _conflicts;
+	set<string> _projectConflicts;
 
-	bool isEquipment;
+	bool _isEquipment;
+
+	string _equipmentName;
 
 public:
 
@@ -29,7 +32,9 @@ public:
 
 	virtual ~Conflicts();
 
-	vector<Resource*>* calc(Task* task);
+	set<string> calc(Task* task);
+
+	void visit(SimpleTask* task);
 
 	void visit(ProjectTask* task);
 
