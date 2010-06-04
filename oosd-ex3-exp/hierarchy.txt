@@ -1,0 +1,24 @@
+task-type (description, duration, [resources ] [sub-tasks ])"
+
+dedicated1(" main task",
+            1,
+            [sue, kid],
+            [ dedicated2(  "sub-task a",
+                          3,
+                          [kid, sam, truck, drill],
+                          [ simple1("do this", 4, [kid, drill, truck, bob]),
+                            simple2("do that", 4, [sue, sam])]),
+              simple3( "sub-task b", 1, [sam, drill, kid]),
+              simple4( "sub-task c", 2, [sam, drill, hammer]),
+              project1("sub-task d",
+                      [ simple5( "put a nail", 1, [sam, kid, drill, hammer]),
+                        simple6( "break a wall", 2, [bob, truck, drill, hammer]),
+                        project2(  "sub-sub task",
+                                  [ simple7("something", 2, [bob, sue]),
+                                    simple8("something else", 4, [bob, kid]),
+                                    dedicated3(  "sub-sub-sub task",
+                                                3,
+                                                [sam, hammer, truck, kid],
+                                                [ simple9("make a hole", 4, [sam, drill, kid, bob]),
+                                                  simple10("drive kid home", 4, [sam, truck, kid])])])])])
+                                                  
