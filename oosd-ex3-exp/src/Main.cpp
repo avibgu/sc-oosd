@@ -31,15 +31,74 @@ void test();
 
 int main(){
 
-// tests
-
-	test();
+// test();
 
 // build hierarchy
 
+	Duration duration;
+	Manpower manpower;
+	Load load;
+	Conflicts conflicts;
+
+	Worker* joe = new Worker("Joe", "Cole");
+	Worker* bob = new Worker("Bob", "Marley");
+	Worker* sue = new Worker("Sue", "Oyunlari");
+	Worker* sam = new Worker("Sam", "Oliver");
+	Worker* kid = new Worker("Kid", "Johnson");
+
+	Equipment* hammer = new Equipment(17, "hammer");
+	Equipment* drill = new Equipment(23, "drill");
+	Equipment* truck = new Equipment(96, "truck");
+
+	// task-type (description, duration, [resources ] [sub-tasks ])
+
+	vector< Resource* >* res1 = new vector< Resource* >();
+
+	res1->push_back( kid );
+	res1->push_back( drill );
+	res1->push_back( truck );
+	res1->push_back( bob );
+
+	vector< Resource* >* res2 = new vector< Resource* >();
+
+	res2->push_back( sue );
+	res2->push_back( sam );
+
+	Task* simple1 = new SimpleTask( 4, "do this", res1 );
+	Task* simple2 = new SimpleTask( 4, "do that", res2 );
+	Task* simple3 = new SimpleTask( 18, "st2", res2 );
+	Task* simple4 = new SimpleTask( 18, "st2", res2 );
+	Task* simple5 = new SimpleTask( 18, "st2", res2 );
+	Task* simple6 = new SimpleTask( 18, "st2", res2 );
+	Task* simple7 = new SimpleTask( 18, "st2", res2 );
+	Task* simple8 = new SimpleTask( 18, "st2", res2 );
+	Task* simple9 = new SimpleTask( 18, "st2", res2 );
+	Task* simple10 = new SimpleTask( 18, "st2", res2 );
+
+
+
+
+
+
+	Task* dedicated1 = new DedicatedTask(0, "", 0, 0);
 
 // ask queries
 
+	cout << "Duration: " << duration.calc( dedicated1 ) << endl;
+	cout << "Manpower: " << manpower.calc( dedicated1 ) << endl;
+	cout << "Load: " << load.calc( dedicated1 ) << endl;
+	cout << "Conflicts: ";
+
+	set<string> conflictsSet = conflicts.calc( dedicated1 );
+
+    for(	set<string>::iterator iter = conflictsSet.begin();
+    		iter != conflictsSet.end();
+    		++iter ) {
+
+		cout<< *iter;
+    }
+
+	cout << endl;
 
 
 //delete
