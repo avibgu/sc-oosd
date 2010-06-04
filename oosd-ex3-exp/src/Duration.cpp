@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cstdlib>
 
 using namespace std;
 
@@ -20,14 +21,11 @@ using namespace std;
 #include "../h/Duration.h"
 
 Duration::Duration() {
-	// TODO Auto-generated constructor stub
-	this->_duration = -1;
 
+	this->_duration = rand();
 }
 
-Duration::~Duration() {
-	// TODO Auto-generated destructor stub
-}
+Duration::~Duration() {}
 
 int Duration::calc(Task* task){
 
@@ -42,15 +40,27 @@ int Duration::calc(Task* task){
 
 void Duration::visit(SimpleTask* task){
 
-	// calc duration of SimpleTask and update 'this->duration'
+	this->_duration = task->getDuration();
 }
 
 void Duration::visit(ProjectTask* task){
 
+	for ( vector< Task* >::iterator iter = task->getTasks()->begin();
+		  iter !=  task->getTasks()->end();
+		  ++iter ){
 
+		this->_duration += this->calc( *iter );
+	}
 }
 
 void Duration::visit(DedicatedTask* task){
 
+	this->_duration = task->getDuration();
 
+	for ( vector< Task* >::iterator iter = task->getTasks()->begin();
+		  iter !=  task->getTasks()->end();
+		  ++iter ){
+
+		this->_duration += this->calc( *iter );
+	}
 }
