@@ -8,7 +8,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <cstdlib>
 
 using namespace std;
 
@@ -22,7 +21,7 @@ using namespace std;
 
 Duration::Duration() {
 
-	this->_duration = rand();
+	this->_duration = 0;
 }
 
 Duration::~Duration() {}
@@ -45,22 +44,28 @@ void Duration::visit(SimpleTask* task){
 
 void Duration::visit(ProjectTask* task){
 
+	int sum = 0;
+
 	for ( vector< Task* >::iterator iter = task->getTasks()->begin();
 		  iter !=  task->getTasks()->end();
 		  ++iter ){
 
-		this->_duration += this->calc( *iter );
+		sum += this->calc( *iter );
 	}
+
+	this->_duration = sum;
 }
 
 void Duration::visit(DedicatedTask* task){
 
-	this->_duration = task->getDuration();
+	int sum = task->getDuration();
 
 	for ( vector< Task* >::iterator iter = task->getTasks()->begin();
 		  iter !=  task->getTasks()->end();
 		  ++iter ){
 
-		this->_duration += this->calc( *iter );
+		sum += this->calc( *iter );
 	}
+
+	this->_duration = sum;
 }

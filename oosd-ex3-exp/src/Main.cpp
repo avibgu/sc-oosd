@@ -32,31 +32,41 @@ int main(){
 
 	Query<int>* dr = new Duration();
 
-	Task* st = new SimpleTask( 17, "st", new vector< Resource* >() );
+	Task* st1 = new SimpleTask( 17, "st1", new vector< Resource* >() );
+	Task* st2 = new SimpleTask( 18, "st2", new vector< Resource* >() );
+
+	vector< Task* >* tvec = new vector< Task* >();
+
+	tvec->push_back(st1);
+	tvec->push_back(st2);
+
+	Task* pr = new ProjectTask( tvec, "this is a project task" );
+	Task* ded = new DedicatedTask( 45, "this is a dedicated task", tvec, new vector< Resource* >() );
 
 	Worker wr;
 	Equipment eq;
 
 // ask queries
 
-	cout << "Duration: " << dr->calc( st ) << endl;
+	cout << "Duration1: " << dr->calc( st1 ) << endl;
+	cout << "Duration2: " << dr->calc( st2 ) << endl;
+	cout << "Duration3: " << dr->calc( pr ) << endl;
+	cout << "Duration4: " << dr->calc( ded ) << endl;
 	cout << "Name: " << wr.getName() << endl;
 	cout << "IN: " << eq.getInventoryNumber() << endl;
 
 
 //delete only elements, not containers
 
-	if (0 != st){
+	if (0 != st1){ delete( st1 ); st1 = 0; }
 
-		delete( st );
-		st = 0;
-	}
+	if (0 != st2){ delete( st2 ); st2 = 0; }
 
-	if (0 != dr){
+	if (0 != pr){ delete( pr ); pr = 0; }
 
-		delete( dr );
-		dr = 0;
-	}
+	if (0 != ded){ delete( ded ); ded = 0; }
+
+	if (0 != dr){ delete( dr ); dr = 0; }
 
 	return 0;
 }

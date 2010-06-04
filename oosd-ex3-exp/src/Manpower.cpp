@@ -47,7 +47,15 @@ int Manpower::calc(Task* task){
 
 void Manpower::visit(SimpleTask* task){
 
-	// calc load of SimpleTask and update 'this->manpower'
+	this->manpower = 0;
+
+	for ( vector< Resource* >::iterator iter = task->getResources()->begin();
+		  iter !=  task->getResources()->end();
+		  ++iter ){
+
+
+	}
+
 }
 
 void Manpower::visit(ProjectTask* task){
