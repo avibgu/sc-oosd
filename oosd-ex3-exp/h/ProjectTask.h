@@ -12,13 +12,19 @@ class TasksVisitor;
 
 class ProjectTask : public virtual Task{
 
+protected:
+
+	vector< Task* >* _tasks;	// shallow delete only..
+
 public:
 
 	ProjectTask();
 
+	ProjectTask( vector< Task* >* tasks, string description );
+
 	virtual ~ProjectTask();
 
-	virtual void accept(TasksVisitor* v);	//TODO should be virtual?..
+	virtual void accept( TasksVisitor* v );	//TODO should be virtual?..
 };
 
 #endif /* PROJECTTASK_H_ */

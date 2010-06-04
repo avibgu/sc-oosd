@@ -12,7 +12,17 @@ class TasksVisitor;
 
 class Task {
 
+protected:
+
+	string _description;
+
 public:
+
+	Task();
+
+	virtual ~Task();
+
+	string getDescription();
 
 	virtual void accept(TasksVisitor* v) = 0;
 };

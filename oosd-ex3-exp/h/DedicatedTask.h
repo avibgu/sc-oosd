@@ -16,11 +16,12 @@ public:
 
 	DedicatedTask();
 
-	DedicatedTask(int duration);
+	DedicatedTask( int duration, string description, vector< Task* >* tasks,
+				   vector< Resource* >* resources );
 
 	virtual ~DedicatedTask();
 
-	void accept(TasksVisitor* v);
+	void accept( TasksVisitor* v );
 };
 
 #endif /* DEDICATEDTASK_H_ */
