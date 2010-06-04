@@ -34,10 +34,14 @@ int main(){
 
 	Task* st = new SimpleTask( 17, "st", new vector< Resource* >() );
 
+	Worker wr;
+	Equipment eq;
 
 // ask queries
 
 	cout << "Duration: " << dr->calc( st ) << endl;
+	cout << "Name: " << wr.getName() << endl;
+	cout << "IN: " << eq.getInventoryNumber() << endl;
 
 
 //delete only elements, not containers

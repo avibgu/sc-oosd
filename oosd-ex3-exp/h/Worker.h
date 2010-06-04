@@ -12,13 +12,20 @@ class ResourcesVisitor;
 
 class Worker: public Resource {
 
+	string _firstName;
+	string _lastName;
+
 public:
 
 	Worker();
 
+	Worker( string first, string last );
+
 	virtual ~Worker();
 
 	void accept(ResourcesVisitor* v);
+
+	string getName();
 };
 
 #endif /* WORKER_H_ */

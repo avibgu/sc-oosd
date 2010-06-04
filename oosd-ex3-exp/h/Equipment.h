@@ -12,13 +12,19 @@ class ResourcesVisitor;
 
 class Equipment: public Resource {
 
+	int _inventoryNumber;
+
 public:
 
 	Equipment();
 
+	Equipment( int inventoryNumber );
+
 	virtual ~Equipment();
 
 	void accept(ResourcesVisitor* v);
+
+	int getInventoryNumber();
 };
 
 #endif /* EQUIPMENT_H_ */

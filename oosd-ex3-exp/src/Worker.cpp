@@ -16,8 +16,15 @@ using namespace std;
 #include "../h/Worker.h"
 
 Worker::Worker() {
-	// TODO Auto-generated constructor stub
 
+	this->_firstName = "first";
+	this->_lastName = "last";
+}
+
+Worker::Worker( string first, string last ){
+
+	this->_firstName = first;
+	this->_lastName = last;
 }
 
 Worker::~Worker() {
@@ -27,4 +34,9 @@ Worker::~Worker() {
 void Worker::accept(ResourcesVisitor* v){
 
 	v->visit( this );
+}
+
+string Worker::getName(){
+
+	return this->_firstName + " " + this->_lastName;
 }
