@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <set>
 
 using namespace std;
 
@@ -23,45 +24,77 @@ using namespace std;
 #include "../h/Equipment.h"
 #include "../h/Conflicts.h"
 
-Conflicts::Conflicts() {
-	// TODO Auto-generated constructor stub
+Conflicts::Conflicts() : _isEquipment( false ) {
 
-	this->conflicts = new vector<Resource*>();
-	this->isEquipment = false;
+	this->_conflicts.clear();
+	this->_projectConflicts.clear();
 }
 
-Conflicts::~Conflicts() {
-	// TODO Auto-generated destructor stub
-	delete( this->conflicts );
-}
+Conflicts::~Conflicts() {}
 
-vector<Resource*>* Conflicts::calc(Task* task){
+set<string> Conflicts::calc(Task* task){
+
+	this->_conflicts.clear();
+	this->_projectConflicts.clear();
 
 	task->accept( this );
 
-	return this->conflicts;
+	return this->_conflicts;
 }
 
 /**
  * the purpose of visit is to calculate the manpower of the given task.
  */
 
+void Conflicts::visit(SimpleTask* task){
+
+	for ( vector< Resource* >::iterator iter = task->getResources()->begin();
+		  iter !=  task->getResources()->end();
+		  ++iter ){
+
+		(*iter)->accept( this );
+
+		if ( this->_isEquipment ){
+
+			if ( 1 == this->_projectConflicts.count( this->_equipmentName ) )
+				this->_conflicts.insert( this->_equipmentName );
+
+			this->_projectConflicts.insert( this->_equipmentName );
+		}
+	}
+}
+
 void Conflicts::visit(ProjectTask* task){
 
-	// calc conflicts of ProjectTask and update 'this->conflicts'
+	this->_projectConflicts.clear();
+
+	for ( vector< Task* >::iterator iter = task->getTasks()->begin();
+		  iter !=  task->getTasks()->end();
+		  ++iter ){
+
+		(*iter)->accept( this );
+	}
 }
 
 void Conflicts::visit(DedicatedTask* task){
 
+	this->_projectConflicts.clear();
 
+	for ( vector< Task* >::iterator iter = task->getTasks()->begin();
+		  iter !=  task->getTasks()->end();
+		  ++iter ){
+
+		(*iter)->accept( this );
+	}
 }
 
 void Conflicts::visit(Worker* resource){
 
-	this->isEquipment = false;
+	this->_isEquipment = false;
 }
 
 void Conflicts::visit(Equipment* resource){
 
-	this->isEquipment = true;
+	this->_isEquipment = true;
+	this->_equipmentName = resource->getName();
 }

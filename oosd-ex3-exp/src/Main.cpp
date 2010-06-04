@@ -27,13 +27,34 @@ using namespace std;
 #include "../h/Load.h"
 #include "../h/ManPower.h"
 
+void test();
+
 int main(){
+
+// tests
+
+	test();
+
+// build hierarchy
+
+
+// ask queries
+
+
+
+//delete
+
+	return 0;
+}
+
+void test(){
 
 // build hierarchy
 
 	Query<int>* dr = new Duration();
 	Query<int>* mp = new Manpower();
 	Query<float>* ld = new Load();
+	Query< set<string> >* cf = new Conflicts();
 
 	vector< Resource* >* res1 = new vector< Resource* >();
 	vector< Resource* >* res2 = new vector< Resource* >();
@@ -83,7 +104,14 @@ int main(){
 	cout << "Load: " << ld->calc( pr ) << endl;
 	cout << "Load: " << ld->calc( ded ) << endl;
 
-//delete only elements, not containers
+	cout << endl;
+
+//	cout << "Conflicts: " << cf->calc( st1 ) << endl;
+//	cout << "Conflicts: " << cf->calc( st2 ) << endl;
+//	cout << "Conflicts: " << cf->calc( pr ) << endl;
+//	cout << "Conflicts: " << cf->calc( ded ) << endl;
+
+//delete
 
 	if (0 != w1){ delete( w1 ); w1 = 0; }
 	if (0 != w2){ delete( w2 ); w2 = 0; }
@@ -103,6 +131,5 @@ int main(){
 	if (0 != dr){ delete( dr ); dr = 0; }
 	if (0 != mp){ delete( mp ); mp = 0; }
 	if (0 != ld){ delete( ld ); ld = 0; }
-
-	return 0;
+	if (0 != cf){ delete( cf ); cf = 0; }
 }

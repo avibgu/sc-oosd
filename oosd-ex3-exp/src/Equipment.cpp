@@ -16,9 +16,10 @@ using namespace std;
 #include "../h/Resource.h"
 #include "../h/Equipment.h"
 
-Equipment::Equipment() : _inventoryNumber( rand() ) {}
+Equipment::Equipment() : _inventoryNumber( rand() ), _name( "equipment" ) {}
 
-Equipment::Equipment( int inventoryNumber ) : _inventoryNumber( inventoryNumber ) {}
+Equipment::Equipment( int inventoryNumber, string name ) : _inventoryNumber( inventoryNumber ),
+														   _name( name ) {}
 
 Equipment::~Equipment() {}
 
@@ -30,4 +31,9 @@ void Equipment::accept(ResourcesVisitor* v){
 int Equipment::getInventoryNumber(){
 
 	return this->_inventoryNumber;
+}
+
+string Equipment::getName(){
+
+	return this->_name;
 }
