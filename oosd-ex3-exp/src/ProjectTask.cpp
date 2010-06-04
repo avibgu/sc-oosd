@@ -17,11 +17,23 @@ using namespace std;
 
 ProjectTask::ProjectTask() {
 	// TODO Auto-generated constructor stub
+	this->_tasks = new vector< Task* >();
+	_description = "project task";
+}
 
+ProjectTask::ProjectTask( vector< Task* >* tasks, string description ){
+
+	this->_tasks = tasks;
+	_description = description;
 }
 
 ProjectTask::~ProjectTask() {
-	// TODO Auto-generated destructor stub
+
+	if ( 0 != this->_tasks){
+
+		delete( this->_tasks );
+		this->_tasks = 0;
+	}
 }
 
 void ProjectTask::accept(TasksVisitor* v){

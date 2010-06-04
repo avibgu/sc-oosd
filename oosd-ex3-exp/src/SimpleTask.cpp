@@ -15,14 +15,25 @@ using namespace std;
 #include "../h/Task.h"
 #include "../h/SimpleTask.h"
 
-SimpleTask::SimpleTask() : _duration(-1){}
+SimpleTask::SimpleTask() : _duration(-1){
 
-SimpleTask::SimpleTask( int duration ): _duration( duration ) {
-	// TODO Auto-generated constructor stub
+	this->_resources = new vector< Resource* >();
+	_description = "simple task";
+}
+
+SimpleTask::SimpleTask( int duration, string description, vector< Resource* >* resources ):
+										_duration( duration ), _resources( resources ) {
+
+	_description = description;
 }
 
 SimpleTask::~SimpleTask() {
-	// TODO Auto-generated destructor stub
+
+	if ( 0 != this->_resources){
+
+		delete( this->_resources );
+		this->_resources = 0;
+	}
 }
 
 void SimpleTask::accept(TasksVisitor* v){

@@ -18,18 +18,23 @@ using namespace std;
 #include "../h/DedicatedTask.h"
 
 DedicatedTask::DedicatedTask(){
-	// TODO Auto-generated constructor stub
-	this->_duration = -1;
+
+	_description = "dedicated task";
+	_duration = -1;
+	_resources = new vector< Resource* >();
+	_tasks = new vector< Task* >();
 }
 
-DedicatedTask::DedicatedTask( int duration ) {
-	// TODO Auto-generated constructor stub
-	this->_duration = duration;
+DedicatedTask::DedicatedTask( int duration, string description, vector< Task* >* tasks,
+							  vector< Resource* >* resources ) {
+
+	_description = description;
+	_duration = duration;
+	_resources = resources;
+	_tasks = tasks;
 }
 
-DedicatedTask::~DedicatedTask() {
-	// TODO Auto-generated destructor stub
-}
+DedicatedTask::~DedicatedTask() {}
 
 void DedicatedTask::accept( TasksVisitor* v ){
 
