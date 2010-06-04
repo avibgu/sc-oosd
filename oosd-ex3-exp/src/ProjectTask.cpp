@@ -20,7 +20,7 @@ ProjectTask::ProjectTask() : _tasks( 0 ) {
 	_description = "project task";
 }
 
-ProjectTask::ProjectTask( vector< Task* >* tasks, string description ) : _tasks( tasks ) {
+ProjectTask::ProjectTask( string description, vector< Task* >* tasks ) : _tasks( tasks ) {
 
 	_description = description;
 }
