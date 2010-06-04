@@ -41,17 +41,29 @@ float Load::calc(Task* task){
 
 void Load::visit(SimpleTask* task){
 
-	task->getResources()->size();
-
-	task->
+	this->_totalDuration += task->getDuration();
+	this->_numOfResources += task->getResources()->size();
 }
 
 void Load::visit(ProjectTask* task){
 
+	for ( vector< Task* >::iterator iter = task->getTasks()->begin();
+		  iter !=  task->getTasks()->end();
+		  ++iter ){
 
+		(*iter)->accept( this );
+	}
 }
 
 void Load::visit(DedicatedTask* task){
 
+	this->_totalDuration += task->getDuration();
+	this->_numOfResources += task->getResources()->size();
 
+	for ( vector< Task* >::iterator iter = task->getTasks()->begin();
+		  iter !=  task->getTasks()->end();
+		  ++iter ){
+
+		(*iter)->accept( this );
+	}
 }

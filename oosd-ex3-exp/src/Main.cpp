@@ -33,6 +33,7 @@ int main(){
 
 	Query<int>* dr = new Duration();
 	Query<int>* mp = new Manpower();
+	Query<float>* ld = new Load();
 
 	vector< Resource* >* res1 = new vector< Resource* >();
 	vector< Resource* >* res2 = new vector< Resource* >();
@@ -75,6 +76,13 @@ int main(){
 	cout << "Manpower: " << mp->calc( pr ) << endl;
 	cout << "Manpower: " << mp->calc( ded ) << endl;
 
+	cout << endl;
+
+	cout << "Load: " << ld->calc( st1 ) << endl;
+	cout << "Load: " << ld->calc( st2 ) << endl;
+	cout << "Load: " << ld->calc( pr ) << endl;
+	cout << "Load: " << ld->calc( ded ) << endl;
+
 //delete only elements, not containers
 
 	if (0 != w1){ delete( w1 ); w1 = 0; }
@@ -94,6 +102,7 @@ int main(){
 
 	if (0 != dr){ delete( dr ); dr = 0; }
 	if (0 != mp){ delete( mp ); mp = 0; }
+	if (0 != ld){ delete( ld ); ld = 0; }
 
 	return 0;
 }
