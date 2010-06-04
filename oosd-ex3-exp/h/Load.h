@@ -17,7 +17,8 @@ class Load : public Query<float> {
 
 private:
 
-	float load;
+	float _totalDuration;
+	float _numOfResources;
 
 public:
 

@@ -15,21 +15,11 @@ using namespace std;
 #include "../h/Resource.h"
 #include "../h/Worker.h"
 
-Worker::Worker() {
+Worker::Worker() : _firstName( "first" ), _lastName( "last" ) {}
 
-	this->_firstName = "first";
-	this->_lastName = "last";
-}
+Worker::Worker( string first, string last ) : _firstName( first ), _lastName( last ) {}
 
-Worker::Worker( string first, string last ){
-
-	this->_firstName = first;
-	this->_lastName = last;
-}
-
-Worker::~Worker() {
-	// TODO Auto-generated destructor stub
-}
+Worker::~Worker() {}
 
 void Worker::accept(ResourcesVisitor* v){
 

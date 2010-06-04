@@ -16,19 +16,11 @@ using namespace std;
 #include "../h/Resource.h"
 #include "../h/Equipment.h"
 
-Equipment::Equipment() {
+Equipment::Equipment() : _inventoryNumber( rand() ) {}
 
-	this->_inventoryNumber = rand();
-}
+Equipment::Equipment( int inventoryNumber ) : _inventoryNumber( inventoryNumber ) {}
 
-Equipment::Equipment( int inventoryNumber ){
-
-	this->_inventoryNumber = inventoryNumber;
-}
-
-Equipment::~Equipment() {
-	// TODO Auto-generated destructor stub
-}
+Equipment::~Equipment() {}
 
 void Equipment::accept(ResourcesVisitor* v){
 

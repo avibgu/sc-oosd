@@ -19,21 +19,20 @@ using namespace std;
 #include "../h/Query.h"
 #include "../h/Load.h"
 
-Load::Load() {
-	// TODO Auto-generated constructor stub
+Load::Load() : _totalDuration( 0 ), _numOfResources ( 0 ) {}
 
-	this->load = -1;
-}
-
-Load::~Load() {
-	// TODO Auto-generated destructor stub
-}
+Load::~Load() {}
 
 float Load::calc(Task* task){
 
+	this->_totalDuration = 0;
+	this->_numOfResources = 0;
+
 	task->accept( this );
 
-	return this->load;
+	if ( 0 == this->_numOfResources ) return 0;
+
+	return this->_totalDuration / this->_numOfResources;
 }
 
 /**
@@ -42,7 +41,9 @@ float Load::calc(Task* task){
 
 void Load::visit(SimpleTask* task){
 
-	// calc load of SimpleTask and update 'this->load'
+	task->getResources()->size();
+
+	task->
 }
 
 void Load::visit(ProjectTask* task){

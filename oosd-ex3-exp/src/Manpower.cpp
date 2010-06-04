@@ -24,11 +24,9 @@ using namespace std;
 #include "../h/Equipment.h"
 #include "../h/Manpower.h"
 
-Manpower::Manpower() {
+Manpower::Manpower() : _isWorker( false ), _workerName( "" ) {
 
 	this->_manpower.clear();
-	this->_isWorker = false;
-	this->_workerName = "";
 }
 
 Manpower::~Manpower() {}

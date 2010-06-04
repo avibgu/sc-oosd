@@ -15,15 +15,13 @@ using namespace std;
 #include "../h/Task.h"
 #include "../h/ProjectTask.h"
 
-ProjectTask::ProjectTask() {
+ProjectTask::ProjectTask() : _tasks( 0 ) {
 
-	this->_tasks = 0;
 	_description = "project task";
 }
 
-ProjectTask::ProjectTask( vector< Task* >* tasks, string description ){
+ProjectTask::ProjectTask( vector< Task* >* tasks, string description ) : _tasks( tasks ) {
 
-	this->_tasks = tasks;
 	_description = description;
 }
 

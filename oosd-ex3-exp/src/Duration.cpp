@@ -19,10 +19,7 @@ using namespace std;
 #include "../h/Query.h"
 #include "../h/Duration.h"
 
-Duration::Duration() {
-
-	this->_duration = 0;
-}
+Duration::Duration(): _duration( 0 ) {}
 
 Duration::~Duration() {}
 

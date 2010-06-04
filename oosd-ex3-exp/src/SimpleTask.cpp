@@ -15,9 +15,8 @@ using namespace std;
 #include "../h/Task.h"
 #include "../h/SimpleTask.h"
 
-SimpleTask::SimpleTask() : _duration(-1){
+SimpleTask::SimpleTask() : _duration( 0 ), _resources( 0 ) {
 
-	this->_resources = 0;
 	_description = "simple task";
 }
 
