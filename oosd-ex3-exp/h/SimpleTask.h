@@ -17,7 +17,7 @@ protected:
 
 		int _duration;
 
-		vector< Resource* >* _resources;	// shallow delete only..
+		vector< Resource* >* _resources;	// not our responsibility..
 
 public:
 

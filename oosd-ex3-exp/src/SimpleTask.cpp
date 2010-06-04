@@ -17,7 +17,7 @@ using namespace std;
 
 SimpleTask::SimpleTask() : _duration(-1){
 
-	this->_resources = new vector< Resource* >();
+	this->_resources = 0;
 	_description = "simple task";
 }
 
@@ -27,14 +27,7 @@ SimpleTask::SimpleTask( int duration, string description, vector< Resource* >* r
 	_description = description;
 }
 
-SimpleTask::~SimpleTask() {
-
-	if ( 0 != this->_resources){
-
-		delete( this->_resources );
-		this->_resources = 0;
-	}
-}
+SimpleTask::~SimpleTask() {}
 
 void SimpleTask::accept(TasksVisitor* v){
 

@@ -17,7 +17,7 @@ using namespace std;
 
 ProjectTask::ProjectTask() {
 
-	this->_tasks = new vector< Task* >();
+	this->_tasks = 0;
 	_description = "project task";
 }
 
@@ -27,14 +27,7 @@ ProjectTask::ProjectTask( vector< Task* >* tasks, string description ){
 	_description = description;
 }
 
-ProjectTask::~ProjectTask() {
-
-	if ( 0 != this->_tasks){
-
-		delete( this->_tasks );
-		this->_tasks = 0;
-	}
-}
+ProjectTask::~ProjectTask() {}
 
 void ProjectTask::accept(TasksVisitor* v){
 

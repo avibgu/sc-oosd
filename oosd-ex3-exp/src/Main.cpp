@@ -75,7 +75,6 @@ int main(){
 	cout << "Manpower: " << mp->calc( pr ) << endl;
 	cout << "Manpower: " << mp->calc( ded ) << endl;
 
-
 //delete only elements, not containers
 
 	if (0 != w1){ delete( w1 ); w1 = 0; }
@@ -87,6 +86,11 @@ int main(){
 	if (0 != st2){ delete( st2 ); st2 = 0; }
 	if (0 != pr){ delete( pr ); pr = 0; }
 	if (0 != ded){ delete( ded ); ded = 0; }
+
+	if (0 != tvec){ delete( tvec ); tvec = 0; }
+	if (0 != res1){ delete( res1 ); res1 = 0; }
+	if (0 != res2){ delete( res2 ); res2 = 0; }
+	if (0 != res3){ delete( res3 ); res3 = 0; }
 
 	if (0 != dr){ delete( dr ); dr = 0; }
 	if (0 != mp){ delete( mp ); mp = 0; }

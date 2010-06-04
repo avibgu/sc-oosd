@@ -14,7 +14,7 @@ class ProjectTask : public virtual Task{
 
 protected:
 
-	vector< Task* >* _tasks;	// shallow delete only..
+	vector< Task* >* _tasks;	// not our responsibility..
 
 public:
 
