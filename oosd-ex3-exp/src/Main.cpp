@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <set>
 
 using namespace std;
 
@@ -31,9 +32,25 @@ int main(){
 // build hierarchy
 
 	Query<int>* dr = new Duration();
+	Query<int>* mp = new Manpower();
 
-	Task* st1 = new SimpleTask( 17, "st1", new vector< Resource* >() );
-	Task* st2 = new SimpleTask( 18, "st2", new vector< Resource* >() );
+	vector< Resource* >* res1 = new vector< Resource* >();
+	vector< Resource* >* res2 = new vector< Resource* >();
+	vector< Resource* >* res3 = new vector< Resource* >();
+
+	Worker* w1 = new Worker("worker", "1");
+	Worker* w2 = new Worker("worker", "2");
+	Worker* w3 = new Worker("worker", "3");
+	Worker* w4 = new Worker("worker", "4");
+
+	res1->push_back( w1 );
+	res1->push_back( w2 );
+	res2->push_back( w1 );
+	res2->push_back( w3 );
+	res3->push_back( w4 );
+
+	Task* st1 = new SimpleTask( 17, "st1", res1 );
+	Task* st2 = new SimpleTask( 18, "st2", res2 );
 
 	vector< Task* >* tvec = new vector< Task* >();
 
@@ -41,10 +58,8 @@ int main(){
 	tvec->push_back(st2);
 
 	Task* pr = new ProjectTask( tvec, "this is a project task" );
-	Task* ded = new DedicatedTask( 45, "this is a dedicated task", tvec, new vector< Resource* >() );
+	Task* ded = new DedicatedTask( 45, "this is a dedicated task", tvec, res3 );
 
-	Worker wr;
-	Equipment eq;
 
 // ask queries
 
@@ -52,21 +67,29 @@ int main(){
 	cout << "Duration2: " << dr->calc( st2 ) << endl;
 	cout << "Duration3: " << dr->calc( pr ) << endl;
 	cout << "Duration4: " << dr->calc( ded ) << endl;
-	cout << "Name: " << wr.getName() << endl;
-	cout << "IN: " << eq.getInventoryNumber() << endl;
+
+	cout << endl;
+
+	cout << "Manpower: " << mp->calc( st1 ) << endl;
+	cout << "Manpower: " << mp->calc( st2 ) << endl;
+	cout << "Manpower: " << mp->calc( pr ) << endl;
+	cout << "Manpower: " << mp->calc( ded ) << endl;
 
 
 //delete only elements, not containers
 
+	if (0 != w1){ delete( w1 ); w1 = 0; }
+	if (0 != w2){ delete( w2 ); w2 = 0; }
+	if (0 != w3){ delete( w3 ); w3 = 0; }
+	if (0 != w4){ delete( w4 ); w4 = 0; }
+
 	if (0 != st1){ delete( st1 ); st1 = 0; }
-
 	if (0 != st2){ delete( st2 ); st2 = 0; }
-
 	if (0 != pr){ delete( pr ); pr = 0; }
-
 	if (0 != ded){ delete( ded ); ded = 0; }
 
 	if (0 != dr){ delete( dr ); dr = 0; }
+	if (0 != mp){ delete( mp ); mp = 0; }
 
 	return 0;
 }

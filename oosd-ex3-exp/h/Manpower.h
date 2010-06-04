@@ -8,7 +8,6 @@
 #ifndef MANPOWER_H_
 #define MANPOWER_H_
 
-class set;
 class Task;
 class SimpleTask;
 class ProjectTask;
