@@ -29,7 +29,9 @@ public:
 
 	virtual void accept( TasksVisitor* v );	//TODO should be virtual?..
 
-	int getDuration();
+	virtual int getDuration();
+
+	virtual vector< Resource* >* getResources();
 };
 
 #endif /* SIMPLETASK_H_ */

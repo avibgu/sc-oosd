@@ -22,7 +22,7 @@ public:
 
 	virtual ~Task();
 
-	string getDescription();
+	virtual string getDescription();
 
 	virtual void accept(TasksVisitor* v) = 0;
 };

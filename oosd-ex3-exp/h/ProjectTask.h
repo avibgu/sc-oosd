@@ -25,6 +25,8 @@ public:
 	virtual ~ProjectTask();
 
 	virtual void accept( TasksVisitor* v );	//TODO should be virtual?..
+
+	virtual vector< Task* >* getTasks();
 };
 
 #endif /* PROJECTTASK_H_ */

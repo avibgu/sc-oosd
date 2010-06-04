@@ -16,7 +16,7 @@ using namespace std;
 #include "../h/ProjectTask.h"
 
 ProjectTask::ProjectTask() {
-	// TODO Auto-generated constructor stub
+
 	this->_tasks = new vector< Task* >();
 	_description = "project task";
 }
@@ -39,4 +39,9 @@ ProjectTask::~ProjectTask() {
 void ProjectTask::accept(TasksVisitor* v){
 
 	v->visit( this );
+}
+
+vector< Task* >* ProjectTask::getTasks(){
+
+	return this->_tasks;
 }

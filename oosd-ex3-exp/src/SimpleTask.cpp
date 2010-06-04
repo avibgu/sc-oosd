@@ -45,3 +45,8 @@ int SimpleTask::getDuration(){
 
 	return this->_duration;
 }
+
+vector< Resource* >* SimpleTask::getResources(){
+
+	return this->_resources;
+}
