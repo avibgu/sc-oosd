@@ -8,6 +8,7 @@
 #ifndef MANPOWER_H_
 #define MANPOWER_H_
 
+class set;
 class Task;
 class SimpleTask;
 class ProjectTask;
@@ -19,9 +20,9 @@ class Manpower : public Query<int>, public ResourcesVisitor {
 
 private:
 
-	int manpower;
-
-	bool isWorker;
+	set<string> _manpower;
+	bool _isWorker;
+	string _workerName;
 
 public:
 

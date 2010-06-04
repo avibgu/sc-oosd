@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <set>
 
 using namespace std;
 
@@ -24,21 +25,21 @@ using namespace std;
 #include "../h/Manpower.h"
 
 Manpower::Manpower() {
-	// TODO Auto-generated constructor stub
 
-	this->manpower = -1;
-	this->isWorker = false;
+	this->_manpower.clear();
+	this->_isWorker = false;
+	this->_workerName = "";
 }
 
-Manpower::~Manpower() {
-	// TODO Auto-generated destructor stub
-}
+Manpower::~Manpower() {}
 
 int Manpower::calc(Task* task){
 
+	this->_manpower.clear();
+
 	task->accept( this );
 
-	return this->manpower;
+	return this->_manpower.size();
 }
 
 /**
@@ -47,35 +48,54 @@ int Manpower::calc(Task* task){
 
 void Manpower::visit(SimpleTask* task){
 
-	this->manpower = 0;
+	for ( vector< Resource* >::iterator iter = task->getResources()->begin();
+		  iter !=  task->getResources()->end();
+		  ++iter ){
+
+		(*iter)->accept( this );
+
+		if ( this->_isWorker ) this->_manpower.insert( this->_workerName );
+	}
+}
+
+void Manpower::visit(ProjectTask* task){
+
+	for ( vector< Task* >::iterator iter = task->getTasks()->begin();
+		  iter !=  task->getTasks()->end();
+		  ++iter ){
+
+		(*iter)->accept( this );
+	}
+}
+
+void Manpower::visit(DedicatedTask* task){
 
 	for ( vector< Resource* >::iterator iter = task->getResources()->begin();
 		  iter !=  task->getResources()->end();
 		  ++iter ){
 
+		(*iter)->accept( this );
 
+		if ( this->_isWorker ) this->_manpower.insert( this->_workerName );
 	}
 
-}
+	for ( vector< Task* >::iterator iter = task->getTasks()->begin();
+		  iter !=  task->getTasks()->end();
+		  ++iter ){
 
-void Manpower::visit(ProjectTask* task){
-
-
-}
-
-void Manpower::visit(DedicatedTask* task){
-
-
+		(*iter)->accept( this );
+	}
 }
 
 void Manpower::visit(Worker* resource){
 
-	this->isWorker = true;
+	this->_isWorker = true;
+	this->_workerName = resource->getName();
 }
 
 void Manpower::visit(Equipment* resource){
 
-	this->isWorker = false;
+	this->_isWorker = false;
 }
 
 
