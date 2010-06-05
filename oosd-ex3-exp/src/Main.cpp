@@ -25,7 +25,7 @@ using namespace std;
 #include "../h/Conflicts.h"
 #include "../h/Duration.h"
 #include "../h/Load.h"
-#include "../h/ManPower.h"
+#include "../h/Manpower.h"
 
 
 int main(){
