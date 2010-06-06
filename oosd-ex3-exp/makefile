@@ -26,7 +26,7 @@ clean1:
 	-rm -f src/*~
 	-rm -f h/*~
 	-rm -f $(EXECUTABLE)
-	-rm -f bin
+	-rm -fr bin
 
 clean2:
 	-mv src/*.o bin/
