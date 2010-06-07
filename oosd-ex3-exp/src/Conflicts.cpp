@@ -32,7 +32,7 @@ Conflicts::Conflicts() : _isEquipment( false ) {
 
 Conflicts::~Conflicts() {}
 
-set<string> Conflicts::calc(Task* task){
+set< Resource* > Conflicts::calc(Task* task){
 
 	this->_conflicts.clear();
 	this->_projectConflicts.clear();
@@ -56,10 +56,10 @@ void Conflicts::visit(SimpleTask* task){
 
 		if ( this->_isEquipment ){
 
-			if ( 1 == this->_projectConflicts.count( this->_equipmentName ) )
-				this->_conflicts.insert( this->_equipmentName );
+			if ( 1 == this->_projectConflicts.count( (*iter) ) )
+				this->_conflicts.insert( (*iter) );
 
-			this->_projectConflicts.insert( this->_equipmentName );
+			this->_projectConflicts.insert( (*iter) );
 		}
 	}
 }
@@ -96,5 +96,4 @@ void Conflicts::visit(Worker* resource){
 void Conflicts::visit(Equipment* resource){
 
 	this->_isEquipment = true;
-	this->_equipmentName = resource->getName();
 }

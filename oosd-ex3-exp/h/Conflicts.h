@@ -15,16 +15,14 @@ class Resource;
 class Worker;
 class Equipment;
 
-class Conflicts : public Query< set<string> >, public ResourcesVisitor{
+class Conflicts : public Query< set< Resource* > >, public ResourcesVisitor{
 
 private:
 
-	set<string> _conflicts;
-	set<string> _projectConflicts;
+	set< Resource* > _conflicts;
+	set< Resource* > _projectConflicts;
 
 	bool _isEquipment;
-
-	string _equipmentName;
 
 public:
 
@@ -32,7 +30,7 @@ public:
 
 	virtual ~Conflicts();
 
-	set<string> calc(Task* task);
+	set< Resource* > calc(Task* task);
 
 	void visit(SimpleTask* task);
 

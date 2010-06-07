@@ -185,13 +185,13 @@ int main(){
 	cout << "Load: " << load.calc( dedicated1 ) << endl;
 	cout << "Conflicts: ";
 
-	set<string> conflictsSet = conflicts.calc( dedicated1 );
+	set< Resource* > conflictsSet = conflicts.calc( dedicated1 );
 
-    for(	set<string>::iterator iter = conflictsSet.begin();
+    for(	set< Resource* >::iterator iter = conflictsSet.begin();
     		iter != conflictsSet.end();
     		++iter ) {
 
-		cout<< *iter << " ";
+		cout<< (*iter)->getName() << " ";
     }
 
 	cout << endl;
